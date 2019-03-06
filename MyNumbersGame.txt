@@ -1,0 +1,6 @@
+﻿1>------ Build started: Project: ConsoleApp6, Configuration: Debug Any CPU ------
+1>c:\users\hp\source\repos\ConsoleApp6\ConsoleApp6\Program.cs(139,29,139,30): warning CS0162: Unreachable code detected
+1>c:\users\hp\source\repos\ConsoleApp6\ConsoleApp6\Program.cs(118,34,118,36): warning CS0168: The variable 'ex' is declared but never used
+1>c:\users\hp\source\repos\ConsoleApp6\ConsoleApp6\Program.cs(17,17,17,30): warning CS0219: The variable 'DontDisplayXO' is assigned but its value is never used
+1>  ConsoleApp6 -> c:\users\hp\source\repos\ConsoleApp6\ConsoleApp6\bin\Debug\ConsoleApp6.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
