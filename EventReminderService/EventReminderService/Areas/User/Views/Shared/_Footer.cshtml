@@ -1,0 +1,62 @@
+﻿<style type="text/css">
+    .link {
+        color: green;
+        font-weight: bold;
+        text-decoration: none;
+        font-family: Tahoma;
+        font-size: 12px;
+    }
+
+        .link:hover {
+            color: red;
+        }
+</style>
+
+
+
+<table width="100%">
+    <tr valign='top'>
+        @*<td>
+            <img src="~/Images/" width="2" height="40" />
+        </td>
+        <td>
+            <img src="~/Images/" width="2" height="40" />
+        </td>*@
+        <td align="center">
+            <hr color="029D03" />
+            <table width="100%" style="background-color:azure">
+                <tr>
+                    <td width="70" align="center">
+
+                        <img src="~/Images/event_elephant.gif" alt="Powerd by BigDates-Solution.com" border="0" />
+                    </td>
+                    <td align="center">
+                        <b>
+                            <a class="link" href="/Users">Home</a>
+                            | <a class="link" href="/Users/Home/MembersCorner">Member's Corner</a>
+                            | <a class="link" href="#">Contact Us</a>
+                            | <a class="link" href="#">FAQs</a>
+                            | <a class="link" href="#">Free Ecards</a>
+                            | <a class="link" href="#">About Us</a>
+                            | <a class="link" href="#">How it works</a>
+                            | <a class="link" href="#">Privacy Policy</a>
+                            | <a class="link" href="#">Links</a>
+                            | @Html.ActionLink("Logout", "Logout", null, new { @class="link" })
+                            <br />
+                        </b>
+                        <p style="font-family:Tahoma;font-size:12px">
+                            Copyright &copy; 2017 - 2018 <a class="link" href="#">Event-Reminders.com</a> - Greeting Cards Powered by <a class="link" href="http://www.greetingcarduniverse.com">GreetingCardUniverse.com</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        @*<td>
+            <img src="~/Images/" width="10" height="40" />
+        </td>
+        <td>
+            <img src="~/Images/" width="2" height="40" />
+
+        </td>*@
+    </tr>
+</table>

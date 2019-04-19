@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_ControlPanelLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGetStarted").click(function () {
+            var email = $("#txtEmail").val();
+            var pwd = $("#txtPassword").val();
+            var pwdAgain = $("#txtPasswordAgain").val();
+            var required = true;
+            //alert("11111111111");
+            if (email == "") {
+                $("#spanEmail").html("Email field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanEmail").html("");
+            }
+
+            if (pwd == "") {
+                $("#spanPwd").html("Password field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanPwd").html("");
+            }
+
+            if (pwdAgain == "") {
+                $("#spanPwdAgain").html("Password Again field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanPwdAgain").html("");
+            }
+
+            if (required == false) {
+                //alert("22");
+                return false
+
+            }
+
+            var minMaxPwd = true;
+           // var pwdLenght = pwd.length();
+            var pwdLength = $("#txtPassword").val().length;
+
+            //alert("before length if");
+            if (pwdLength < 6 || pwdLength > 15) {
+
+                //alert("inside length if");
+                $("#spanPwd").html("Password should be 6 to 15 characters").hide().fadeIn(1000);
+                minMaxPwd = false;
+            }
+            else {
+                $("#spanPwd").html("");
+            }
+
+            if (minMaxPwd == false) {
+                return false;
+            }
+
+            var pwdAgain = true;
+            //alert("before checking between two passwords if");
+
+            if ($("#txtPassword").val() != $("#txtPasswordAgain").val()) {
+
+                //alert("inside checking between two passwords if");
+
+                $("#spanPwdAgain").html("password Again should be same as password").hide().fadeIn(1000);
+                pwdAgain = false;
+            }
+            else {
+                $("#spanPwdAgain").html("");
+            }
+
+            if (pwdAgain == false) {
+                return false;
+            }
+        });
+
+        $("#txtEmail").focus();
+
+        $("#txtEmail").focusout(function () {
+
+            if ($(this).val() != "") {
+                $("#spanEmail").html("");
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("CheckEmailAvailability")',
+                    data: "{ email:'" + $(this).val() + "'}",
+                    dataType: "json",
+                    success: function (response) {
+                        var value = response;
+                        if (parseInt(value) == 1) {
+                            $("#spanEmailStatus").html("<b style='color:red'>Email Id is already in use.</b>").hide().fadeIn(1000);
+                            $("#btnGetStarted").prop("disabled", true);
+                            $("#txtEmail").focus();
+                        }
+                        else {
+                            $("#spanEmailStatus").html("<b style='color:green'>you can use this email id.</b>").hide().fadeIn(1000);
+                            $("#btnGetStarted").prop("disabled", false);
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.status);
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+@*<h2>Index</h2>*@
+<table width="100%">
+
+    <tr>
+        <td width="50%" align="center">
+            <img src="~/Images/login.png" />
+        </td>
+
+
+        <td width="50%" align="center">
+
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "form1" }))
+            {
+
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <br />
+                            <img src="~/Images/reminder.jpg" width="300" height="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br />
+                            <img src="~/Images/number1.png" width="15" height="15" />
+                            <b>. Your email address will be your Login :</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Email </b>
+                        </td>
+                        <td>
+                            <input id="txtEmail" type="email" name="email" placeholder="Enter Email Id" />
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td></td>
+                        <td>
+                            <span id="spanEmail" style="color:red"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <!--Status-->
+                            <span id="spanEmailStatus"></span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="2">
+                            <img src="~/Images/number2.png" width="15" height="15" />
+                            <b>. Please select a password :</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Password </b>
+                        </td>
+                        <td>
+                            <input id="txtPassword" name="password" type="password" placeholder="Enter Password" />
+                            <br />
+                            <b style="color:gray"> password should be 6 to 15 characters.</b>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td></td>
+                        <td>
+                            <span id="spanPwd" style="color:red"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="font-family:Tahoma;font-size:12px;font-weight:bold">
+                            Password (again)
+                        </td>
+                        <td>
+                            <input id="txtPasswordAgain" type="password" placeholder="Enter Password Again" />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td></td>
+                        <td>
+                            <span id="spanPwdAgain" style="color:red"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" align="center">
+                            <br />
+                            <input type="submit" id="btnGetStarted" value="Get started" />
+                        </td>
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="2" align="center">
+                            <b style="font-family:Tahoma;font-size:12px">Already Member? &nbsp;</b>
+                            @Html.ActionLink("Log-in", "Login")
+                            @*<a href="">Log-in</a>*@
+                        </td>
+                    </tr>
+
+                </table>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <b> Free Email Cell phon Reminders for Birthdays, Anniversaries, Holidays, and more....</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:justify">
+            Event-Reminders.com is a FREE reminder service that helps you remember Important dates like birthdays, anniversaries, graduations, sympathy, and holidays like labor Day, Gradution Day, Rosh Hashanah, and more. Our free reminders are sent by email, cell-phone, and RSS feeds. Our reminders can be sent at intervals of your choosing and include free ecards, paper greeting cards, and gift suggestions. We offer thousands of free ecards, including funny birthday cards, business cards, and birthdat invitations. Try our reminder service today and never forget again.
+        </td>
+
+    </tr>
+</table>

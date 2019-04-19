@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5272c0992255409eae3198dded1bcf7c" Name="Diagram1" >
+        <EntityTypeShape EntityType="EventReminderModel2.tblBirthdayDetail" Width="1.5" PointX="0.875" PointY="0.75" />
+        <EntityTypeShape EntityType="EventReminderModel2.tblBirthdayReminder" Width="1.5" PointX="3" PointY="1.5" />
+        <AssociationConnector Association="EventReminderModel2.FK_tblBirthdayReminder_tblBirthdayDetails" />
+        <EntityTypeShape EntityType="EventReminderModel2.tblRelationshipUser" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

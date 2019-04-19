@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>ASP.NET Peoject</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <div>
+         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/red_white_rose_flowers.jpg" Width="100%" Height="175" />
+    </div>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    <div style="text-align:center">
+        <hr />
+        <h4>Coyright &copy; 2018-2019 Belal Khanjar. All right reserved</h4>
+    </div>
+
+    </form>
+</body>
+</html>

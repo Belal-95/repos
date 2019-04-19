@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -144,12 +152,110 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Common\Utility.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CvMakerEntity1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CvMakerEntity1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CvMakerEntity1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CvMakerEntity1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CvMakerEntity1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CvMakerEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CvMakerEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_CheckUserLogin_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvBasicInformationByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvEducationDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvInterestDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvObjectiveDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvQualificationDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvReferencesDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvUserDetailsByUserId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvUserDetailsByUserId_Result1.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetCvWorkExperienceDetailsByCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_GetSingleCvDetailsByUserIdAndCvId_Result.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCvBasicInformation.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEducationDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblInterestDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblObjective.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblQualification.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblReferencesDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUserAccountDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUserCvDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUserPersonalDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblWorkExperienceDetail.cs">
+      <DependentUpon>CvMakerEntity1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -163,15 +269,71 @@
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\owl.theme.default.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_highlight-hard_30_285c00_1x100.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_highlight-soft_33_3a8104_1x100.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_highlight-soft_50_4eb305_1x100.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_highlight-soft_60_4ca20b_1x100.png" />
+    <Content Include="Content\themes\le-frog\images\ui-bg_inset-soft_10_285c00_1x100.png" />
+    <Content Include="Content\themes\le-frog\images\ui-icons_4eb305_256x240.png" />
+    <Content Include="Content\themes\le-frog\images\ui-icons_72b42d_256x240.png" />
+    <Content Include="Content\themes\le-frog\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\le-frog\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\le-frog\jquery-ui.css" />
+    <Content Include="Content\themes\le-frog\jquery-ui.min.css" />
+    <Content Include="Content\themes\le-frog\theme.css" />
+    <Content Include="css\cv-edit.css" />
+    <Content Include="css\cvhome.css" />
+    <Content Include="css\cvMaker.css" />
     <Content Include="css\main.css" />
     <Content Include="css\util.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="fonts\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\iconic\css\material-design-iconic-font.css" />
     <Content Include="fonts\iconic\css\material-design-iconic-font.min.css" />
     <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
@@ -179,98 +341,108 @@
     <Content Include="fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Home\css\bootstrap-grid.css" />
-    <Content Include="Home\css\bootstrap-grid.min.css" />
-    <Content Include="Home\css\bootstrap-reboot.css" />
-    <Content Include="Home\css\bootstrap-reboot.min.css" />
-    <Content Include="Home\css\bootstrap.css" />
-    <Content Include="Home\css\bootstrap.min.css" />
-    <Content Include="Home\css\font-awesome.min.css" />
-    <Content Include="Home\css\magnific-popup.css" />
-    <Content Include="Home\css\main.css" />
-    <Content Include="Home\css\owl.carousel.css" />
-    <Content Include="Home\css\owl.theme.default.css" />
-    <Content Include="Home\css\style.css" />
-    <Content Include="Home\css\util.css" />
-    <Content Include="Home\fonts\fontawesome-webfont.svg" />
-    <Content Include="Home\img\background1.jpg" />
-    <Content Include="Home\img\background11.jpg" />
-    <Content Include="Home\img\background111.jpg" />
-    <Content Include="Home\img\background1111.jpg" />
-    <Content Include="Home\img\background11111.jpg" />
-    <Content Include="images\1-1.jpg" />
-    <Content Include="Home\img\logo-alt.png" />
-    <Content Include="Home\img\logo.png" />
-    <Content Include="Home\js\bootstrap.js" />
-    <Content Include="Home\js\bootstrap.min.js" />
-    <Content Include="Home\js\jquery.magnific-popup.js" />
-    <Content Include="Home\js\jquery.min.js" />
-    <Content Include="Home\js\main.js" />
-    <Content Include="Home\js\map-custom.js" />
-    <Content Include="Home\js\owl.carousel.min.js" />
-    <Content Include="Home\js\popper.js" />
-    <Content Include="Home\js\popper.min.js" />
-    <Content Include="Home\js\tooltip.js" />
+    <Content Include="images\Index\background11111.jpg" />
+    <Content Include="images\Login\1-1.jpg" />
+    <Content Include="images\Index\logo-alt.png" />
+    <Content Include="images\Index\logo.png" />
     <Content Include="images\icons\favicon.ico" />
-    <Content Include="images\icons\map-marker.png" />
-    <Content Include="images\whyToChooseUs1.jpg" />
-    <Content Include="images\whyToChooseUs2.jpg" />
+    <Content Include="images\Index\whyToChooseUs1.jpg" />
+    <Content Include="images\Index\whyToChooseUs2.jpg" />
+    <Content Include="js\css\cv-edit.css" />
+    <Content Include="js\css\cvhome.css" />
+    <Content Include="js\js\plugin.js" />
     <Content Include="js\main.js" />
-    <Content Include="js\map-custom.js" />
+    <Content Include="js\plugin.js" />
+    <Content Include="js\tinymce\changelog.txt" />
+    <Content Include="js\tinymce\jquery.tinymce.min.js" />
+    <Content Include="js\tinymce\LICENSE.TXT" />
+    <Content Include="js\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\emoticons\js\emojis.js" />
+    <Content Include="js\tinymce\plugins\emoticons\js\emojis.min.js" />
+    <Content Include="js\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\placeholder\plugin.js" />
+    <Content Include="js\tinymce\plugins\placeholder\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\quickbars\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\toc\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="js\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="js\tinymce\skins\content\default\content.min.css" />
+    <Content Include="js\tinymce\skins\content\document\content.min.css" />
+    <Content Include="js\tinymce\skins\content\writer\content.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide-dark\skin.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide\content.inline.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide\content.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide\content.mobile.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide\skin.min.css" />
+    <Content Include="js\tinymce\skins\ui\oxide\skin.mobile.min.css" />
+    <Content Include="js\tinymce\themes\mobile\theme.min.js" />
+    <Content Include="js\tinymce\themes\silver\theme.min.js" />
+    <Content Include="js\tinymce\tinymce.min.js" />
+    <Content Include="Models\CvMakerEntity1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CvMakerEntity1.edmx</DependentUpon>
+      <LastGenOutput>CvMakerEntity1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CvMakerEntity1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CvMakerEntity1.edmx</DependentUpon>
+      <LastGenOutput>CvMakerEntity1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>CvMakerEntity.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CvMakerEntity.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="Home\fonts\fontawesome-webfont.eot" />
-    <Content Include="Home\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Home\fonts\fontawesome-webfont.woff" />
-    <Content Include="Home\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Home\fonts\FontAwesome.otf" />
-    <Content Include="Home\css\bootstrap-grid.css.map" />
-    <Content Include="Home\css\bootstrap-grid.min.css.map" />
-    <Content Include="Home\css\bootstrap-reboot.css.map" />
-    <Content Include="Home\css\bootstrap-reboot.min.css.map" />
-    <Content Include="Home\css\bootstrap.css.map" />
-    <Content Include="Home\css\bootstrap.min.css.map" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <Content Include="fonts\font-awesome-4.7.0\less\animated.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\core.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\fixed-width.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\font-awesome.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\icons.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\larger.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\list.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\mixins.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\path.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\screen-reader.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\stacked.less" />
-    <Content Include="fonts\font-awesome-4.7.0\less\variables.less" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_animated.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_core.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_icons.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_larger.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_list.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_mixins.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_path.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
-    <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
     <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
@@ -297,13 +469,45 @@
     <Content Include="fonts\poppins\Poppins-SemiBoldItalic.ttf" />
     <Content Include="fonts\poppins\Poppins-Thin.ttf" />
     <Content Include="fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="Areas\User\Views\web.config" />
+    <EntityDeploy Include="Models\CvMakerEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CvMakerEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CvMakerEntity.edmx.diagram">
+      <DependentUpon>CvMakerEntity.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <EntityDeploy Include="Models\CvMakerEntity1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CvMakerEntity1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CvMakerEntity1.edmx.diagram">
+      <DependentUpon>CvMakerEntity1.edmx</DependentUpon>
+    </Content>
+    <Content Include="css\cv-edit.css.map" />
+    <Content Include="css\cv-edit.scss" />
+    <Content Include="css\cvhome.css.map" />
+    <Content Include="css\cvhome.scss" />
+    <Content Include="js\css\cv-edit.css.map" />
+    <Content Include="js\css\cv-edit.scss" />
+    <Content Include="js\css\cvhome.css.map" />
+    <Content Include="js\css\cvhome.scss" />
+    <Content Include="js\tinymce\langs\readme.md" />
+    <Content Include="js\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="js\slim\jquery-3.3.1.slim.js" />
+    <Content Include="js\slim\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -313,37 +517,9 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
-    <Content Include="vendor\animate\animate.css" />
-    <Content Include="vendor\animsition\css\animsition.css" />
-    <Content Include="vendor\animsition\css\animsition.min.css" />
-    <Content Include="vendor\animsition\js\animsition.js" />
-    <Content Include="vendor\animsition\js\animsition.min.js" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="vendor\bootstrap\css\bootstrap.min.css" />
-    <Content Include="vendor\bootstrap\js\bootstrap.js" />
-    <Content Include="vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="vendor\bootstrap\js\popper.js" />
-    <Content Include="vendor\bootstrap\js\popper.min.js" />
-    <Content Include="vendor\bootstrap\js\tooltip.js" />
-    <Content Include="vendor\countdowntime\countdowntime.js" />
-    <Content Include="vendor\css-hamburgers\hamburgers.css" />
-    <Content Include="vendor\css-hamburgers\hamburgers.min.css" />
-    <Content Include="vendor\daterangepicker\daterangepicker.css" />
-    <Content Include="vendor\daterangepicker\daterangepicker.js" />
-    <Content Include="vendor\daterangepicker\moment.js" />
-    <Content Include="vendor\daterangepicker\moment.min.js" />
-    <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.css" />
-    <Content Include="vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
-    <Content Include="vendor\select2\select2.css" />
-    <Content Include="vendor\select2\select2.js" />
-    <Content Include="vendor\select2\select2.min.css" />
-    <Content Include="vendor\select2\select2.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -356,31 +532,35 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.css.map" />
-    <Content Include="vendor\bootstrap\css\bootstrap-grid.min.css.map" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.css.map" />
-    <Content Include="vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
-    <Content Include="vendor\bootstrap\css\bootstrap.css.map" />
-    <Content Include="vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Views\Home\login.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
+    <Content Include="Views\View.cshtml" />
+    <Content Include="Views\Home\CvMaker.cshtml" />
+    <Content Include="Views\Home\Activation.cshtml" />
+    <Content Include="Views\Home\CvUserHome.cshtml" />
+    <Content Include="Views\Home\CvUserEditCv.cshtml" />
+    <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\Home\Testview.cshtml" />
+    <Content Include="Views\Home\UpgradeToPremium.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="js\slim\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

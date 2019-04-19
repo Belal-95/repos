@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "BirthdayRequester";
+}
+@using (Html.BeginForm())
+{
+    <table width="100%">
+        <tr>
+            <td colspan="2">
+                Birthday Requester
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                The easiest way to add birthdays! Ask your friends and family to provide them for you.
+            </td>
+        </tr>
+        <tr>
+            <td width="10%">
+                <img id="image1" src="~/Images/BirthdayRequester.gif" width="70" height="70" />
+            </td>
+            <td valign="top">
+                <b>Here's how it works:</b>
+                <br />
+                <ol>
+                    <li>Enter their addresses below</li>
+                    <li>
+                        We send the Birthday Request emails on your behalf
+                    </li>
+                    <li>
+                        They respond with their birthday and your accoint is <b>updated automatically!</b>
+                    </li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table width="100%">
+                    <tr>
+                        <td width="70%">
+                            <table width="100%">
+                                <tr>
+                                    <td width="20%" align="right">
+                                        <b style="color:green">From:</b>
+                                    </td>
+                                    <td>
+                                        @Session["EmailId"].ToString()
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%" align="right" valign="top">
+                                        <b style="color:green">To:</b>
+                                    </td>
+                                    <td>
+                                        <textarea id="txtToMails" rows="3" cols="75" name="toMails"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        (i.e. jsmith123@aol.com, djones@hotmail.com)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20" align="right">
+                                        <b style="color:green">Email subject:</b>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="txtEmailSubject" name="emailSubject" style="width:550px" value="@Session["FirstName"].ToString() wants to know your birthday" />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20" align="right" valign="top">
+                                        <b style="color:green">Email Content:</b>
+                                    </td>
+                                    <td>
+                                        @{
+                                            string message = "I'm organizing my friends and family's birthdays." + "\n\n" + "Please do me a favor and enter your birthday by clicking on:" + "\n" + "<a href='http://localhost:1784/Home/BirthdayDate?id=" + Session["UserId"].ToString() + "&nm=" + Session["FirstName"].ToString() + "' target='_blank'>http://localhost:1784/Home/BirthdayDate?id=" + Session["UserId"].ToString() + "&nm=" + Session["FirstName"].ToString() + "</a>" + "\n\n" + "It only takes a minute." + "\n\n" + "Thanks!\n" + Session["FirstName"].ToString();
+                                        }
+                                        <textarea id="txtEmailContent" rows="10" cols="75" readonly="readonly">@message.ToString().Trim()</textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="button" id="btnBack" value="Back" onclick="javascript: document.location.href='@Url.Action("MyReminders")'" />
+
+                                        &nbsp;
+                                        <input type="submit" id="btnBirthdayRequester" value="Send Birthday Requests >>">
+                                        <br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="40"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+}

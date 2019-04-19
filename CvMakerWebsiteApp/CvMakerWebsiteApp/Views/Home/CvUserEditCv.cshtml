@@ -1,0 +1,623 @@
+﻿@using CvMakerWebsiteApp.Models;
+
+@{
+    Layout = null;
+}
+
+
+
+@*<head>*@
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/js/plugin.js"></script>
+<script>
+    $(function () {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+</script>
+<script src="~/js/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init(
+        {
+            selector: 'textarea',
+            menubar: 'false',
+            plugins: 'lists placeholder',
+            //toolbar: ' bullist numlist | bold underline'
+        }
+    );
+</script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            @*alert("heeeeey");
+            alert(@Session["CvId"]);
+            alert(@TempData["CvId"]);*@
+
+
+            $("#txtdateStartWork,#txtdateEndWork,#txtdateStartEdu,#txtdateEndEdu").datepicker({
+                showOn: "both",
+                buttonImage: "../../Images/calendar.png",
+                buttonImageOnly: true,
+                changeMonth: true,
+                changeYear: true,
+                maxDate: +0,
+                yearRange: "-100:+0",
+                dateFormat: "dd/M/yy"
+            });
+
+            $("#SaveInformation").click(function () {
+                //Basic Info
+                fullName = $("#fullName").val();
+                emailId = $("#emailId").val();
+                phoneNo = $("#phoneNumber").val();
+                website = $("#website").val();
+                addline1 = $("#addline1").val();
+                addline2 = $("#addline2").val();
+                //Job Info
+                jobTitle = $("#jobTitle").val();
+                companyName = $("#companyName").val();
+                dateStartWork = $("#txtdateStartWork").val();
+                dateEndWork = $("#txtdateEndWork").val();
+                otherWorkInformation = $("#otherWorkInformation").val();
+                //Qualification Info
+                qualificationText = $("#qualificationText").val();
+                //Objectives Info
+                objectivesText = $("#objectivesText").val();
+                //Education Info
+                CourseName = $("#CourseName").val();
+                institutionName = $("#institutionName").val();
+                dateStartEdu = $("#txtdateStartEdu").val();
+                dateEndEdu = $("#txtdateEndEdu").val();
+                otherEduInfo = $("#otherEduInfo").val();
+                //Interests Info
+                interestsText = $("#interestsText").val();
+                //Reference Info
+                referenceText = $("#referenceText").val();
+
+                //var fileName = e.target.files[0].name;
+                //alert('The file "' + fileName + '" has been selected.');
+                var profilePhoto = $("#ProfilePhotoUpload").val();
+                alert(profilePhoto);
+                alert(fullName);
+                alert(emailId);
+                alert(phoneNo);
+                alert(website);
+                alert(addline1);
+                alert(addline2);
+                alert(jobTitle);
+                alert(companyName);
+                alert(dateStartWork);
+                alert(dateEndWork);
+                alert(otherWorkInformation);
+                alert(qualificationText);
+                alert(objectivesText);
+                alert(CourseName);
+                alert(institutionName);
+                alert(dateStartEdu);
+                alert(dateEndEdu);
+                alert(interestsText);
+                alert(referenceText);
+                alert(@Session["CvId"]);
+
+
+
+                 $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("UpdateCvDetails")',
+                     data: "{ fullName:" + fullName + ", profilePhoto:'" + profilePhoto + ", emailId:'" + emailId + "', phoneNo:" + phoneNo + "', website:" + website + ", addline1:" + addline1 + ", addline2:" + addline2 + ", jobTitle:'" + jobTitle + ", companyName:'" + companyName + ", dateStartWork:'" + dateStartWork + ", dateEndWork:'" + dateEndWork + ", otherWorkInformation:'" + otherWorkInformation + ", qualificationText:'" + qualificationText + ", objectivesText:'" + objectivesText + ", CourseName:'" + CourseName + ", institutionName:'" + institutionName + ", dateStartEdu:'" + dateStartEdu + ", dateEndEdu:'" + dateEndEdu + ", otherEduInfo:'" + otherEduInfo + ", interestsText:'" + interestsText + ", referenceText:'" + referenceText + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+                            if (parseInt(value) > 0) {
+                                alert(value);
+
+                            }
+                            else {
+                                //$("#pEStatus").html("<b style='color:red'> City Updation Failed</b>");
+                                alert("failed")
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error:" + error.status);
+                        }
+                    });
+            });
+
+            //$("input[name=date1]").datepicker({
+            //    showOn: "both",
+            //    buttonImage: "../../Images/calendar.png",
+            //    buttonImageOnly: true,
+            //    changeMonth: true,
+            //    changeYear: true,
+            //    maxDate: +0,
+            //    yearRange: "-100:+0",
+            //    dateFormat: "dd/M/yy"
+            //});
+
+
+            //$("#txtdateEndEdu").change(function () {
+
+            //    var date = $(this).val();
+            //    var months = { "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12" };
+            //    var dateArray = date.split(/\//);
+            //    var day = dateArray[0];
+            //    var year = dateArray[2];
+            //    var month = months[dateArray[1]];
+            //    var newDate = [month, day, year].join("/");
+
+            //    var dateOfBirth = new Date(newDate);
+
+            //    var currentDate = new Date();
+            //    var age = currentDate.getFullYear() - dateOfBirth.getFullYear();
+            //});
+
+
+            @*@{ List<SP_GetSingleCvDetailsByUserIdAndCvId_Result> objectCvDetails = (List<SP_GetSingleCvDetailsByUserIdAndCvId_Result>)ViewBag.CvDetails;}
+
+            $("#fullName").val(@objectCvDetails.FullName);*@
+
+            //$("#CvDetailsForm").validate({
+            //    rules: {
+            //        firstName: {
+            //            required: true
+            //        },
+            //        lastName: "required",
+            //        dateOfBirth: "required",
+            //        mobileNo: {
+            //            required: true,
+            //            digits: true,
+            //            minlength: 10,
+            //            maxlenght: 10,
+            //        },
+            //        passwordAgain: {
+            //            equalTo: "#txtNewPassword"
+            //        },
+            //        pinCode: {
+            //            digits: true,
+            //            minlength: 6,
+            //            maxlenght: 6
+            //        }
+            //    }
+            //});
+
+        });
+
+        function loadImageUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    $("#ImgProfilePhoto")
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+
+
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV - Edit</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- custome css -->
+<link rel="stylesheet" href="~/js/css/cv-edit.css">
+@*</head>*@
+@{SP_GetSingleCvDetailsByUserIdAndCvId_Result objectCvDetails = (SP_GetSingleCvDetailsByUserIdAndCvId_Result)ViewBag.CvDetails;
+}
+@{SP_GetCvBasicInformationByCvId_Result objectBasicInfoDetails = (SP_GetCvBasicInformationByCvId_Result)ViewBag.CvbasicInfoDetails;
+}
+
+@*To aler if needed List*@
+@{SP_GetCvEducationDetailsByCvId_Result objectEducationDetails = (SP_GetCvEducationDetailsByCvId_Result)ViewBag.CvEducationInfoDetails;
+}
+@{SP_GetCvInterestDetailsByCvId_Result objectInterestDetails = (SP_GetCvInterestDetailsByCvId_Result)ViewBag.CvInterestInfoDetails;
+}
+@{SP_GetCvObjectiveDetailsByCvId_Result objectObjectiveDetails = (SP_GetCvObjectiveDetailsByCvId_Result)ViewBag.CvObjectiveInfoDetails;
+}
+@{SP_GetCvQualificationDetailsByCvId_Result objectQualificationDetails = (SP_GetCvQualificationDetailsByCvId_Result)ViewBag.CvQualificationInfoDetails;
+}
+@{SP_GetCvReferencesDetailsByCvId_Result objectReferencesDetails = (SP_GetCvReferencesDetailsByCvId_Result)ViewBag.CvReferencesInfoDetails;
+}
+
+@*To aler if needed List*@
+@{SP_GetCvWorkExperienceDetailsByCvId_Result objectWorkExperienceDetails = (SP_GetCvWorkExperienceDetailsByCvId_Result)ViewBag.CvWorkExperienceInfoDetails;
+}
+
+@*@using (Html.BeginForm("CvUserEditCv", "Home", FormMethod.Post, new { id = "CvDetailsForm", enctype = "multipart/form-data" }))
+    {*@
+@*<table width="100">*@
+
+
+@*//enctype = "multipart/form-data" // we are using this because there is a file in the information to upload that is why this kind of enctype is needed*@
+@*@using (Html.BeginForm("CvUserEditCv", "Home", FormMethod.Post, new { id = "CvDetailsForm", enctype = "multipart/form-data" }))
+    {*@
+
+
+@*//SP_GetSingleCvDetailsByUserIdAndCvId_Result objCvDetails = objectCvDetails;*@
+
+<!-- navbar -->
+@using (Html.BeginForm())
+{
+    <nav class="navbar navbar-expand-md navCust shadow-sm bg-white">
+        <a class="navbar-brand" href="#">
+            <!-- <img src="" alt=""> -->
+            logo here
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/UpgradeToPremium">Upgrade to Premium <i class="fa fa-star-o" aria-hidden="true"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Edit account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+}
+    <div class="container">
+        <div class="cv_name py-md-5 py-2">
+            <h1>@objectCvDetails.CvName</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9 d-flex justify-content-end">
+                <div class="my-1">
+                    <button class="btn btn-secondary my-1">help</button>
+                    <button class="btn btn-secondary my-1">Quick Preview</button>
+                    <button id="SaveInformation" class="btn btn-secondary my-1">Save</button>
+                    <button class="btn btn-secondary my-1">Download</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills  p-3 bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+
+
+                    <a class="nav-link active" id="v-pills-basic-tab" data-toggle="pill" href="#v-pills-basic" role="tab" aria-controls="v-pills-basic" aria-selected="true">Basic information</a>
+
+
+                    <a class="nav-link" id="v-pills-work-tab" data-toggle="pill" href="#v-pills-work" role="tab" aria-controls="v-pills-work" aria-selected="false">Work experience</a>
+
+                    <a class="nav-link" id="v-pills-qualification-tab" data-toggle="pill" href="#v-pills-qualification" role="tab" aria-controls="v-pills-qualification" aria-selected="false">Qualification</a>
+
+                    <a class="nav-link" id="v-pills-education-tab" data-toggle="pill" href="#v-pills-education" role="tab" aria-controls="v-pills-education" aria-selected="false">Education</a>
+
+                    <a class="nav-link" id="v-pills-interest-tab" data-toggle="pill" href="#v-pills-interest" role="tab" aria-controls="v-pills-interest" aria-selected="false">Interests</a>
+
+                    <a class="nav-link" id="v-pills-objectives-tab" data-toggle="pill" href="#v-pills-objectives" role="tab" aria-controls="v-pills-objectives" aria-selected="false">Objectives</a>
+
+                    <a class="nav-link" id="v-pills-references-tab" data-toggle="pill" href="#v-pills-references" role="tab" aria-controls="v-pills-references" aria-selected="false">References</a>
+
+
+                </div>
+            </div>
+
+            <div class="col-9">
+                <form action="">
+                    <div class="tab-content p-3 bg-white" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-basic" role="tabpanel" aria-labelledby="v-pills-basic-tab">
+                            <h4>Basic Information</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="full-name">Full Name</label>
+                                        <input type="text" class="form-control" name="full-name" id="fullName" value="@objectCvDetails.FullName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="emailAdd">Email Address</label>
+                                        <input type="email" class="form-control" name="emailAdd" id="emailId" value="@objectCvDetails.EmailId">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Phone number</label>
+                                        <input type="email" class="form-control" name="phone" value="@objectBasicInfoDetails.phoneNumber" id="phoneNumber">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Website">Website</label>
+                                        <input type="text" class="form-control" name="website" id="website" value="@objectBasicInfoDetails.WebSite">
+                                    </div>
+                                </div>
+                                <div class="divide"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="emailAdd">Address Line 1</label>
+                                        <input type="text" class="form-control" name="addline1" id="addline1" value="@objectBasicInfoDetails.AdressLine1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="emailAdd">Address Line 2</label>
+                                        <input type="text" class="form-control" name="addline2" id="addline2" value="@objectBasicInfoDetails.AdressLine2">
+                                    </div>
+                                </div>
+                                <div class="divide"></div>
+                                @using (Html.BeginForm("CvUserEditCv", "Home", FormMethod.Post, new { id = "CvDetailsForm", enctype = "multipart/form-data" }))
+                                {
+                                    <div class="col-md-10">
+                                        <div class="d-flex justify-content-center p-2">
+                                            <img class="upload-img" src="@objectBasicInfoDetails.UserPhoto" alt="uploaded-image-here" id="ImgProfilePhoto" style="width:160px;height:50px">
+                                            <input type="file" id="ProfilePhotoUpload" onchange="loadImageUrl(this);" name="profilePhoto">
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <button id="" class="btn btn-sm btn-success mx-1">Upload</button>
+                                                <button class="btn btn-sm btn-secondary mx-1">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-work" role="tabpanel" aria-labelledby="v-pills-work-tab">
+                            <h4>Work Experience</h4>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="job-title">Job Title</label>
+                                        <input type="text" class="form-control" name="job-title" value="@objectWorkExperienceDetails.JobTitle" id="jobTitle">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cmp-name">Company Name</label>
+                                        <input type="text" class="form-control" name="cmp-name" value="@objectWorkExperienceDetails.CompanyName" id="companyName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="text" class="form-control" name="date1" value="@objectWorkExperienceDetails.StartDate" id="txtdateStartWork">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input type="text" class="form-control" name="date1" value="@objectWorkExperienceDetails.EndDate" id="txtdateEndWork">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="" id="otherWorkInformation" cols="30" rows="10">@objectWorkExperienceDetails.OtherInformation</textarea>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-secondary my-3">Delete</a>
+                            <div class="divide"></div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="job-title">Job Title</label>
+                                        <input type="text" class="form-control" name="job-title" id="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cmp-name">Company Name</label>
+                                        <input type="text" class="form-control" name="cmp-name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="Date" class="form-control" name="start-date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input type="Date" class="form-control" name="end-date">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-secondary my-3">Delete</a>
+                            <div class="divide"></div>
+                            <a href="#" class="btn btn-success mb-2">Add</a>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-qualification" role="tabpanel" aria-labelledby="v-pills-qualification-tab">
+                            <h4>Qualification</h4>
+                            <div>
+                                <textarea name="" id="qualificationText" cols="50" rows="20" placeholder="Example: Certified Public Accountant">@objectQualificationDetails.Qualifications</textarea>
+                            </div>
+                            <p class="hints">Certifications, Accreditation etc, that you have received</p>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-objectives" role="tabpanel" aria-labelledby="v-pills-objectives-tab">
+                            <h4>Objectives</h4>
+                            <div class="my-3">
+                                <textarea name="" id="objectivesText" cols="50" rows="20" placeholder="Example: Certified Public Accountant">@objectObjectiveDetails.Objective</textarea>
+                            </div>
+                            <div class="divide"></div>
+                            <a href="#" class="btn btn-secondary my-2">Delete</a>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+                            <h4>Education</h4>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="job-title">Course name</label>
+                                        <input type="text" class="form-control" name="job-title" value="@objectEducationDetails.CourseName" id="CourseName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cmp-name">Institution Name</label>
+                                        <input type="text" class="form-control" name="cmp-name" value="@objectEducationDetails.InstitutionName" id="institutionName">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input id="txtdateStartEdu" type="text" class="startDate" name="date1" value="@objectEducationDetails.StartDate" ">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input type="text" class="EndDate" name="date1" value="@objectEducationDetails.EndDate" id="txtdateEndEdu">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="" id="otherEduInfo" cols="30" rows="10">@objectEducationDetails.OtherInformaton</textarea>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-secondary my-3">Delete</a>
+                            <div class="divide"></div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="job-title">Course name</label>
+                                        <input type="text" class="form-control" name="job-title" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cmp-name">Institution Name</label>
+                                        <input type="text" class="form-control" name="cmp-name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="Date" class="form-control" name="start-date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input type="Date" class="form-control" name="end-date">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-secondary my-3">Delete</a>
+                            <div class="divide"></div>
+                            <a href="#" class="btn btn-success mb-2">Add</a>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-interest" role="tabpanel" aria-labelledby="v-pills-interest-tab">
+
+                            <h4>Interest</h4>
+                            <div class="my-3">
+                                <textarea name="" id="interestsText" cols="50" rows="20" placeholder="Music, Reading, Gardening">@objectInterestDetails.InterestsDetails</textarea>
+                            </div>
+                            <div class="divide"></div>
+                            <a href="#" class="btn btn-secondary my-2">Delete</a>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-references" role="tabpanel" aria-labelledby="v-pills-references-tab">
+                            <h4>References</h4>
+                            <div class="my-3">
+                                <textarea name="" id="referenceText" cols="50" rows="20" placeholder="Mr. Neo, President of Matrix corp.
+Email: neo@neo-matrix.com
+Phone: +1-234-5678">@objectReferencesDetails.ReferencesDetails</textarea>
+                            </div>
+                            <div class="divide"></div>
+                            <a href="#" class="btn btn-secondary my-2">Delete</a>
+                        </div>
+                    </div> <!-- tab content end here -->
+                    <div class="my-3 text-right">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*</table>*@
+    @*}*@
+    <footer>
+        <div class="mt-md-5 mt-3 pt-md-3 pt-2 bg-white">
+            <div class="container">
+                <div class="row foot-ul mx-auto">
+                    <div class="col-md-4">
+                        <ul>
+                            <li>About us</li>
+                            <li>Contact us</li>
+                            <li>Privacy Policy</li>
+                            <li>Terms and services</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="social-links">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Resume tips</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="~/js/js/plugin.js"></script>
+        <script>
+            $(function () {
+                $("#sortable").sortable();
+                $("#sortable").disableSelection();
+            });
+        </script>
+        <script src="~/js/tinymce/tinymce.min.js"></script>
+        <script>
+            tinymce.init(
+                {
+                    selector: 'textarea',
+                    menubar: 'false',
+                    plugins: 'lists placeholder',
+                    //toolbar: ' bullist numlist | bold underline'
+                }
+            );
+        </script>*@
+

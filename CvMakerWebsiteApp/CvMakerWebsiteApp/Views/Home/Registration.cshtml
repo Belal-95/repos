@@ -1,0 +1,303 @@
+﻿@{
+    Layout = null;
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<!DOCTYPE html>
+<script type="text/javascript">
+
+   /* JQuery code for validations 
+    This code will run on corresponding actions on the controls 
+    */
+    $(document).ready(function () {
+        var isEmailUniqe  = 1;
+        $("#btnSignUp").click(function () {
+
+            var fullName = $("#txtName").val();
+            var email = $("#txtEmail").val();
+            var userName = $("#txtUserName").val();
+            var Password = $("#txtPassword").val();
+            var repeatedPassword = $("#txtRepeatedPassword").val();
+            var IsAcceptingTheTerms = $("#ckb1").is(":checked");
+
+            //This variable to check the validation if there is anything not validated we will make it false then we won't post the view if it is false
+            //This part is for empty fields validation
+            var require = true;
+
+            if (fullName == "") {
+                $("#spanFullName").html("Name is required");
+                require = false;
+            }
+            else 
+                $("#spanFullName").html("");
+
+            if (email == "") {
+                $("#spanEmail").html("Email is required");
+                require = false;
+            }
+            else
+                $("#spanEmail").html("");
+
+
+            if (userName == "") {
+                $("#spanUserName").html("User Name is required");
+                require = false;
+            }
+            else
+                $("#spanUserName").html("");
+
+            if (Password == "") {
+                $("#spanPassword").html("Password is required");
+                require = false;
+            }
+            else
+                $("#spanPassword").html("");
+
+            if (repeatedPassword == "") {
+                $("#spanRepeatedPassword").html("Repeated Password is required");
+                require = false;
+            }
+            else
+                $("#spanRepeatedPassword").html("");
+
+            if (!IsAcceptingTheTerms) {
+                $("#spanTerms").html("You should accept the terms to continue");
+                require = false;
+            }
+            else
+                $("#spanTerms").html("");
+
+            //else
+            //    $("#ckb1").prop("checked", false);
+
+            //if (require == false) {
+            //    return false;
+            //}
+
+            //This part of validation is for specifying min and max characters in the fields
+            var minName = fullName.length;
+
+            var minMaxPwd = true;
+            var pwdlenght = $("#txtPassword").val().length;
+
+            if (minName < 4 && minName > 0) {
+                $("#spanFullName").html("User Name should be at least 4 characters");
+                minName = false;
+
+            }
+            //else {
+            //    $("#spanFullName").html("");
+            //}
+
+            if ((pwdlenght < 6 && pwdlenght > 0) || pwdlenght > 15) {
+                $("#spanPassword").html("Password hould be 6 to 15 characters").hide().fadeIn(1000);
+                minMaxPwd = false;
+            }
+            //else {
+            //    $("#spanPassword").html("");
+            //}
+
+            //if (minMaxPwd == false) {
+            //    return false;
+            //}
+
+            var pwdAgain = true;
+            if (repeatedPassword != Password && repeatedPassword != "") {
+                $("#spanRepeatedPassword").html("Repeated Password should be same as password").hide().fadeIn(1000);
+                pwdAgain = false;
+            }
+            //else {
+            //    $("#spanRepeatedPassword").html("");
+            //}
+
+            if (require == false) {
+                return false;
+            }
+
+            if (minMaxPwd == false) {
+                return false;
+            }
+
+            if (minName == false) {
+                return false;
+            }
+
+            if (pwdAgain == false) {
+                return false;
+            }
+            
+            if (isEmailUniqe  == 0) {
+                return false;
+            }
+
+        });
+
+        $("#txtEmail").focusout(function () {
+
+            if ($(this).val() != "") {
+                $("#spanEmail").html("");
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: '@Url.Action("CheckEmailAvailability")',
+                    data: "{ email:'" + $(this).val() + "'}",
+                    dataType: "json",
+                    success: function (response) {
+                        var value = response;
+                        if (parseInt(value) == 1) {
+                            $("#spanEmailStatus").html("<b style='color:red'>Email Id is already in use.</b>").hide().fadeIn(1000);
+                            $("#txtEmail").focus();
+                            isEmailUniqe  = 0;
+                        }
+                        else {
+                            $("#spanEmailStatus").html("<b style='color:green'>you can use this email id.</b>").hide().fadeIn(1000);
+                            isEmailUniqe  = 1;
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.status);
+                    }
+                });
+            }
+        });
+    });
+</script>
+<html lang="en">
+
+
+<head>
+    <title>Registration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="../../images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../Content/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../fonts/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body style="background-color: #999999;">
+    @using (Html.BeginForm())
+    {
+<div class="limiter">
+    <div class="container-login100">
+        <div class="login100-more" style="background-image: url('../images/Index/background11111.jpg');"></div>
+
+        <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+            <form class="login100-form validate-form">
+
+                <!----Show The Registration Status-->
+                @if (ViewBag.Status != null)
+                {
+                    if (ViewBag.Status == 1)
+                    {
+                        <p style="color:green">Your Registration has been completed successfully!!! Please check you mail to activate the account.</p>
+                    }
+                    else
+                    {
+                        <p style="color:green">Your Registration failed. Please try again.!!!</p>
+                    }
+                }
+
+                <span class="login100-form-title p-b-59">
+                    Sign Up
+                </span>
+
+                <div id="divName" class="wrap-input100 validate-input" data-validate="Name is required" data-content="aaaa">
+                    <span class="label-input100">Full Name</span>
+                    <input id="txtName" class="input100" type="text" name="name" @*required minlength="3"*@ placeholder="Name...">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <span id="spanFullName" style="padding-bottom:10px;margin-top:-40px;color:red"></span>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <span class="label-input100">Email</span>
+                    <input class="input100" type="text" id="txtEmail" name="email" placeholder="Email address...">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <span id="spanEmail" style="padding-bottom:10px;margin-top:-40px;color:red"></span>
+                @*//////////////////////////////////////////////////////////////////////////////////////////*@
+                <span id="spanEmailStatus" style="padding-bottom:10px;margin-top:-40px;color:red"></span>
+
+                @*<div class="wrap-input100 validate-input" data-validate="Username is required">
+            <span class="label-input100">Username</span>
+            <input class="input100" type="text" id="txtUserName" name="username" placeholder="Username...">
+            <span class="focus-input100"></span>
+        </div>
+
+        <span id="spanUserName" style="padding-bottom:10px;margin-top:-40px;color:red"></span>*@
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" typeof="password" id="txtPassword" name="pass" placeholder="*************">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <span id="spanPassword" style="padding-bottom:10px;margin-top:-40px;color:red"></span>
+
+                <div class="wrap-input100 validate-input" data-validate="Repeat Password is required">
+                    <span class="label-input100">Repeat Password</span>
+                    <input class="input100" type="password" id="txtRepeatedPassword" name="repeatpass" placeholder="*************">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <span id="spanRepeatedPassword" style="padding-bottom:10px;margin-top:-40px;color:red"></span>
+
+                <div class="flex-m w-full p-b-33">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberme">
+                        <label class="label-checkbox100" for="ckb1">
+                            <span class="txt1">
+                                I agree to the
+                                <a href="#" class="txt2 hov1">
+                                    Terms of User
+                                </a>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <span id="spanTerms" style="padding-bottom:10px;margin-top:-20px;color:red"></span>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button type="submit" class="login100-form-btn" id="btnSignUp">
+                            Sign Up
+                        </button>
+                    </div>
+
+                    <a href="/Home/login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                        Sign in
+                        <i class="fa fa-long-arrow-right m-l-5"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    }
+
+    <!--===============================================================================================-->
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../Scripts/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="../../js/main.js"></script>
+
+</body>
+</html>
+

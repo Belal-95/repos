@@ -1,0 +1,63 @@
+body {
+  background-color: #f0f0f0; }
+
+#sortable {
+  list-style-type: none;
+  padding-left: 0; }
+
+.navCust .nav-item .nav-link {
+  color: #000; }
+
+/* pills css */
+.nav-link {
+  padding: .5rem 2rem;
+  color: #000;
+  border-radius: 0 !important; }
+  .nav-link:hover {
+    color: #fff;
+    background-color: #00ced1; }
+
+.nav-pills .nav-link.active {
+  background-color: #00ced1; }
+
+.cv_name h1 {
+  color: #565656; }
+
+.divide {
+  width: 100%;
+  height: 1px;
+  background-color: #f0f0f0;
+  margin-bottom: 1rem; }
+
+.upload-img {
+  width: 100%; }
+
+.tab-content {
+  border: 2px solid #f0f0f0; }
+
+.divide {
+  width: 100%;
+  height: 1px;
+  background-color: #f0f0f0; }
+
+.hints {
+  margin-bottom: 0;
+  font-size: .7rem; }
+
+.foot-ul ul {
+  list-style-type: none;
+  padding-left: 0; }
+
+footer {
+  background-color: #fff; }
+  footer .social-links {
+    display: flex; }
+    footer .social-links li {
+      padding: .5rem; }
+      footer .social-links li a i {
+        padding: .5rem;
+        border: 2px solid #00ced1;
+        border-radius: 50%;
+        color: #00ced1; }
+
+/*# sourceMappingURL=cv-edit.css.map */

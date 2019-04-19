@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "BirthdayRequesterStatus";
+}
+
+<table width="100%" cellpadding="5">
+    <tr>
+        <td colspan="2">
+            <b style="font-size:20px;color:green">Birthday Requester Status</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Thank you for using Birthday Requester!
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            We are sending your Birthday Requests now.
+        </td>
+    </tr>
+    <tr>
+        <td width="30%">
+            <img id="Image1" src="~/Images/event_elephant.gif" />
+        </td>
+        <td valign="top">
+            Birthday Requesters Sent to:
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @if (TempData["ToMails"] != null)
+            {
+                <span>@TempData["ToMails"]</span>
+            }
+        </td>
+    </tr>
+</table>

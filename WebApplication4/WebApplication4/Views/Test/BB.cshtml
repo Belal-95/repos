@@ -1,0 +1,13 @@
+﻿@using (Html.BeginForm("BB", "test", FormMethod.Post, new { id = "form1" }))
+{
+    <b>Enter the first number: </b>@Html.TextBox("Value1", Request["Value1"])
+    <br /><br />
+    <b>Enter the second number: </b>@Html.TextBox("Value2", Request["Value2"])
+    <br /><br />
+    <input type="submit" value="Add" />
+    <br /><br />
+    if(ViewBag.Result != null)
+    {
+        <span><b>Result of Addition is :</b>&nsub;@ViewBag.Result</span>
+    }
+}

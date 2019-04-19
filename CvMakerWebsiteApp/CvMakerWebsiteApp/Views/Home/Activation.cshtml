@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Activation";
+}
+
+@*<h2 align="center">User Account Activation</h2>*@
+<!-- Header -->
+@*<header id="home">
+    <!-- Background Image -->
+    <div class="bg-img" style="background-image: url('../images/Index/background11111.jpg');">
+        <div class="overlay"></div>
+    </div>
+    <!-- /Background Image -->
+    <!-- Nav -->
+    <nav id="nav" class="navbar nav-transparent">
+        <div class="container">
+
+            <div class="navbar-header">
+                <!-- Logo -->
+                <div class="navbar-brand">
+                    <a href="index.html">
+                        <img class="logo" src="~/images/Index//logo.png" alt="logo">
+                        <img class="logo-alt" src="~/images/Index//logo-alt.png" alt="logo">
+                    </a>
+                </div>
+                <!-- /Logo -->
+                <!-- Collapse nav button -->
+                <div class="nav-collapse">
+                    <span></span>
+                </div>
+                <!-- /Collapse nav button -->
+            </div>
+
+            <!--  Main navigation  -->
+            <ul class="main-nav nav navbar-nav navbar-right">
+                <li><a href="#home">Home</a></li>
+                <li><a href="/Home/login">Sign In</a></li>
+            </ul>
+            <!-- /Main navigation -->
+
+        </div>
+    </nav>
+</header>*@
+
+<hr />
+<div align="center">
+    @{
+        if (ViewBag.Status == 1)
+        {
+            <p style="color:green;font-family:'Bauhaus 93';font-size:20px">Your account has been activated successfully!!!</p>
+            <p>&nbsp;</p>
+            <p style="font-family:Tahoma;font-size:15px">Please <a href="@Url.Action("Login")">Click Here</a>&nbsp;to Login</p>
+        }
+        else
+        {
+            <p style="color:red;font-family:'Bauhaus 93';font-size:20px">Your account activated Failed!!!</p>
+        }
+    }
+</div>
+
+<!-- Footer -->
+@*<footer id="footer" class="sm-padding bg-dark">
+
+    <!-- Container -->
+    <div class="container">
+
+        <!-- Row -->
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <!-- footer logo -->
+                <div class="footer-logo">
+                    <a href="index.html"><img src="~/images/Index/logo-alt.png" alt="logo"></a>
+                </div>
+                <!-- /footer logo -->
+                <!-- footer follow -->
+                <ul class="footer-follow">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                </ul>
+                <!-- /footer follow -->
+                <!-- footer copyright -->
+                <div class="footer-copyright">
+                    <p>Copyright © 2019. All Rights Reserved. Designed by <a href="https://ABC.com" target="_blank">ABC</a></p>
+                </div>
+                <!-- /footer copyright -->
+
+            </div>
+
+        </div>
+        <!-- /Row -->
+
+    </div>
+    <!-- /Container -->
+
+</footer>*@
+<!-- /Footer -->

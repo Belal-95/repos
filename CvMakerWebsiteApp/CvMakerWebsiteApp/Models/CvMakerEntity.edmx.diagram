@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fae33c6212864869a13fabf88ee7fb7b" Name="Diagram1">
+        <EntityTypeShape EntityType="CvMakerDBModel.sysdiagram" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblCvBasicInformation" Width="1.5" PointX="5.625" PointY="15.75" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblEducationDetail" Width="1.5" PointX="5.625" PointY="9.125" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblObjective" Width="1.5" PointX="5.625" PointY="19.625" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblQualification" Width="1.5" PointX="5.625" PointY="6.625" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblUserCvDetail" Width="1.5" PointX="0.5" PointY="10.375" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblWorkExperienceDetail" Width="1.5" PointX="5.625" PointY="12.5" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblInterestDetail" Width="1.5" PointX="1.625" PointY="5.25" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblReferencesDetail" Width="1.5" PointX="4" PointY="5.25" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblCvBasicInformation_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblEducationDetails_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblObjective_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblQualifications_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblWorkExperienceDetails_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblInterestDetails_tblUserCvDetails" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblReferencesDetails_tblUserCvDetails" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblUserAccountDetail" Width="1.5" PointX="1" PointY="15" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblUserCvDetails_tblUserAccountDetails" />
+        <EntityTypeShape EntityType="CvMakerDBModel.tblUserPersonalDetail" Width="1.5" PointX="3.375" PointY="14.75" />
+        <AssociationConnector Association="CvMakerDBModel.FK_tblUserPersonalDetails_tblUserAccountDetails" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

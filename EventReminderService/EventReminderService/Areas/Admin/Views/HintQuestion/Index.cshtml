@@ -1,0 +1,397 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_ControlPanelLayout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var countryId = "";
+        function loadHintQuestionListData() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetHintQuestionList")',
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+
+                    if (data.length > 0) {
+                        var output = "<table align='center' border='1' width='100%' style='text-align:center'><tr style='background-color:blue; color:white'><th>Hint Question Id</th><th>Hint Question</th><th>Is Active</th><th>Action</th></tr>";
+
+                        for (var c = 0; c < data.length; c++) {
+                            output += "<tr><td>" + data[c].HintQuestionId + "</td><td>" +
+                                data[c].HintQuestion + "</td><td>";
+                            if (data[c].IsActive == true)
+                                output += "<input type='checkbox' checked='checked' disabled='disabled' />";
+                            else
+                                output += "<input type='checkbox' disabled='disabled' />";
+
+                            output += "</td><td>" + "<a href='#' name='CEdit' id='" + data[c].HintQuestionId + "'>Edit</a>&nbsp;|&nbsp;<a href='#' name='CDetails' id='" + data[c].HintQuestionId + "'>Details</a>&nbsp;|&nbsp;<a href='#' name='CDelete' id='" + data[c].HintQuestionId + "'>Delete</a>" + "</td></tr> ";
+
+                        }
+                        output += "</table><br /><br />";
+
+                        $("#divData").html(output);
+
+                        $("a[name='CEdit']").click(function () {
+                            hintQuestionId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var hName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            $("#txtEditHintName").val(hName);
+                            $("#chkEditIsActive").prop("checked", isActive);
+                            $("#divEdit").dialog("open");
+                            /////////////////
+                            $("#pUStatus").text("");
+                            /////////////////
+                            /////////////////
+                            $("#lblUError").text("");
+                            /////////////////
+                        });
+
+                        $("a[name='CDelete']").click(function () {
+                            hintQuestionId = $(this).attr("id");
+                            $("#divDelete").dialog("open");
+                            /////////////////
+                            $("#pDStatus").text("");
+                            /////////////////
+                        });
+
+                        $("a[name='CDetails']").click(function () {
+                            hintQuestionId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var hName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            $("#spanHintId").text(hintQuestionId);
+                            $("#spanHintName").text(hName);
+                            $("#chkDetailsIsActive").prop("checked", isActive);
+                            $("#divDetails").dialog("open");
+                        });
+                    }
+                    else {
+                        $("#divData").html("");
+                    }
+                },
+                error: function (error) {
+                    alert("Error: " + error.status);
+                }
+            });
+        }
+        loadHintQuestionListData();
+        
+
+        $("#CreateLink").click(function () {
+            $("#divCreate").dialog("open");
+            ///////////////
+            $("#chkIsActive").prop('checked', false); // Unchecks it
+            /////////////////
+            $("#lblCError").text("");
+            /////////////////
+            /////////////////
+            $("#txtHintName").val("");
+            ////////////////
+            /////////////////
+            $("#pCStatus").text("");
+            /////////////////
+        });
+
+        $("#divCreate").dialog({
+            autoOpen: false,
+            modal: true,
+            title: "Create New Hint Question Details",
+            width: 500,
+            height: 350,
+            dragable: true,
+            resizable: true,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+            buttons: {
+                "Save": function () {
+                    var hintQuestion = $("#txtHintName").val().trim();
+                    var isActive = $("#chkIsActive").is(":checked");
+
+                    if (hintQuestion != "")
+                    {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset-utf-8",
+                            url: '@Url.Action("InsertHintQuestion")',
+                            data: "{ hintQuestion:'" + hintQuestion + "', isActive:'" + isActive + "'}",
+                            dataType: "json",
+                            success: function (response) {
+                                var value = response;
+
+                                if (parseInt(value) > 0) {
+                                    $("#divCreate").dialog("close");
+                                    loadHintQuestionListData();
+                                }
+                                else {
+                                    $("#pCStatus").html("<b style='color:red'>Hint Question Insertion Failed!!!</b>");
+                                }
+                            },
+                            error: function (error) {
+                                altert("Error: " + error.status);
+                            }
+                        });
+                    }
+                    else {
+                        ////////////////////////////////////
+                        var message = "Please Enter The Hint Question Name ";
+                        $("#lblCError").text(message) ;
+                        ////////////////////////////////////
+                        // OR
+                       // $("$spanCreateHintNameError").html("<br /><b style='color:red'>Please enter country name</b>");
+                        // and add span there instead of lable
+
+
+                        //$("#txtHintName").after("<br /><b style='color:red'>Please enter country name</b>");
+                        return false;
+                    }
+                },
+
+                "Close": function () {
+                    $("#divCreate").dialog("close");
+                }
+            }
+
+        });
+
+       $("#divEdit").dialog({
+            autoOpen: false,
+            modal: true,
+            title: "Update The Hint Question Details",
+            width: 550,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+
+            buttons: {
+                "Update": function () {
+
+                    /////////////////
+                    $("#pUStatus").text("");
+                    /////////////////
+                    /////////////////
+                    $("#lblUError").text("");
+                    /////////////////
+
+//////////////////////// this extra code for not updating the country to blank (you can delete both of it together and it will work without it)
+                    var hintQuestion = $("#txtEditHintName").val().trim();
+                    var isActive = $("#chkEditIsActive").is(":checked");
+
+                    if (hintQuestion != "") {
+///////////////////////////
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("UpdateHintQuestions")',
+                        data: "{ hintQuestionId:'" + hintQuestionId + "', hintQuestion: '" + $("#txtEditHintName").val() + "', isActive: '" + $("#chkEditIsActive").is(":checked") + "'}",
+                        dataType: "json",
+
+                        success: function (response) {
+                            var value = response;
+                           // alert(value);
+                            if (parseInt(value) > 0)
+                            {
+                                $("#divEdit").dialog("close");
+                                ///////////////////
+                                //$("#pUStatus").text("");
+                                ///////////////////
+                                loadHintQuestionListData();
+                            }
+                            else
+                            {
+                                    // we can also specify more cases of errors 1 is for not changing the values and show this messege and other for in case if any other error happened during updation
+                                /////////////////
+                                $("#pUStatus").text("Hint Question Updation Failed!!! you didn't change anything yaaar");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error: " + error.status);
+                        }
+                        });
+
+///////////////////////  this extra code for not updating the country to blank (you can delete both of it together and it will work without it)
+
+                    }
+                    else {
+                        ////////////////////////////////////
+                        var message = "please enter the Hint Question name ";
+                        $("#lblUError").text(message);
+                        ////////////////////////////////////
+
+                        // OR
+                       // $("$spanUpdateHintNameError").html("<br /><b style='color:red'>Please enter country name</b>");
+                        // and add span there instead of lable
+
+                        //$("#txtEditHintName").after("<br /><b style='color:red'>Please enter country name</b>");
+                        return false;
+                    }
+
+///////////////////////////
+
+                },
+                "Cancel": function () {
+                    $("#divEdit").dialog("close");
+                    ///////////////////
+                    //$("#pUStatus").text("");
+                    ///////////////////
+                }
+            }
+        });
+
+        $("#divDelete").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 550,
+            title: "Delete The Hint Question",
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Ok": function () {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset-utf-8",
+                        url: '@Url.Action("DeleteHintQuestions")',
+                        data: "{hintQuestionId:'" + hintQuestionId + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+
+                            if (parseInt(value) > 0) {
+                                $("#divDelete").dialog("close");
+
+                                loadHintQuestionListData();
+                            }
+                            else {
+                                $("#pDStatus").html("<b style='color:red'>Hint Question Deletion Failed!!!</b>");
+                            }
+                        },
+                        error: function (error) {
+                            altert("Error: " + error.status);
+                        }
+                    });
+                },
+
+                "Cancel": function () {
+                    $("#divDelete").dialog("close");
+                }
+            }
+        });
+        $("#divDetails").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 350,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Close": function () {
+                    $("#divDetails").dialog("close");
+
+                    
+                }
+            }
+        });
+    });
+</script>
+
+@*<h2>Index</h2>*@
+
+<div id="divCreate">
+    <p id="pCStatus"></p>
+    <b>Hint Question Name:</b>
+    <br />
+    <input id="txtHintName" type="text" />
+    <br /><br />
+
+    @*  *@
+    <label id="lblCError" style='color:red'></label>
+    @*  *@
+
+    @*or
+        <span id="spanCreateHintNameError" ></span>*@
+
+
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input id="chkIsActive" type="checkbox" />
+
+
+
+
+</div>
+
+<div id="divEdit">
+    <p id="pUStatus" style='color:red'></p>
+    <b>Hint Question Name:</b>
+    <br />
+    <input id="txtEditHintName" type="text" />
+    <br /><br />
+
+    @*  *@
+    <label id="lblUError" style='color:red'></label>
+    @*  *@
+
+    @*or
+        <span id="spanUpdateHintNameError" ></span>*@
+
+    <br /><br />
+
+    <b>Is Active:</b>
+    <br />
+    <input id="chkEditIsActive" type="checkbox" />
+    <br /><br />
+
+</div>
+
+<div id="divDelete">
+    <p id="pDStatus"></p>
+    <b>Are you sure? Do you want to delete Hint Question details?</b>
+</div>
+
+<div id="divDetails">
+    <b>Hint Question Id:</b>
+    <br />
+    <span id="spanHintId"></span>
+    <br /><br />
+          <b>Hint Question Name:</b>
+    <br />
+    <span id="spanHintName"></span>
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input id="chkDetailsIsActive" type="checkbox" disabled="disabled" />
+    <br /><br />
+</div>
+
+<h2>Hint Question List</h2>
+
+<p>
+    <a href="#" id="CreateLink">Create New Hint Question</a>
+</p>
+<div id="divData"></div>

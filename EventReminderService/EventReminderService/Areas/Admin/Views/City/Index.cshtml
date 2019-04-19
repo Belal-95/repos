@@ -1,0 +1,468 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_ControlPanelLayout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function loadCityListData() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url:'@Url.Action("GetCityList")',
+                dataType: "json",
+                success: function(response) {
+                    var data = response;
+                    if(data.length > 0)
+                    {
+                        var output = "<table class='table table-bordered' width='100%' style='text-align:center'><tr style='background-color:#59759e; color:white'><th>City Id</th><th>City Name</th><th>Is Active </th><th>State Name</th><th>Country Name</th><th>Action</th></tr>";
+
+                        for (var c = 0;c < data.length; c++) {
+                            output += "<tr><td>" + data[c].CityId + "</td><td>" + data[c].CityName + "</td><td>";
+
+                            if (data[c].IsActive)
+                                output += "<input type='checkbox' checked='checked' disabled='disabled'/>";
+                            else
+                                output += "<input type='checkbox' disabled='disabled'/>";
+
+                            output += "</td><td><span id='sName'>" + data[c].tblState.StateName + "</span><span id='sId' style='display:none'>" + data[c].StateId + "</span></td>";
+
+                            output += "<td><span id='cName'>" + data[c].tblCountry.CountryName + "</span><span id='cId' style='display:none'>" + data[c].CountryId + "</span></td>";
+
+                            output += "<td>" + "<a href='#' name='CEdit' id=" + data[c].CityId + ">Edit</a> &nbsp; | &nbsp; <a href='#' name='CDelete' id=" + data[c].CityId +"> Delete</a> &nbsp; | &nbsp; <a href='#' name='CDetails' id='"+ data[c].CityId +"'>Details</a>" + "</td></tr>";
+                            }
+                        output += "</table><br/><br/>";
+
+                        $("#divData").html(output);
+
+                        $("a[name='CEdit']").click(function(){
+                            cityId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var cName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            var sId = tr.children('td:eq(3)').children('#sId').text();
+                            var cId = tr.children('td:eq(4)').children('#cId').text();
+
+                            //Edit Cascading dropdownlist(Country based- state)
+                            bindStateDDLByCountry($("#ddlEditState"),cId, sId);
+
+                            $("#txtEditCityName").val(cName);
+                            $("#ddlEditCountry").val(cId);
+                            $("#ddlEditState").val(sId);
+                            $("#chkEditIsActive").prop("checked", isActive);
+                            $("#divEdit").dialog("open");
+                            $("#chkEditIsActive").html("");
+                            $("#spanEStateName").html("");
+                            $("#spanECountryName").html("");
+                            $("#spanECityName").html("");
+                            $("#pEStatus").html("");
+                            
+                        });
+
+                        $("a[name='CDetails']").click(function(){
+                            cityId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var cName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            var sName = tr.children('td:eq(3)').children("#sName").text();
+                            var cnName = tr.children('td:eq(4)').children("#cName").text();
+
+                            $("#spanCityId").text(cityId);
+                            $("#spanCityName").text(cName);
+                            $("#spanStateName").text(sName);
+                            $("#spanCountryName").text(cnName);
+                            $("#chkDetailsIsActive").prop("checked", isActive);
+                            $("#divDetails").dialog("open");
+                        });
+
+                        $("a[name='CDelete']").click(function () {
+                            cityId = $(this).attr("id");
+                            $("#divDelete").dialog("open");
+                        });
+                    }
+                },
+                error: function (error) {
+                    alert("Error:" + error.status);
+                }
+            });
+        }
+
+        loadCityListData();
+
+        function bindCountryDDL(ddl) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetCountryList","Country")',
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+                    if (data.length > 0) {
+                        for (var c = 0; c < data.length; c++) {
+                            ddl.append("<option value='" + data[c].CountryId + "'> " + data[c].CountryName + "</option>");
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert("Error:" + error.status);
+                }
+            });
+        }
+
+        function bindStateDDL(ddl) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetStateList","State")',
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+                    if (data.length > 0) {
+                        for (var c = 0; c < data.length; c++) {
+                            ddl.append("<option value='" + data[c].StateId + "'>" + data[c].StateName + "</option>");
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert("Error:" + error.status);
+                }
+            });
+        }
+
+        function bindStateDDLByCountry(ddl, countryId, stateId) {
+            ddl.find("option:gt(0)").remove();
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetStateListByCountryId", "state")',
+                data: "{countryId:'" + countryId + "'}",
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+                    if (data.length > 0) {
+                        for (var c = 0; c < data.length; c++) {
+                            ddl.append("<option value='" + data[c].StateId + "'>" + data[c].StateName + "</option>");
+                        }
+                        if (stateId !== "")
+                            ddl.val(stateId);
+                    }
+                },
+                error: function (error) {
+                    alert("Error:" + error.status);
+                }
+            });
+        }
+
+        bindCountryDDL($("#ddlCountry"));
+        bindCountryDDL($("#ddlEditCountry"));
+
+        bindStateDDL($("#ddlState"));
+        bindStateDDL($("#ddlEditState"));
+
+        $("#CreateLink").click(function () {
+            $("#txtCityName").val("");
+            $("#ddlCountry").val("0");
+            $("#ddlState").val("0");
+            $("#divCreate").dialog("open");
+            $("#chkIsActive").prop("checked", false);
+            $("#spanCStateName").html("");
+            $("#spanCCountryName").html("");
+            $("#spanCCityName").html("");
+        });
+
+        $("#ddlCountry").change(function () {
+            var countryId = $("#ddlCountry option:selected").val();
+            bindStateDDLByCountry($("#ddlState"), countryId, "");
+        });
+
+        $("#ddlEditCountry").change(function () {
+            var countryId = $("#ddlEditCountry option:selected").val();
+            bindStateDDLByCountry($("#ddlEditState"), countryId, "");
+        });
+
+        $("#divCreate").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 450,
+            title: "Create New City List",
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+            buttons: {
+                "Save": function () {
+                    $("#spanCCityName, #spanSStateName, #spanCCountryName").html("");
+                    var cityName = $("#txtCityName").val().trim();
+                    var countryId = $("#ddlCountry option:selected").val();
+                    var stateId = $("#ddlState").val().trim();
+                    var isActive = $("#chkIsActive").is(":checked");
+                    if (cityName == "")
+                        $("#spanCCityName").html("<br/> <b style='color:red'>Please enter city name!</b>");
+
+                    if (countryId == "0")
+                        $("#spanCCountryName").html("<br/><b style='color:red'> Please select country name!</b>");
+
+                    if (stateId == "0")
+                        $("#spanCStateName").html("<br/><b style='color:red'>Please select state name!</b>");
+
+                    if (cityName == "" || countryId == "0" || stateId == "0")
+                        return false;
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("InsertCityDetails")',
+                        data: "{cityName:'" + cityName + "', countryId:'" + countryId + "',stateId:'" + stateId + "', isActive:'" + isActive + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+
+                            if (parseInt(value) > 0) {
+                                $("#divCreate").dialog("close");
+
+                                loadCityListData();
+                            }
+                            else
+                            {
+                                $("#pCStatus").html("<b style='color:red'>City Insertion Failed!!</b>");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error:" + error.status);
+                        }
+                    });
+                },
+                "Close": function () {
+                    $("#divCreate").dialog("close");
+                }
+            }
+
+        });
+
+
+        $("#divEdit").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 350,
+            title: "Update City Details",
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+            buttons: {
+                "Update": function () {
+                    $("#spanECityName, #spanEStateName, #spanECountryName").html("");
+
+                    var cityName = $("#txtEditCityName").val().trim();
+
+                    var countryId = $("#ddlEditCountry option:selected").val();
+
+                    var stateId = $("#ddlEditState").val().trim();
+
+                    var isActive = $("#chkEditIsActive").is(":checked");
+
+                    if (cityName == "")
+                        $("#spanECityName").html("<br/> <b style='color:red'>Please enter city Name</b>");
+
+                    if (countryId == "0")
+                        $("#spanECountryName").html("<br/><b style='color:red'> Please enter select country name</b>");
+
+                    if (stateId == "0")
+                        $("#spanEStateName").html("<br/><b style='color:red'>Please enter select state name</b>");
+
+                    if (cityName == "" || countryId == "0" || stateId == "0")
+                        return false;
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("UpdateCityDetails")',
+                        data: "{ cityId:" + cityId + ", cityName:'" + cityName + "', countryId:" + countryId + ", stateId:" + stateId + ", isActive:'" + isActive + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+                            if (parseInt(value) > 0) {
+                                $("#divEdit").dialog("close");
+                                loadCityListData();
+                            }
+                            else {
+                                $("#pEStatus").html("<b style='color:red'> City Updation Failed</b>");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error:" + error.status);
+                        }
+                    });
+                },
+                "Cancel": function () {
+                    $("#divEdit").dialog("close");
+                }
+            }
+        });
+
+        $("#divDelete").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 550,
+            title: "Delete City Details",
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Ok": function () {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("DeleteCityDetails")',
+                        data: "{cityId:'" + cityId + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+
+                            if (parseInt(value) > 0) {
+                                $("#divDelete").dialog("close");
+
+                                loadCityListData();
+                            }
+                            else {
+                                $("#pDStatus").html("<b style='color:red'>State Deletion Failed!!!</b>");
+                            }
+                        },
+                        error: function (error) {
+                            altert("Error: " + error.status);
+                        }
+                    });
+                },
+
+                "Cancel": function () {
+                    $("#divDelete").dialog("close");
+                }
+            }
+        });
+
+        $("#divDetails").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 300,
+            show: {
+                effect: "slide",
+                duration:500
+            },
+            hide: {
+                effect: "slide",
+                duration:500
+            },
+            buttons: {
+                "Close": function () {
+                    $("#divDetails").dialog("close");
+                }
+            }
+        });
+
+    });
+</script>
+
+
+<div id="divCreate">
+    <p id="pCStatus"></p>
+    <b>City Name</b>
+    <br />
+    <input type="text" id="txtCityName" class="form-control col-7" />
+    <span id="spanCCityName"></span>
+    <br /><br />
+    <b>Country Name</b>
+    <br />
+    <select id="ddlCountry" class="form-control col-7">
+        <option value="0">Select</option>
+    </select>
+    <span id="spanCCountryName"></span>
+    <br /><br />
+    <b>State Name:</b>
+    <br />
+    <select id="ddlState" class="form-control col-7">
+        <option value="0">Select</option>
+    </select>
+    <span id="spanCStateName"></span>
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input type="checkbox" id="chkIsActive" />
+    <br /><br />
+</div>
+
+<div id="divEdit" title="Update City Details">
+    <p id="pEStatus"></p>
+    <b>City Name:</b>
+    <br />
+    <input type="text" id="txtEditCityName" class="form-control col-10" />
+    <span id="spanECityName"></span>
+    <br /><br />
+    <b>Country Name:</b>
+    <br />
+    <select id="ddlEditCountry" class="form-control col-10">
+        <option value="0">Select</option>
+    </select>
+    <span id="spanECountryName"></span>
+    <br /><br />
+    <b>State Name:</b>
+    <br />
+    <select id="ddlEditState" class="form-control col-10">
+        <option value="0">Select</option>
+    </select>
+    <span id="spanEStateName"></span>
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input type="checkbox" id="chkEditIsActive" />
+    <br /><br />
+</div>
+
+<div id="divDelete" title="Delete City Details">
+    <p id="pDStatus"></p>
+    <b>Are you sure? Do You want to delete city details?</b>
+</div>
+
+<div id="divDetails" title="City Details">
+    <p id="pStatus"></p>
+    <b>City Id:</b>
+    <br />
+    <span id="spanCityId"></span>
+    <br /><br />
+    <b>City Name:</b>
+    <br />
+    <span id="spanCityName"></span>
+    <br /><br />
+    <b>State Name:</b>
+    <br />
+    <span id="spanStateName"></span>
+    <br /><br />
+    <b>Country Name:</b>
+    <br />
+    <span id="spanCountryName"></span>
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input type="checkbox" id="chkDetailsIsActive" disabled="disabled" />
+</div>
+
+<h2>City List</h2>
+<p>
+    <a href="#" id="CreateLink">Create New City</a>
+</p>
+<div id="divData"></div>
+

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Activation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Account Activation</h2>
+<hr />
+<div align="center">
+    @{
+        if (ViewBag.Status == 1)
+        {
+            <p style="color:green;font-family:'Bauhaus 93';font-size:20px">Your account has been activated successfully!!!</p>
+            <p>&nbsp;</p>
+            <p style="font-family:Tahoma;font-size:15px">Please <a href="@Url.Action("Login")">Click Here</a>&nbsp;to Login</p>
+        }
+        else
+        {
+            <p style="color:red;font-family:'Bauhaus 93';font-size:20px">Your account activated Failed!!!</p>
+        }
+    }
+</div>
+

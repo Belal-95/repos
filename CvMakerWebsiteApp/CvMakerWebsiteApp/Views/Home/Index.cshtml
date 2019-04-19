@@ -17,40 +17,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>HTML Template</title>
+    <title>Make Your CV</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/bootstrap.min.css" />
 
     <!-- Owl Carousel -->
-    <link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
-    <link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/owl.carousel.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/owl.theme.default.css" />
 
     <!-- Magnific Popup -->
-    <link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/magnific-popup.css" />
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/style.css" />
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
     <!-- Header -->
     <header id="home">
         <!-- Background Image -->
-        <div class="bg-img" style="background-image: url('./img/background11111.jpg');">
+        <div class="bg-img" style="background-image: url('../images/Index/background11111.jpg');">
             <div class="overlay"></div>
         </div>
         <!-- /Background Image -->
@@ -62,8 +56,8 @@
                     <!-- Logo -->
                     <div class="navbar-brand">
                         <a href="index.html">
-                            <img class="logo" src="img/logo.png" alt="logo">
-                            <img class="logo-alt" src="img/logo-alt.png" alt="logo">
+                            <img class="logo" src="~/images/Index//logo.png" alt="logo">
+                            <img class="logo-alt" src="~/images/Index//logo-alt.png" alt="logo">
                         </a>
                     </div>
                     <!-- /Logo -->
@@ -78,17 +72,9 @@
                 <ul class="main-nav nav navbar-nav navbar-right">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    @*<li><a href="#portfolio">Portfolio</a></li>*@
                     <li><a href="#service">Services</a></li>
-                    @*<li><a href="#pricing">Prices</a></li>
-                        <li><a href="#team">Team</a></li>
-                        <li class="has-dropdown">
-                            <a href="#blog">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-single.html">blog post</a></li>
-                            </ul>
-                        </li>*@
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="/Home/login">Sign In</a></li>
                 </ul>
                 <!-- /Main navigation -->
 
@@ -107,7 +93,7 @@
                             <p class="white-text">
                                 WebsiteName was created to help you Generating your Creative and professional CV online for free
                             </p>
-                            <button class="white-btn" onclick="javascript:document.location.href='@Url.Action("login","Home")'">Get Started!</button>
+                            <button class="white-btn" onclick="javascript:document.location.href='@Url.Action("Registration","Home")'">Get Started!</button>
                             <button class="main-btn">Learn more</button>
                         </div>
                     </div>
@@ -173,113 +159,7 @@
 
     </div>
     <!-- /About -->
-    @*<!-- Portfolio -->
-        <div id="portfolio" class="section md-padding bg-grey">
 
-            <!-- Container -->
-            <div class="container">
-
-                <!-- Row -->
-                <div class="row">
-
-                    <!-- Section header -->
-                    <div class="section-header text-center">
-                        <h2 class="title">Featured Works</h2>
-                    </div>
-                    <!-- /Section header -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work1.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work1.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work2.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work2.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work3.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work3.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work4.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work4.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work5.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work5.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-                    <!-- Work -->
-                    <div class="col-md-4 col-xs-6 work">
-                        <img class="img-responsive" src="./img/work6.jpg" alt="">
-                        <div class="overlay"></div>
-                        <div class="work-content">
-                            <span>Category</span>
-                            <h3>Lorem ipsum dolor</h3>
-                            <div class="work-link">
-                                <a href="#"><i class="fa fa-external-link"></i></a>
-                                <a class="lightbox" href="./img/work6.jpg"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Work -->
-
-                </div>
-                <!-- /Row -->
-
-            </div>
-            <!-- /Container -->
-
-        </div>
-        <!-- /Portfolio -->*@
     <!-- Service -->
     <div id="service" class="section md-padding">
 
@@ -292,7 +172,7 @@
                 <!-- Section header -->
                 <div class="section-header text-center">
                     <h2 class="title">What we Do</h2>
-                </div>
+                </div>f
                 <!-- /Section header -->
                 <!-- service -->
                 <div class="col-md-4 col-sm-6">
@@ -393,10 +273,10 @@
                 <!-- About slider -->
                 <div class="col-md-6">
                     <div id="about-slider" class="owl-carousel owl-theme">
-                        <img class="img-responsive" src="~/images/whyToChooseUs1.jpg" alt="">
-                        <img class="img-responsive" src="~/images/whyToChooseUs2.jpg" alt="">
-                        <img class="img-responsive" src="~/images/whyToChooseUs1.jpg" alt="">
-                        <img class="img-responsive" src="~/images/whyToChooseUs2.jpg" alt="">
+                        <img class="img-responsive" src="~/images/Index/whyToChooseUs1.jpg" alt="">
+                        <img class="img-responsive" src="~/images/Index/whyToChooseUs2.jpg" alt="">
+                        <img class="img-responsive" src="~/images/Index/whyToChooseUs1.jpg" alt="">
+                        <img class="img-responsive" src="~/images/Index/whyToChooseUs2.jpg" alt="">
                     </div>
                 </div>
                 <!-- /About slider -->
@@ -409,448 +289,6 @@
 
     </div>
     <!-- /Why Choose Us -->
-    @*<!-- Numbers -->
-    <div id="numbers" class="section sm-padding">
-
-        <!-- Background Image -->
-        <div class="bg-img" style="background-image: url('./img/background2.jpg');">
-            <div class="overlay"></div>
-        </div>
-        <!-- /Background Image -->
-        <!-- Container -->
-        <div class="container">
-
-            <!-- Row -->
-            <div class="row">
-
-                <!-- number -->
-                <div class="col-sm-3 col-xs-6">
-                    <div class="number">
-                        <i class="fa fa-users"></i>
-                        <h3 class="white-text"><span class="counter">451</span></h3>
-                        <span class="white-text">Happy clients</span>
-                    </div>
-                </div>
-                <!-- /number -->
-                <!-- number -->
-                <div class="col-sm-3 col-xs-6">
-                    <div class="number">
-                        <i class="fa fa-trophy"></i>
-                        <h3 class="white-text"><span class="counter">12</span></h3>
-                        <span class="white-text">Awards won</span>
-                    </div>
-                </div>
-                <!-- /number -->
-                <!-- number -->
-                <div class="col-sm-3 col-xs-6">
-                    <div class="number">
-                        <i class="fa fa-coffee"></i>
-                        <h3 class="white-text"><span class="counter">154</span>K</h3>
-                        <span class="white-text">Cups of Coffee</span>
-                    </div>
-                </div>
-                <!-- /number -->
-                <!-- number -->
-                <div class="col-sm-3 col-xs-6">
-                    <div class="number">
-                        <i class="fa fa-file"></i>
-                        <h3 class="white-text"><span class="counter">45</span></h3>
-                        <span class="white-text">Projects completed</span>
-                    </div>
-                </div>
-                <!-- /number -->
-
-            </div>
-            <!-- /Row -->
-
-        </div>
-        <!-- /Container -->
-
-    </div>
-    <!-- /Numbers -->*@
-    @*<!-- Pricing -->
-        <div id="pricing" class="section md-padding">
-
-            <!-- Container -->
-            <div class="container">
-
-                <!-- Row -->
-                <div class="row">
-
-                    <!-- Section header -->
-                    <div class="section-header text-center">
-                        <h2 class="title">Pricing Table</h2>
-                    </div>
-                    <!-- /Section header -->
-                    <!-- pricing -->
-                    <div class="col-sm-4">
-                        <div class="pricing">
-                            <div class="price-head">
-                                <span class="price-title">Basic plan</span>
-                                <div class="price">
-                                    <h3>$9<span class="duration">/ month</span></h3>
-                                </div>
-                            </div>
-                            <ul class="price-content">
-                                <li>
-                                    <p>1GB Disk Space</p>
-                                </li>
-                                <li>
-                                    <p>100 Email Account</p>
-                                </li>
-                                <li>
-                                    <p>24/24 Support</p>
-                                </li>
-                            </ul>
-                            <div class="price-btn">
-                                <button class="outline-btn">Purchase now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /pricing -->
-                    <!-- pricing -->
-                    <div class="col-sm-4">
-                        <div class="pricing">
-                            <div class="price-head">
-                                <span class="price-title">Silver plan</span>
-                                <div class="price">
-                                    <h3>$19<span class="duration">/ month</span></h3>
-                                </div>
-                            </div>
-                            <ul class="price-content">
-                                <li>
-                                    <p>1GB Disk Space</p>
-                                </li>
-                                <li>
-                                    <p>100 Email Account</p>
-                                </li>
-                                <li>
-                                    <p>24/24 Support</p>
-                                </li>
-                            </ul>
-                            <div class="price-btn">
-                                <button class="outline-btn">Purchase now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /pricing -->
-                    <!-- pricing -->
-                    <div class="col-sm-4">
-                        <div class="pricing">
-                            <div class="price-head">
-                                <span class="price-title">Gold plan</span>
-                                <div class="price">
-                                    <h3>$39<span class="duration">/ month</span></h3>
-                                </div>
-                            </div>
-                            <ul class="price-content">
-                                <li>
-                                    <p>1GB Disk Space</p>
-                                </li>
-                                <li>
-                                    <p>100 Email Account</p>
-                                </li>
-                                <li>
-                                    <p>24/24 Support</p>
-                                </li>
-                            </ul>
-                            <div class="price-btn">
-                                <button class="outline-btn">Purchase now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /pricing -->
-
-                </div>
-                <!-- Row -->
-
-            </div>
-            <!-- /Container -->
-
-        </div>
-        <!-- /Pricing -->*@
-    @*<!-- Testimonial -->
-        <div id="testimonial" class="section md-padding">
-
-            <!-- Background Image -->
-            <div class="bg-img" style="background-image: url('./img/background3.jpg');">
-                <div class="overlay"></div>
-            </div>
-            <!-- /Background Image -->
-            <!-- Container -->
-            <div class="container">
-
-                <!-- Row -->
-                <div class="row">
-
-                    <!-- Testimonial slider -->
-                    <div class="col-md-10 col-md-offset-1">
-                        <div id="testimonial-slider" class="owl-carousel owl-theme">
-
-                            <!-- testimonial -->
-                            <div class="testimonial">
-                                <div class="testimonial-meta">
-                                    <img src="./img/perso1.jpg" alt="">
-                                    <h3 class="white-text">John Doe</h3>
-                                    <span>Web Designer</span>
-                                </div>
-                                <p class="white-text">Molestie at elementum eu facilisis sed odio. Scelerisque in dictum non consectetur a erat. Aliquam id diam maecenas ultricies mi eget mauris.</p>
-                            </div>
-                            <!-- /testimonial -->
-                            <!-- testimonial -->
-                            <div class="testimonial">
-                                <div class="testimonial-meta">
-                                    <img src="./img/perso2.jpg" alt="">
-                                    <h3 class="white-text">John Doe</h3>
-                                    <span>Web Designer</span>
-                                </div>
-                                <p class="white-text">Molestie at elementum eu facilisis sed odio. Scelerisque in dictum non consectetur a erat. Aliquam id diam maecenas ultricies mi eget mauris.</p>
-                            </div>
-                            <!-- /testimonial -->
-
-                        </div>
-                    </div>
-                    <!-- /Testimonial slider -->
-
-                </div>
-                <!-- /Row -->
-
-            </div>
-            <!-- /Container -->
-
-        </div>
-        <!-- /Testimonial -->
-        <!-- Team -->
-        <div id="team" class="section md-padding">
-
-            <!-- Container -->
-            <div class="container">
-
-                <!-- Row -->
-                <div class="row">
-
-                    <!-- Section header -->
-                    <div class="section-header text-center">
-                        <h2 class="title">Our Team</h2>
-                    </div>
-                    <!-- /Section header -->
-                    <!-- team -->
-                    <div class="col-sm-4">
-                        <div class="team">
-                            <div class="team-img">
-                                <img class="img-responsive" src="./img/team1.jpg" alt="">
-                                <div class="overlay">
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="team-content">
-                                <h3>John Doe</h3>
-                                <span>Web Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /team -->
-                    <!-- team -->
-                    <div class="col-sm-4">
-                        <div class="team">
-                            <div class="team-img">
-                                <img class="img-responsive" src="./img/team2.jpg" alt="">
-                                <div class="overlay">
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="team-content">
-                                <h3>John Doe</h3>
-                                <span>Web Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /team -->
-                    <!-- team -->
-                    <div class="col-sm-4">
-                        <div class="team">
-                            <div class="team-img">
-                                <img class="img-responsive" src="./img/team3.jpg" alt="">
-                                <div class="overlay">
-                                    <div class="team-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="team-content">
-                                <h3>John Doe</h3>
-                                <span>Web Designer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /team -->
-
-                </div>
-                <!-- /Row -->
-
-            </div>
-            <!-- /Container -->
-
-        </div>
-        <!-- /Team -->
-        <!-- Blog -->
-        <div id="blog" class="section md-padding bg-grey">
-
-            <!-- Container -->
-            <div class="container">
-
-                <!-- Row -->
-                <div class="row">
-
-                    <!-- Section header -->
-                    <div class="section-header text-center">
-                        <h2 class="title">Recents news</h2>
-                    </div>
-                    <!-- /Section header -->
-                    <!-- blog -->
-                    <div class="col-md-4">
-                        <div class="blog">
-                            <div class="blog-img">
-                                <img class="img-responsive" src="./img/blog1.jpg" alt="">
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta">
-                                    <li><i class="fa fa-user"></i>John doe</li>
-                                    <li><i class="fa fa-clock-o"></i>18 Oct</li>
-                                    <li><i class="fa fa-comments"></i>57</li>
-                                </ul>
-                                <h3>Molestie at elementum eu facilisis sed odio</h3>
-                                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-                                <a href="blog-single.html">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /blog -->
-                    <!-- blog -->
-                    <div class="col-md-4">
-                        <div class="blog">
-                            <div class="blog-img">
-                                <img class="img-responsive" src="./img/blog2.jpg" alt="">
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta">
-                                    <li><i class="fa fa-user"></i>John doe</li>
-                                    <li><i class="fa fa-clock-o"></i>18 Oct</li>
-                                    <li><i class="fa fa-comments"></i>57</li>
-                                </ul>
-                                <h3>Molestie at elementum eu facilisis sed odio</h3>
-                                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-                                <a href="blog-single.html">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /blog -->
-                    <!-- blog -->
-                    <div class="col-md-4">
-                        <div class="blog">
-                            <div class="blog-img">
-                                <img class="img-responsive" src="./img/blog3.jpg" alt="">
-                            </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta">
-                                    <li><i class="fa fa-user"></i>John doe</li>
-                                    <li><i class="fa fa-clock-o"></i>18 Oct</li>
-                                    <li><i class="fa fa-comments"></i>57</li>
-                                </ul>
-                                <h3>Molestie at elementum eu facilisis sed odio</h3>
-                                <p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-                                <a href="blog-single.html">Read more</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /blog -->
-
-                </div>
-                <!-- /Row -->
-
-            </div>
-            <!-- /Container -->
-
-        </div>
-        <!-- /Blog -->*@
-
-    @*<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-            <form class="login100-form validate-form">
-                <span class="login100-form-title p-b-59">
-                    Sign Up
-                </span>
-
-                <div class="wrap-input100 validate-input alert-validate" data-validate="Name is required">
-                    <span class="label-input100">Full Name</span>
-                    <input class="input100" type="text" name="name" placeholder="Name...">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input alert-validate" data-validate="Valid email is required: ex@abc.xyz">
-                    <span class="label-input100">Email</span>
-                    <input class="input100" type="text" name="email" placeholder="Email addess...">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input alert-validate" data-validate="Username is required">
-                    <span class="label-input100">Username</span>
-                    <input class="input100" type="text" name="username" placeholder="Username...">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input alert-validate" data-validate="Password is required">
-                    <span class="label-input100">Password</span>
-                    <input class="input100" type="text" name="pass" placeholder="*************">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input alert-validate" data-validate="Repeat Password is required">
-                    <span class="label-input100">Repeat Password</span>
-                    <input class="input100" type="text" name="repeat-pass" placeholder="*************">
-                    <span class="focus-input100"></span>
-                </div>
-
-                <div class="flex-m w-full p-b-33">
-                    <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            <span class="txt1">
-                                I agree to the
-                                <a href="#" class="txt2 hov1">
-                                    Terms of User
-                                </a>
-                            </span>
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn">
-                            Sign Up
-                        </button>
-                    </div>
-
-                    <a href="#" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-                        Sign in
-                        <i class="fa fa-long-arrow-right m-l-5"></i>
-                    </a>
-                </div>
-            </form>
-        </div>*@
 
     <!-- Contact -->
     <div id="contact" class="section md-padding">
@@ -871,7 +309,7 @@
                     <div class="contact">
                         @*<i class="fa fa-phone"></i>
                         <h3>Phone</h3>
-                        <p>512-421-3940</p>*@
+                        <p>000-000-0000</p>*@
                     </div>
                 </div>
                 <!-- /contact -->
@@ -889,7 +327,7 @@
                     <div class="contact">
                         @*<i class="fa fa-map-marker"></i>
                         <h3>Address</h3>
-                        <p>1739 Bubby Drive</p>*@
+                        <p>-----------</p>*@
                     </div>
                 </div>
                 <!-- /contact -->
@@ -926,7 +364,7 @@
 
                     <!-- footer logo -->
                     <div class="footer-logo">
-                        <a href="index.html"><img src="img/logo-alt.png" alt="logo"></a>
+                        <a href="index.html"><img src="~/images/Index/logo-alt.png" alt="logo"></a>
                     </div>
                     <!-- /footer logo -->
                     <!-- footer follow -->
@@ -969,11 +407,11 @@
     </div>
     <!-- /Preloader -->
     <!-- jQuery Plugins -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="js/jquery.magnific-popup.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
 
 </body>
 

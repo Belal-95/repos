@@ -1,0 +1,411 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtEmail").focus();
+        $("#btnLogin").click(function () {
+            var email = $("#txtEmail").val();
+            var pwd = $("#txtPassword").val();
+            var required = true;
+            if (email == "") {
+                $("#spanEmail").html("Email field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanEmail").html("");
+            }
+
+            if (pwd == "") {
+                $("#spanPwd").html("Email field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanPwd").html("");
+            }
+
+            if (required == false) {
+                return false;
+            }
+        });
+
+        //Forget Password Dialog
+        $("#forgetPwdDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 700,
+            show: {
+                effect: "fadeIn",
+                duration: 500
+            },
+            hide: {
+                effect: "fadeOut",
+                duration: 500
+            },
+            close: function () {
+                $("#spanForgetEmail,#lblForgetPwdStatus,#spanAnswer").html("");
+                $("#txtForgetPwdEmail").val();
+                $("#btnEmailPassword").prop("disabled", false);
+                $("#txtHintQuestion,#txtAnswer").val("");
+                $("#trHintQuestion,#trHintAnswer").hide();
+            }
+        });
+
+        $("#forgetPwdSuccessDialog").dialog({
+            
+            autoOpen: false,
+            modal: true,
+            width: 700,
+            show: {
+                effect: "fadeIn",
+                duration: 500
+            },
+            hide: {
+                effect: "fadeOut",
+                duration: 500
+            },
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#forgetPwdLink").click(function () {
+            $("#forgetPwdDialog").dialog({ autoOpen: true });
+        });
+
+        function checkRegisteredEmail(email)
+        {
+            if (email != "") {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    url: "@Url.Action("CheckEmailAvailability")",
+                    data: "{email:'" + email + "'}",
+                    dataType: "json",
+                    success: function (response) {
+                        var value = response;
+                        if (value > 0) {
+
+                            $("#lblForgetPwdStatus").html("");
+                            $("#btnEmailPassword").prop("disabled", false);
+
+                            $.ajax({
+                                type: "POST",
+                                contentType: "application/json;charset=utf-8",
+                                url: "@Url.Action("GetHintQuestion")",
+                                data: "{email:'" + email + "'}",
+                                dataType: "json",
+                                success: function (response) {
+                                    var hintQuestion = response;
+                                    if (hintQuestion != "") {
+                                        $("#trHintQuestion,#trHintAnswer").show();
+                                        $("#trHintQuestion").val(hintQuestion).prop("readonly", true);
+                                        $("txtAnswer").focus();
+                                    }
+                                    else {
+                                        $("#trHintQuestion,#trHintAnswer").hide();
+                                        $("#trHintQuestion").val("").prop("readonly", false);
+                                    }
+                                },
+                                error: function (error) {
+                                    alert("Error Status: " + error.statusText);
+                                }
+                            });
+                        }
+                        else {
+                            $("#lblForgetPwdStatus").html("Email Address is not registered with us.").hide().fadeIn(500);
+                            $("#btnEmailPassword").prop("disabled", true);
+
+                            $("#txtForgetPwdEmail").focus();
+                            return false;
+                        }
+                    },
+                    error: function (error) {
+                        alert("Error Status: " + error.statusText);
+                    }
+                });
+            }
+        }
+
+        $("#txtForgetPwdEmail").keyup(function () {
+            if ($(this).val().length > 0) {
+                $("#spanForgetEmail").html("").fadeOut(500);
+            }
+            else {
+                $("#spanForgetEmail").html("Please Enter Email Address").hide().fadeIn(500);
+                $(this).focus();
+            }
+        });
+
+        $("#txtForgetPwdEmail").focusout(function () {
+            $("#spanForgetEmail").html("");
+            var email = $(this).val();
+            checkRegisteredEmail(email);
+        });
+
+
+        $("#btnEmailPassword").click(function () {
+            $("#spanForgetEmail").html("");
+            $("#spanAnswer").html("");
+            var email = $("#txtForgetPwdEmail").val();
+            if (email == "") {
+                $("#spanForgetEmail").html("Please Enter Email Address").hide().fadeIn(500);
+                $("#txtForgetPwdEmail").focus();
+                return false;
+            }
+            if ($("#txtHintQuestion").val() != "")
+            {
+                if ($("#txtAnswer").val() == "")
+                {
+                    $("#spanAnswer").html("Please Enter Answer").hide().fadeIn(500);
+                    $("#txtAnswer").focus();
+                    return false;
+                }
+            }
+
+            var answer = $("#txtAnswer").val();
+            alert(answer);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                url: "@Url.Action("SendForgetPassword")",
+                data: "{email:'" + email + "', answer:'" + answer +"'}",
+                dataType: "json",
+                success: function (response) {
+                    alert(response);
+
+                    if (response > 0) {
+                        $("#forgetPwdDialog").dialog("close");
+                        $("#spanEmailSuccess").text(email);
+                        $("#forgetPwdSuccessDialog").dialog("open");
+                    }
+                    else
+                    {
+                        $("#lblForgetPwdStatus").html("please enter correct answer!!!").hide().fadeIn(500);
+                        $("#txtAnswer").focus();
+                        return false;
+                    }
+                },
+                error: function (error)
+                {
+                    alert("Error Status: " + error.statusText);
+                }
+            });
+        });
+    });
+</script>
+
+<!--Forget Password Dialog-->
+<div id="forgetPwdDialog" title="Forget Password"><p style="font-size:20px;font-weight:bold">Forget Your Password?</p>
+    <b>Enter the email address below and we will email your answer to you.</b>
+    <br /><br />
+    <span id="lblForgetPwdStatus" style="background-color:yellow;color:red;font-weight:bold"></span>
+    <br /><br />
+    <div style="border:2px solid red">
+        <table style="width:100%">
+            <tr>
+                <td width="20%">
+                    <b>Email Address</b>
+                </td>
+                <th>:</th>
+                @*<td width="2%>:</td>*@
+                <td>
+                    <input type="text" id="txtForgetPwdEmail" />
+                    &nbsp;
+                    <span id="spanForgetEmail" style="font-weight:bold;color:red;background-color:yellow"></span>
+                </td>
+            </tr>
+            <tr id="trHintQuestion" style="display:none">
+                <td><b>Hint Question</b></td>
+                <th>:</th>
+                <td>
+                    <input type="text" id="txtHintQuestion" />
+                </td>
+            </tr>
+            <tr id="trHintAnswer" style="display:none">
+                <td><b>Answer</b></td>
+                <th>:</th>
+                <td>
+                    <input type="password" id="txtAnswer" />
+                    &nbsp;
+                    <span id="spanAnswer" style="font-weight:bold;color:red;background-color:yellow"></span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="button" value="Email Password" id="btnEmailPassword" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <p>
+        If the Email account isn't valid anymore, please click here to&nbsp;<a href="#">Contact Us</a>.
+    </p>
+    <br /><br />
+    </div>
+<!--End Of Forget Password Dialog-->
+<!--Forget Password Success Dialog-->
+<div id="forgetPwdSuccessDialog" title="Forget Password">
+    <p style="font-size:20px;font-weight:bold">Forget Your Password?</p>
+    <br />
+    Your password has been sent to your Email: <span id="spanEmailSuccess"></span>
+    <br />
+    <p>
+        If the Email account isn't valid anymore, please click here to&nbsp;<a href="#">Contact Us</a>.
+    </p>
+    <br /><br />
+</div>
+<!--End of Forget Password Success Dialog-->
+
+
+<table width="100%" border="0" cellpadding="3" cellspacing="3">
+    <tr>
+        <td>
+            Sing In
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Event-Reminders will help you remember and take action on the reminders in your life like birthdays, anniversaries, and holidays.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" border="0" cellpadding="3" cellspacing="3">
+                <tr>
+                    <td width="50%" style="border:5px solid Green" valign="top">
+                        <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                            <tr>
+                                <td>
+                                    <b>Join Now - it's FREE!</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    <b>Membership Benefits include:</b>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><b>Never Forget -</b> Receive reminders for birthdays,holidays & more!</li>
+                                        &nbsp;
+                                        <li><b>Convenient - </b>E-mail and cell phone reminders</li>
+                                        &nbsp;
+                                        <li><b>Time Saving - </b>Spicific greeting card, Ecard & gift suggestions</li>
+                                        &nbsp;
+                                        <li>
+                                            <b>FREE Ecards - </b>No annoying ads
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    @Html.ActionLink("Join Now!", "Registeration")
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%" style="border:5px solid Green">
+                        @using (Html.BeginForm())
+                        {
+                            <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                                <tr>
+                                    <td>
+                                        <b>Member Login</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        If you already a member, please login:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--Error-->
+                                        @if (ViewBag.Status != null)
+                                        {
+                                            <b style="color:red">@ViewBag.Status</b>
+                                        }
+                                        <!--Resend Activation Mail-->
+                                        @if (ViewBag.Activation == 1)
+                                        {
+                                            <b>&nbsp;</b>
+                                            <a href="#" onclick="document.forms[1].submit();">Resent Activation Mail</a>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @if (TempData["SendActivationMail"] != null)
+                                        {
+                                            <b style="color:green">Activation Mail has been semt successfully!!!</b>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Email Address</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="email" placeholder="Enter Email Address" id="txtEmail" name="email" required />
+                                        <span id="spanEmail" style="color:red"></span>
+                                        <br />
+                                        (i.e. bjones232@gmail.com)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Password</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <input type="password" id="txtPassword" name="password" placeholder="Enter Password" required />
+                                        <span id="spanPwd" style="color:red"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Remember password
+                                        <input type="checkbox" id="" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <input type="submit" value="Login" id="btnLogin" />
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" id="forgetPwdLink">Click here if you forget your Password</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                        @using (Html.BeginForm("ActivationMail", "Home"))
+                        {
+
+                        }
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+

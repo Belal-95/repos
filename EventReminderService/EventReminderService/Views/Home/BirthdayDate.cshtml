@@ -1,0 +1,202 @@
+﻿@model EventReminderService.Areas.User.Models.tblBirthdayDetail
+
+@{
+    ViewBag.Title = "BirthdayDate";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#FirstName").focus();
+
+        $("#DateOfBirth").datepicker({
+            showOn: "both",
+            buttonImage: "../../Images/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: +0,
+            yearRange: "-100:+0",
+            dateFormat: "dd/M/yy"
+        });
+
+        $("#btnAddBirthdays").click(function () {
+            var firstName = $("#FirstName").val();
+            var dateOfBirth = $("#DateOfBirth").val();
+            var gender = $("#Gender").val();
+            var relationship = $("#RelationashilpId").val();
+
+            var required = true;
+
+            if (firstName == "") {
+                $("#spanName").html("First Name field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanName").html("");
+            }
+
+            if (dateOfBirth == "") {
+                $("#spanDOB").html("Date Of Birth field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanDOB").html("");
+            }
+
+            if (gender == "") {
+                $("#spanGender").html("Gender field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanGender").html("");
+            }
+
+            if (relationship == "") {
+                $("#spanRelationship").html("Relationship field is required").hide().fadeIn(1000);
+                required = false;
+            }
+            else {
+                $("#spanRelationship").html("");
+            }
+
+            if (required == false) {
+                return false;
+            }
+        });
+    });
+</script>
+
+
+<h2 style="margin:0px;padding:5px">Add Birthday</h2>
+<div style="padding:10px">
+    @using (Html.BeginForm())
+    {
+        <table width="100%">
+            <tr>
+                <td colspan="3">
+                    <!--Show The Status Message-->
+                    @if (TempData["Status"] != null)
+                    {
+                        <b style="color:green">@TempData["Status"]</b>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td width="20%">
+                    <b>
+                        @Html.LabelFor(model => Model.FirstName)
+                    </b>
+                </td>
+                <th width="2">:</th>
+                <td>
+                    @Html.TextBoxFor(model => Model.FirstName)
+                    &nbsp;
+                    <span id="spanName" style="color:red;font-weight:bold"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        @Html.LabelFor(model => Model.LastName)
+                    </b>
+                </td>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => Model.LastName)
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        @Html.LabelFor(model => Model.DateOfBirth)
+                    </b>
+                </td>
+                <th>:</th>
+                <td>
+                    @Html.TextBoxFor(model => Model.DateOfBirth)
+                    &nbsp;
+                    <span id="spanDOB" style="color:red;font-weight:bold"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        @Html.LabelFor(model => Model.Gender)
+                    </b>
+                </td>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => Model.Gender, (IEnumerable<SelectListItem>)ViewBag.Gender, "Select")
+                    &nbsp;
+                    <span id="spanGender" style="color:red;font-weight:bold"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        @Html.LabelFor(model => Model.RelationashilpId)
+                    </b>
+                </td>
+                <th>:</th>
+                <td>
+                    @Html.DropDownListFor(model => Model.RelationashilpId, (IEnumerable<SelectListItem>)ViewBag.Relationships, "Select")
+                    &nbsp;
+                    <span id="spanRelationship" style="color:red;font-weight:bold"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Birthday" id="btnAddBirthdays" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+            </tr>
+        </table>
+    }
+</div>
+

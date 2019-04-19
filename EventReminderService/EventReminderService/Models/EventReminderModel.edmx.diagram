@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2db1c81973fd4520a210965c52e22699" Name="Diagram1" ZoomLevel="111">
+        <EntityTypeShape EntityType="EventReminderModel1.tblUserAccountDetail" Width="2.25" PointX="3.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventReminderModel1.tblUserAddressDetail" Width="2.125" PointX="6.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventReminderModel1.tblUserPersonalDetail" Width="2" PointX="6.25" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="EventReminderModel1.FK_tblUserAddressDetails_tblUserAccountDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EventReminderModel1.FK_tblUserPersonalDetail_tblUserAccountDetails" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="EventReminderModel1.tblBirthdayDetail" Width="2" PointX="6.25" PointY="8.125" />
+        <AssociationConnector Association="EventReminderModel1.FK_tblBirthdayDetails_tblUserAccountDetails" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

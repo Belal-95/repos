@@ -1,0 +1,397 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_ControlPanelLayout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        var religionId = "";
+        function loadReligionstData() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetReligionList")',
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+
+                    if (data.length > 0) {
+                        var output = "<table align='center' border='1' width='100%' style='text-align:center'><tr style='background-color:blue; color:white'><th>Religion Id</th><th>Religion Name</th><th>Is Active</th><th>Action</th></tr>";
+
+                        for (var c = 0; c < data.length; c++) {
+                            output += "<tr><td>" + data[c].ReligionId + "</td><td>" +
+                                data[c].ReligionName + "</td><td>";
+                            if (data[c].IsActive == true)
+                                output += "<input type='checkbox' checked='checked' disabled='disabled' />";
+                            else
+                                output += "<input type='checkbox' disabled='disabled' />";
+
+                            output += "</td><td>" + "<a href='#' name='CEdit' id='" + data[c].ReligionId + "'>Edit</a>&nbsp;|&nbsp;<a href='#' name='CDetails' id='" + data[c].ReligionId + "'>Details</a>&nbsp;|&nbsp;<a href='#' name='CDelete' id='" + data[c].ReligionId + "'>Delete</a>" + "</td></tr> ";
+
+                        }
+                        output += "</table><br /><br />";
+
+                        $("#divData").html(output);
+
+                        $("a[name='CEdit']").click(function () {
+                            religionId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var hName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            $("#txtEditReligionName").val(hName);
+                            $("#chkEditIsActive").prop("checked", isActive);
+                            $("#divEdit").dialog("open");
+                            /////////////////
+                            $("#pUStatus").text("");
+                            /////////////////
+                            /////////////////
+                            $("#lblUError").text("");
+                            /////////////////
+                        });
+
+                        $("a[name='CDelete']").click(function () {
+                            religionId = $(this).attr("id");
+                            $("#divDelete").dialog("open");
+                            /////////////////
+                            $("#pDStatus").text("");
+                            /////////////////
+                        });
+
+                        $("a[name='CDetails']").click(function () {
+                            religionId = $(this).attr("id");
+                            var tr = $(this).closest('tr');
+                            var hName = tr.children('td:eq(1)').text();
+                            var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+                            $("#spanReligionId").text(religionId);
+                            $("#spanReligionName").text(hName);
+                            $("#chkDetailsIsActive").prop("checked", isActive);
+                            $("#divDetails").dialog("open");
+                        });
+                    }
+                    else {
+                        $("#divData").html("");
+                    }
+                },
+                error: function (error) {
+                    alert("Error: " + error.status);
+                }
+            });
+        }
+        loadReligionstData();
+
+
+        $("#CreateLink").click(function () {
+            $("#divCreate").dialog("open");
+            ///////////////
+            $("#chkIsActive").prop('checked', false); // Unchecks it
+            /////////////////
+            $("#lblCError").text("");
+            /////////////////
+            /////////////////
+            $("#txtReligionName").val("");
+            ////////////////
+            /////////////////
+            $("#pCStatus").text("");
+            /////////////////
+        });
+
+        $("#divCreate").dialog({
+            autoOpen: false,
+            modal: true,
+            title: "Create New Religion Details",
+            width: 500,
+            height: 350,
+            dragable: true,
+            resizable: true,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+            buttons: {
+                "Save": function () {
+                    var religionName = $("#txtReligionName").val().trim();
+                    var isActive = $("#chkIsActive").is(":checked");
+
+                    if (religionName != "")
+                    {
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json; charset-utf-8",
+                            url: '@Url.Action("InsertReligion")',
+                            data: "{ religionName:'" + religionName + "', isActive:'" + isActive + "'}",
+                            dataType: "json",
+                            success: function (response) {
+                                var value = response;
+
+                                if (parseInt(value) > 0) {
+                                    $("#divCreate").dialog("close");
+                                    loadReligionstData();
+                                }
+                                else {
+                                    $("#pCStatus").html("<b style='color:red'>Hint Question Insertion Failed!!!</b>");
+                                }
+                            },
+                            error: function (error) {
+                                altert("Error: " + error.status);
+                            }
+                        });
+                    }
+                    else {
+                        ////////////////////////////////////
+                        var message = "Please Enter The Religion Name ";
+                        $("#lblCError").text(message) ;
+                        ////////////////////////////////////
+                        // OR
+                       // $("$spanCreateReligionNameError").html("<br /><b style='color:red'>Please enter country name</b>");
+                        // and add span there instead of lable
+
+
+                        //$("#txtReligionName").after("<br /><b style='color:red'>Please enter country name</b>");
+                        return false;
+                    }
+                },
+
+                "Close": function () {
+                    $("#divCreate").dialog("close");
+                }
+            }
+
+        });
+
+       $("#divEdit").dialog({
+            autoOpen: false,
+            modal: true,
+            title: "Update The Religion Details",
+            width: 550,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                duration: 500
+            },
+
+            buttons: {
+                "Update": function () {
+
+                    /////////////////
+                    $("#pUStatus").text("");
+                    /////////////////
+                    /////////////////
+                    $("#lblUError").text("");
+                    /////////////////
+
+//////////////////////// this extra code for not updating the country to blank (you can delete both of it together and it will work without it)
+                    var religionName = $("#txtEditReligionName").val().trim();
+                    var isActive = $("#chkEditIsActive").is(":checked");
+
+                    if (religionName != "") {
+///////////////////////////
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("UpdateReligion")',
+                        data: "{ religionId:'" + religionId + "', religionName: '" + $("#txtEditReligionName").val() + "', isActive: '" + $("#chkEditIsActive").is(":checked") + "'}",
+                        dataType: "json",
+
+                        success: function (response) {
+                            var value = response;
+                           // alert(value);
+                            if (parseInt(value) > 0)
+                            {
+                                $("#divEdit").dialog("close");
+                                ///////////////////
+                                //$("#pUStatus").text("");
+                                ///////////////////
+                                loadReligionstData();
+                            }
+                            else
+                            {
+                                    // we can also specify more cases of errors 1 is for not changing the values and show this messege and other for in case if any other error happened during updation
+                                /////////////////
+                                $("#pUStatus").text("religion Updation Failed!!! you didn't change anything yaaar");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error: " + error.status);
+                        }
+                        });
+
+///////////////////////  this extra code for not updating the country to blank (you can delete both of it together and it will work without it)
+
+                    }
+                    else {
+                        ////////////////////////////////////
+                        var message = "please enter the Religion name ";
+                        $("#lblUError").text(message);
+                        ////////////////////////////////////
+
+                        // OR
+                       // $("$spanUpdateReligionNameError").html("<br /><b style='color:red'>Please enter country name</b>");
+                        // and add span there instead of lable
+
+                        //$("#txtEditReligionName").after("<br /><b style='color:red'>Please enter country name</b>");
+                        return false;
+                    }
+
+///////////////////////////
+
+                },
+                "Cancel": function () {
+                    $("#divEdit").dialog("close");
+                    ///////////////////
+                    //$("#pUStatus").text("");
+                    ///////////////////
+                }
+            }
+        });
+
+        $("#divDelete").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 550,
+            title: "Delete The Religion Name",
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Ok": function () {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset-utf-8",
+                        url: '@Url.Action("DeleteReligion")',
+                        data: "{religionId:'" + religionId + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+
+                            if (parseInt(value) > 0) {
+                                $("#divDelete").dialog("close");
+
+                                loadReligionstData();
+                            }
+                            else {
+                                $("#pDStatus").html("<b style='color:red'>Religion Deletion Failed!!!</b>");
+                            }
+                        },
+                        error: function (error) {
+                            altert("Error: " + error.status);
+                        }
+                    });
+                },
+
+                "Cancel": function () {
+                    $("#divDelete").dialog("close");
+                }
+            }
+        });
+        $("#divDetails").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 350,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Close": function () {
+                    $("#divDetails").dialog("close");
+
+
+                }
+            }
+        });
+    });
+</script>
+
+@*<h2>Index</h2>*@
+
+<div id="divCreate">
+    <p id="pCStatus"></p>
+    <b>Religion Name:</b>
+    <br />
+    <input id="txtReligionName" type="text" />
+    <br /><br />
+
+    @*  *@
+    <label id="lblCError" style='color:red'></label>
+    @*  *@
+
+    @*or
+        <span id="spanCreateReligionNameError" ></span>*@
+
+
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input id="chkIsActive" type="checkbox" />
+
+
+
+
+</div>
+
+<div id="divEdit">
+    <p id="pUStatus" style='color:red'></p>
+    <b>Religion Name:</b>
+    <br />
+    <input id="txtEditReligionName" type="text" />
+    <br /><br />
+
+    @*  *@
+    <label id="lblUError" style='color:red'></label>
+    @*  *@
+
+    @*or
+        <span id="spanUpdateReligionNameError" ></span>*@
+
+    <br /><br />
+
+    <b>Is Active:</b>
+    <br />
+    <input id="chkEditIsActive" type="checkbox" />
+    <br /><br />
+
+</div>
+
+<div id="divDelete">
+    <p id="pDStatus"></p>
+    <b>Are you sure? Do you want to delete Religion details?</b>
+</div>
+
+<div id="divDetails">
+    <b>Religion Id:</b>
+    <br />
+    <span id="spanReligionId"></span>
+    <br /><br />
+    <b>Religion Name:</b>
+    <br />
+    <span id="spanReligionName"></span>
+    <br /><br />
+    <b>Is Active:</b>
+    <br />
+    <input id="chkDetailsIsActive" type="checkbox" disabled="disabled" />
+    <br /><br />
+</div>
+
+<h2>Religion List</h2>
+
+<p>
+    <a href="#" id="CreateLink">Create New Religion</a>
+</p>
+<div id="divData"></div>

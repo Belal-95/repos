@@ -1,0 +1,50 @@
+﻿<style type="text/css">
+    .menuLink {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        font-family: Tahoma;
+        font-size: 12px;
+    }
+
+        .menuLink:hover {
+            color: yellow;
+        }
+</style>
+
+
+<table cellspacing="0" cellpadding="0" style="width:100%;background-color:#029D03">
+    <tr>
+        <td style="background-color:#029D03">
+
+            <table width="100%">
+
+                <tr valign="top">
+                    <td>
+                        <a href="http://www.event-reminders.com">
+                            <img src="~/Images/Events-Banner-Header.jpg" title="Event-Reminders.com.   Free Reminder Service." border="0" width="100%" height="300"/>
+                        </a>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td align="right">
+                        @Html.ActionLink("Logout", "Logout", null, new { @class = "menuLink" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" class="menuLink">
+                        <a class="menuLink" href="/User">Home</a>
+                        |
+                        <a class="menuLink" href="/User/Home/MembersCorner">Member's Corner</a>
+                        |
+                        <a class="menuLink" href="/User/Home/MyReminders">My Reminders</a>
+                        |
+                        <a class="menuLink" href="#">Contact Us</a>
+                        |
+                        <a class="menuLink" href="#">Free Ecards</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

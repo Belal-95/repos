@@ -1,0 +1,190 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "CvMaker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+<head>
+    <title>CvMaker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="../../images/icons/favicon.ico" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../Content/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../../fonts/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../../fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../../css/util.css">
+        <link rel="stylesheet" type="text/css" href="../../css/main.css">
+        <!--===============================================================================================-->*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+
+    <link rel="stylesheet" type="text/css" href="../../css/cvMaker.css">
+
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+        <link href="https://cvmkr.com/public/?v=1.1&css=Member,ui,cleditor" rel="stylesheet" type="text/css" />*@
+
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
+
+</head>
+<div>
+    &nbsp;
+    &nbsp;
+</div>
+<div class="controls">
+    
+    <h1 id="nameOfCv">CV Sample</h1>
+
+    <div class="container-fluid">
+        <span id="Status" style="color:red" class="col-lg-5">
+            succesfully saved
+        </span>
+        <div class="col-lg-7">
+            <a href="" target="_blank" id="Upgrade" class="button premium">Upgrade to premum</a>
+            <a href="" target="_blank" id="help" class="button"> help <i class="fas fa-info-circle"></i></a>
+            <a href="" target="_blank" id="preview" class="button">preview <i class="fas fa-search"></i></a>
+            <a href="" target="_blank" id="save" class="button">save <i class="fas fa-save"></i></a>
+            <a href="" target="_blank" id="saveAndDonload" class="button">save and donload <i class="fas fa-download"></i></a>
+
+        </div>
+        @*<div class="options">
+            <ul id="cvsections" class="noul ui-sortable" style=""><li class="item section-basic selected" style=""><a href="#">Basic information</a></li><li class="item section-work" style=""><a href="#">Work experience</a></li><li class="item section-1287593158087"><a href="#">Objective</a></li><li class="item section-qualifications" style=""><a href="#">Qualifications</a></li><li class="item section-education"><a href="#">Education</a></li><li class="item section-interests"><a href="#">Interests</a></li><li class="item section-references" style=""><a href="#">References</a></li></ul>
+            <p>
+                <a href="#" class="button" id="bt-add-section"><span class="ui-icon ui-icon-plusthick"></span> إضافة قسم جديد</a>
+            </p>
+            <p class="msg">* لإعادة ترتيب الأقسام في سيرتك الذاتية إضغط واسحب اسم القسم في القائمة أعلاه.</p>
+            <p class="msg">* في حال ترك الحقول في القسم فارغة فإن القسم لن يظهر في سيرتك الذاتية.</p>
+        </div>*@
+
+
+
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="basic-information-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Basic Information</a>
+                    <a class="nav-link" id="work-experience-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Work experience</a>
+                    <a class="nav-link" id="objective-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">objective</a>
+                    <a class="nav-link" id="qualifications-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Qualifications</a>
+                    <a class="nav-link" id="education-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Education</a>
+                    <a class="nav-link" id="intrests-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Intrests</a>
+                    <a class="nav-link" id="references-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">References</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="basic-information-tab">
+                        <h1>Basic Information</h1>
+                        <div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="action" name="action" value="save">
+                                <input type="hidden" class="email_copy" name="email_copy" value="">
+                                <input type="hidden" class="style" name="style" value="executive">
+                                <input type="hidden" class="type" name="type" value="pdf">
+                                <input type="hidden" class="page_size" name="page_size" value="pdf">
+                                <input type="hidden" class="section_name" name="sections[basic][section_name]" value="Basic information">
+                                <p class="field field_">
+                                    <label>Full name</label><input maxlength="100" type="text" name="sections[basic][data][fullname]" class="text" value="">
+                                </p><p class="field field_">
+                                    <label>E-mail address</label><input maxlength="100" type="text" name="sections[basic][data][email]" class="text" value="">
+                                </p><p class="field field_">
+                                    <label>Phone numbers</label><input maxlength="100" type="text" name="sections[basic][data][phone]" class="text" value="">
+                                    <span class="info">If you have more than one number, separate with commas</span>
+                                </p><p class="field field_">
+                                    <label>Websites</label><input maxlength="100" type="text" name="sections[basic][data][website]" class="text" value="">
+                                    <span class="info">If you have more than one URL, separate with commas</span>
+                                </p><hr>
+                                <p class="field field_">
+                                    <label>Address line 1</label><input maxlength="100" type="text" name="sections[basic][data][address1]" class="text" value="">
+                                </p><p class="field field_">
+                                    <label>Address line 2</label><input maxlength="100" type="text" name="sections[basic][data][address2]" class="text" value="">
+                                </p><p class="field field_">
+                                    <label>Address line 3</label><input maxlength="100" type="text" name="sections[basic][data][address3]" class="text" value="">
+                                </p><hr>
+                                <div id="photo-preview" style="display: block;">
+                                </div><p class="field field_photo" style="display: block;">
+                                    <label for="photo">Photo</label><input type="file" id="photo" name="photo" class="text" value="">
+                                    <span class="info">gif, jpg, png, jpeg<br>320 x 400 px</span>
+                                </p><p class="field field_bt-photo" style="display: block;">
+                                    <input type="button" id="bt-photo" name="bt-photo" class="button" value="Upload">
+                                </p><p class="field field_bt-photo-remove" style="display: block;">
+                                    <input type="button" id="bt-photo-remove" name="bt-photo-remove" class="button" value="Remove">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="work-experience-tab">
+                        <h1>Work experience</h1>
+                        <div class="set" style="">
+                            <p class="field field_">
+                                <label>Job title</label><input maxlength="100" type="text" name="sections[work][data][job_title][]" class="text" value="">
+                            </p><p class="field field_">
+                                <label>Company name</label><input maxlength="100" type="text" name="sections[work][data][company][]" class="text" value="">
+                            </p><p class="field field_">
+                                <label>Start date</label><input maxlength="100" type="text" name="sections[work][data][start][]" class="text" value="">
+                                <span class="info">Eg: Jan 2005</span>
+                            </p><p class="field field_">
+                                <label>End date</label><input maxlength="100" type="text" name="sections[work][data][end][]" class="text" value="">
+                                <span class="info">Eg: Jan 2009, or Present</span>
+                            </p><p class="field field_">
+                                <label>Other information</label><div class="cleditorMain" style="width: 690px; height: 250px;"><div class="cleditorToolbar" style="height: 27px;"><div class="cleditorGroup" style="width: 73px;"><div class="cleditorButton cleditorDisabled" title="Bold" disabled="disabled"></div><div class="cleditorButton cleditorDisabled" title="Italic" disabled="disabled" style="background-position: -24px center;"></div><div class="cleditorButton cleditorDisabled" title="Underline" disabled="disabled" style="background-position: -48px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 97px;"><div class="cleditorButton cleditorDisabled" title="Font" disabled="disabled" style="background-position: -144px center;"></div><div class="cleditorButton cleditorDisabled" title="Style" disabled="disabled" style="background-position: -192px center;"></div><div class="cleditorButton cleditorDisabled" title="Font Color" disabled="disabled" style="background-position: -216px center;"></div><div class="cleditorButton cleditorDisabled" title="Text Highlight Color" disabled="disabled" style="background-position: -240px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 49px;"><div class="cleditorButton cleditorDisabled" title="Bullets" disabled="disabled" style="background-position: -288px center;"></div><div class="cleditorButton cleditorDisabled" title="Numbering" disabled="disabled" style="background-position: -312px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 145px;"><div class="cleditorButton cleditorDisabled" title="Indent" disabled="disabled" style="background-position: -360px center;"></div><div class="cleditorButton cleditorDisabled" title="Outdent" disabled="disabled" style="background-position: -336px center;"></div><div class="cleditorButton cleditorDisabled" title="Align Text Left" disabled="disabled" style="background-position: -384px center;"></div><div class="cleditorButton cleditorDisabled" title="Center" disabled="disabled" style="background-position: -408px center;"></div><div class="cleditorButton cleditorDisabled" title="Align Text Right" disabled="disabled" style="background-position: -432px center;"></div><div class="cleditorButton cleditorDisabled" title="Justify" disabled="disabled" style="background-position: -456px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 73px;"><div class="cleditorButton cleditorDisabled" title="Insert Horizontal Rule" disabled="disabled" style="background-position: -528px center;"></div><div class="cleditorButton cleditorDisabled" title="Insert Hyperlink" disabled="disabled" style="background-position: -576px center;"></div><div class="cleditorButton cleditorDisabled" title="Remove Hyperlink" disabled="disabled" style="background-position: -600px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 25px;"><div class="cleditorButton cleditorDisabled" title="Insert page-break" disabled="disabled" style="background-position: -648px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 49px;"><div class="cleditorButton cleditorDisabled" title="Undo" disabled="disabled" style="background-position: -480px center;"></div><div class="cleditorButton cleditorDisabled" title="Redo" disabled="disabled" style="background-position: -504px center;"></div><div class="cleditorDivider"></div></div><div class="cleditorGroup" style="width: 25px;"><div class="cleditorButton cleditorDisabled" title="Remove Formatting" disabled="disabled" style="background-position: -264px center;"></div></div></div><textarea name="sections[work][data][info][]" class="textarea" id="t0" style="border: none; margin: 0px; padding: 0px; display: none; width: 690px; height: 223px;"></textarea><iframe frameborder="0" src="javascript:true;" style="width: 690px; height: 223px;"></iframe></div>
+                                <span class="info">Optional details such as job responsibilities, achievements etc.</span>
+                            </p><hr>
+                            <a href="#" class="button bt_delete_set"><span class="ui-icon ui-icon-closethick"></span>حذف</a>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="objective-tab">
+
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="qualifications-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="education-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="intrests-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="references-tab">...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    @*<div class="alert alert-success" role="alert">
+        A simple success alert—check it out!
+    </div>
+    <div class="alert alert-danger" role="alert">
+        A simple danger alert—check it out!
+    </div>*@
+
+    @*<span id="notice" class="notice"> </span>
+        <a href="https://cvmkr.com/ar/Member/upgrade" target="_blank" class="button premium" id="bt-help"> Upgrade to Premium ❤</a>
+
+        <a href="https://cvmkr.com/ar/Pages/help" target="_blank" class="button" id="bt-help"><span class="ui-icon ui-icon-info"></span> مساعدة</a>
+        <a href="#" class="button" id="bt-preview"><span class="ui-icon ui-icon-search"></span> إستعراض سريع</a>
+        <a href="#" class="button" id="bt-save"><span class="ui-icon ui-icon-disk"></span> حفظ</a>
+
+        <a href="#" class="button" id="bt-download"><span class="ui-icon ui-icon-check"></span> حفظ وتحميل</a>*@
+</div>
+
+<!--===============================================================================================-->
+<script src="../Scripts/jquery-3.3.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="../Scripts/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="../../js/main.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Status").html("<b style='color:green'>you can use this email id.</b>").hide().fadeIn(1000);
+
+    });
+</script>

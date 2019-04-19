@@ -1,0 +1,444 @@
+﻿@model EventReminderService.Areas.User.Models.UserDetails
+@{
+    ViewBag.Title = "MyAccount";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divAccordion").accordion({ actice: 0, collapsible: true, event: "click", heightStyle: "content" });
+
+        $("#txtDateOfBirth,#txtAnniversaryDate").datepicker({
+            showOn: "both",
+            buttonImage: "../../Images/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: +0,
+            yearRange: "-100:+0",
+            dateFormat: "dd/M/yy"
+        });
+
+        $("#txtDateOfBirth").change(function () {
+            var date = $(this).val();
+            var months = { "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12" };
+            var dateArray = date.split(/\//);
+            var day = dateArray[0];
+            var year = dateArray[2];
+            var month = months[dateArray[1]];
+            var newDate = [month, day, year].join("/");
+
+            var dateOfBirth = new Date(newDate);
+
+            var currentDate = new Date();
+            var age = currentDate.getFullYear() - dateOfBirth.getFullYear();
+
+            $("#txtAge").val(age);
+
+        });
+
+        $("#ddlHintQuestion").change(function () {
+
+            $("#txtNewHintQuestion").val("");
+            $("#txtAnswer").val("");
+
+            if ($(this).val() == "1") {
+                $("#trNewHint").show();
+                $("#txtNewHintQuestion").focus();
+            }
+            else {
+                $("#trNewHint").hide();
+            }
+        });
+
+        $("#ddlCountry").change(function () {
+            $("#ddlState,#ddlCity").empty();
+            $("#ddlCity").append("<option value='0'>Select</option>");
+            if ($(this).val() > 0) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("GetStates")",
+                    data: "{countryId:'" + $("#ddlCountry").val() + "'}",
+                    dataType: "json",
+                    success: function (states) {
+
+                        $.each(states, function (i, state) {
+                            $("#ddlState").append("<option value='" + state.Value + "'>" + state.Text + "</option>");
+                        });
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.statusText);
+                    }
+                });
+            }
+            else {
+                $("#ddlState").empty();
+                $("#ddlState").append("<option value='0'>Select</option>");
+            }
+        });
+
+        $("#ddlState").change(function () {
+            $("#ddlCity").empty();
+            if ($(this).val() > 0) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "@Url.Action("GetCities")",
+                    data: "{stateId:'" + $("#ddlState").val() + "'}",
+                    dataType: "json",
+                    success: function (cities) {
+                        $.each(cities, function (i, city) {
+                            $("#ddlCity").append("<option value='" + city.Value + "'>" + city.Text + "</option>");
+                        });
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.statusText);
+                    }
+                });
+            }
+            else {
+                $("#ddlCity").empty();
+                $("#ddlCity").append("<option value='0'>Select</option>");
+            }
+        });
+
+        $("#btnSave").click(function () {
+            var error = "";
+            if ($("#txtNewPassword").val() != "") {
+                //alert("111");
+                var pwdAgain = $("#txtReEnterPassword");
+                if (pwdAgain.val() == "") {
+                    error += "Please Enter Pssword Again" + "\n";
+                }
+            }
+            if ($("#ddlHintQuestion").val() != "0") {
+                if ($("#ddlHintQuestion").val() == "1") {
+                    if ($("#txtNewHintQuestion").val() == "") {
+                        error += "Please Enter New Hint Question" + "\n";
+                    }
+                }
+                if ($("#txtAnswer").val() == "") {
+                    error += "Please Enter Answer" + "\n";
+                }
+            }
+
+            if (error != "") {
+                alert(error);
+                return false;
+            }
+        });
+
+        $("#myAccountForm").validate({
+            rules: {
+                firstName: {
+                    required: true
+                },
+                lastName: "required",
+                dateOfBirth: "required",
+                mobileNo: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlenght: 10,
+                },
+                passwordAgain: {
+                    equalTo: "#txtNewPassword"
+                },
+                pinCode: {
+                    digits: true,
+                    minlength: 6,
+                    maxlenght: 6
+                }
+            }
+        });
+    });
+
+    function loadImageUrl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+
+                $("#ImgProfilePhoto")
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(150);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<style type="text/css">
+    label.error {
+        color: white;
+        font-family: 'Monotype Corsiva';
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+
+@*//enctype = "multipart/form-data" // we are using this because there is a file in the information to upload that is why this kind of enctype is needed*@
+@using (Html.BeginForm("MyAccount", "Home", FormMethod.Post, new { id = "myAccountForm", enctype = "multipart/form-data" }))
+{
+    <table width="100%">
+
+        <tr>
+
+            <td>
+                My Account
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td></td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Enter or change your personal information below. The information will be used to make your event-Reminders.com experience quiker and easier.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b style="color:green;font-size:15px;font-weight:bold">@ViewBag.Status</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divAccordion">
+                    <h3>Personal Information</h3>
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td width="20%">First Name</td>
+                                <td width="2%">:</td>
+                                <td width="58%">
+                                    <input type="text" id="txtFirstName" value="@Model.FirstName" name="firstName" />
+                                </td>
+                                <td rowspan="10" valign="top">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>Profile Photo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img id="ImgProfilePhoto" style="width:150px" src="@Model.UserPhoto" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="file" id="ProfilePhotoUpload" onchange="loadImageUrl(this);" name="profilePhoto" />
+                                                <br />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b style="color:red;font-weight:bold;font-size:12px">@ViewBag.FileUploadError</b>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Middle Name</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtMiddleName" value="@Model.MiddleName" name="middleName" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtLastName" value="@Model.LastName" name="lastName" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nick Name</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtNickName" value="@Model.NickName" name="nickName" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td>:</td>
+                                <td>
+                                    @{
+                                        bool M = false;
+                                        bool F = false;
+                                        if (Model.Gender == "M")
+                                        {
+                                            M = true;
+                                        }
+                                        else if (Model.Gender == "F")
+                                        {
+                                            F = true;
+                                        }
+                                    }
+                                    <input type="radio" id="rdbMale" name="Gender" checked="@M" value="M" />
+                                    <label for="rdbMale">Male</label>
+
+                                    <input type="radio" id="rdbFemale" name="Gender" checked="@F" value="F" />
+                                    <label for="rdbFemale">Female</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtDateOfBirth" name="dateOfBirth" readonly="readonly" value="@Model.DateOfBirth" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td>:</td>
+                                <td>
+                                    @{ int age = DateTime.Now.Year - Convert.ToDateTime(Model.DateOfBirth).Year;}
+                                    <input type="text" id="txtAge" name="age" readonly="readonly" value="@age" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Age Secret</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="checkbox" id="chkIsAgeSecret" name="isAgeSecret" value="@Model.IsAgeSecert" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Anniversary Date</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtAnniversaryDate" name="anniversaryDate" readonly="readonly" value="@Model.AnniversaryDate" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mobile No</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtMobileNo" name="mobileNo" value="@Model.MobileNo" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Account Information</h3>
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td width="19%">Email ID</td>
+                                <td width="2%">:</td>
+                                <td width="59%">
+                                    <input type="text" id="txtEmail" readonly="readonly" width="250" value="@Model.EmailId" />
+                                </td>
+                                <td rowspan="6"></td>
+                            </tr>
+                            <tr>
+                                <td>New Password</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="password" id="txtNewPassword" name="newPassword" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Password (again)</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="password" id="txtReEnterPassword" name="passwordAgain" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hint Question</td>
+                                <td>:</td>
+                                <td>
+                                    @Html.DropDownList("HintQuestion", (IEnumerable<SelectListItem>)ViewBag.HintQuestionList, new { id = "ddlHintQuestion" })
+                                </td>
+                            </tr>
+                            <tr id="trNewHint" style="display:none">
+                                <td>
+                                    New Hint Question
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtNewHintQuestion" style="width:350px" value="@Model.NewHintQuestion" name="newHintQuestion" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Answer
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtAnswer" value="@Model.HintQuestionAnswer" name="answer" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Registered Date
+                                </td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtRegisteredDate" value="@Model.DateOfRegistration" readonly="readonly" />
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <h3>Address Information</h3>
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td width="19%" valign="top">Address</td>
+                                <td width="2%" valign="top">:</td>
+                                <td width="59%">
+                                    <textarea id="txtAddress" rows="3" cols="50" name="address">@Model.AddressLine1</textarea>
+                                </td>
+                                <td rowspan="5"></td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>:</td>
+                                <td>
+                                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.CountryList, new { id = "ddlCountry" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>:</td>
+                                <td>
+                                    @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewBag.StateList, new { id = "ddlState" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>:</td>
+                                <td>
+                                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.CityList, new { id = "ddlCity" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pin Code</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" id="txtPinCode" width="75" value="@Model.PinCode" name="pinCode" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input type="submit" id="btnSave" value="Save" width="70" />
+                &nbsp;
+                <input type="button" id="btnBack" value="Back" onclick="javascript:document.location.href='@Url.Action("MembersCorner","Home")'" />
+            </td>
+        </tr>
+    </table>
+}

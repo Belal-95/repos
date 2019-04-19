@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EventReminderModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblBirthdayDetails">
+          <Key>
+            <PropertyRef Name="BirthdayDetailsId" />
+          </Key>
+          <Property Name="BirthdayDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DateOfBirth" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="AnniversaryDate" Type="varchar" MaxLength="11" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="250" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="PinCode" Type="varchar" MaxLength="6" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+          <Property Name="EmailId" Type="varchar" MaxLength="50" />
+          <Property Name="RelationashilpId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="ntext" />
+        </EntityType>
+        <EntityType Name="tblUserAccountDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="HintQuestionId" Type="int" />
+          <Property Name="NewHintQuestion" Type="varchar" MaxLength="250" />
+          <Property Name="HintQuestionAnswer" Type="varchar" MaxLength="250" />
+          <Property Name="DateOfRegistration" Type="datetime" />
+          <Property Name="LastAccessDateTime" Type="datetime" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="IsCancelled" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUserAddressDetails">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="500" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="PinCode" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="tblUserPersonalDetail">
+          <Key>
+            <PropertyRef Name="PersonallId" />
+          </Key>
+          <Property Name="PersonallId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="NickName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="varchar" MaxLength="11" />
+          <Property Name="AnniversaryDate" Type="varchar" MaxLength="11" />
+          <Property Name="IsAgeSecert" Type="bit" />
+          <Property Name="UserPhoto" Type="varchar" MaxLength="250" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_tblBirthdayDetails_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetails" Multiplicity="1" />
+          <End Role="tblBirthdayDetails" Type="Self.tblBirthdayDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblBirthdayDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserAddressDetails_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetails" Multiplicity="1" />
+          <End Role="tblUserAddressDetails" Type="Self.tblUserAddressDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserAddressDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserPersonalDetail_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetails" Multiplicity="1" />
+          <End Role="tblUserPersonalDetail" Type="Self.tblUserPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserPersonalDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_BindRelationship" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_CheckEmailAvailibility" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_CheckUserAccountStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_CheckUserByEmailAnswer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Answer" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_CheckUserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetHintQuestion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateUserProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="NewPassword" Type="varchar" Mode="In" />
+          <Parameter Name="HintQuestionId" Type="int" Mode="In" />
+          <Parameter Name="NewHintQuestion" Type="varchar" Mode="In" />
+          <Parameter Name="HintQuestionAnswer" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="NickeName" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="varchar" Mode="In" />
+          <Parameter Name="AnniversaryDate" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="IsAgeSecret" Type="bit" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+          <Parameter Name="UserPhoto" Type="varchar" Mode="In" />
+          <Parameter Name="AddressLine1" Type="varchar" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="StateId" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="PinCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdatPasswordByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Passwor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UserApproval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UserRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfRegistration" Type="datetime" Mode="In" />
+          <Parameter Name="IsApproved" Type="bit" Mode="In" />
+          <Parameter Name="IsCancelled" Type="bit" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="IsAgeSecret" Type="bit" Mode="In" />
+          <Parameter Name="MobileNo" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EventReminderModel1StoreContainer">
+          <EntitySet Name="tblBirthdayDetails" EntityType="Self.tblBirthdayDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserAccountDetails" EntityType="Self.tblUserAccountDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserAddressDetails" EntityType="Self.tblUserAddressDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserPersonalDetail" EntityType="Self.tblUserPersonalDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBirthdayDetails_tblUserAccountDetails" Association="Self.FK_tblBirthdayDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblBirthdayDetails" EntitySet="tblBirthdayDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserAddressDetails_tblUserAccountDetails" Association="Self.FK_tblUserAddressDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserAddressDetails" EntitySet="tblUserAddressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserPersonalDetail_tblUserAccountDetails" Association="Self.FK_tblUserPersonalDetail_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserPersonalDetail" EntitySet="tblUserPersonalDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventReminderModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblUserAccountDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HintQuestionId" Type="Int32" />
+          <Property Name="NewHintQuestion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="HintQuestionAnswer" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserAddressDetails" Relationship="Self.FK_tblUserAddressDetails_tblUserAccountDetails" FromRole="tblUserAccountDetails" ToRole="tblUserAddressDetails" />
+          <NavigationProperty Name="tblUserPersonalDetails" Relationship="Self.FK_tblUserPersonalDetail_tblUserAccountDetails" FromRole="tblUserAccountDetails" ToRole="tblUserPersonalDetail" />
+          <Property Name="DateOfRegistration" Type="DateTime" Precision="3" />
+          <Property Name="LastAccessDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="IsCancelled" Type="Boolean" />
+          <NavigationProperty Name="tblBirthdayDetails" Relationship="EventReminderModel1.FK_tblBirthdayDetails_tblUserAccountDetails" FromRole="tblUserAccountDetail" ToRole="tblBirthdayDetail" />
+        </EntityType>
+        <EntityType Name="tblUserAddressDetail">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="PinCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserAccountDetail" Relationship="Self.FK_tblUserAddressDetails_tblUserAccountDetails" FromRole="tblUserAddressDetails" ToRole="tblUserAccountDetails" />
+        </EntityType>
+        <EntityType Name="tblUserPersonalDetail">
+          <Key>
+            <PropertyRef Name="PersonallId" />
+          </Key>
+          <Property Name="PersonallId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateOfBirth" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="AnniversaryDate" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="IsAgeSecert" Type="Boolean" />
+          <Property Name="UserPhoto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserAccountDetail" Relationship="Self.FK_tblUserPersonalDetail_tblUserAccountDetails" FromRole="tblUserPersonalDetail" ToRole="tblUserAccountDetails" />
+        </EntityType>
+        <Association Name="FK_tblUserAddressDetails_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetail" Multiplicity="1" />
+          <End Role="tblUserAddressDetails" Type="Self.tblUserAddressDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserAddressDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserPersonalDetail_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetail" Multiplicity="1" />
+          <End Role="tblUserPersonalDetail" Type="Self.tblUserPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserPersonalDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventReminderEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblUserAccountDetails" EntityType="Self.tblUserAccountDetail" />
+          <EntitySet Name="tblUserAddressDetails" EntityType="Self.tblUserAddressDetail" />
+          <EntitySet Name="tblUserPersonalDetails" EntityType="Self.tblUserPersonalDetail" />
+          <AssociationSet Name="FK_tblUserAddressDetails_tblUserAccountDetails" Association="Self.FK_tblUserAddressDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserAddressDetails" EntitySet="tblUserAddressDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserPersonalDetail_tblUserAccountDetails" Association="Self.FK_tblUserPersonalDetail_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserPersonalDetail" EntitySet="tblUserPersonalDetails" />
+          </AssociationSet>
+          <FunctionImport Name="SP_UpdateUserProfile">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="NewPassword" Mode="In" Type="String" />
+            <Parameter Name="HintQuestionId" Mode="In" Type="Int32" />
+            <Parameter Name="NewHintQuestion" Mode="In" Type="String" />
+            <Parameter Name="HintQuestionAnswer" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="MiddleName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="NickeName" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="String" />
+            <Parameter Name="AnniversaryDate" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="IsAgeSecret" Mode="In" Type="Boolean" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+            <Parameter Name="UserPhoto" Mode="In" Type="String" />
+            <Parameter Name="AddressLine1" Mode="In" Type="String" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="StateId" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="PinCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckEmailAvailibility" ReturnType="Collection(Int32)">
+          <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UserRegistration">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="DateOfRegistration" Mode="In" Type="DateTime" />
+            <Parameter Name="IsApproved" Mode="In" Type="Boolean" />
+            <Parameter Name="IsCancelled" Mode="In" Type="Boolean" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="MiddleName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="IsAgeSecret" Mode="In" Type="Boolean" />
+            <Parameter Name="MobileNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UserApproval">
+          <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetHintQuestion" ReturnType="Collection(EventReminderModel1.SP_GetHintQuestion_Result)">
+          <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckUserByEmailAnswer" ReturnType="Collection(Int32)">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Answer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdatPasswordByEmail">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Passwor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckUserLogin" EntitySet="tblUserAccountDetails" ReturnType="Collection(EventReminderModel1.tblUserAccountDetail)">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckUserAccountStatus" ReturnType="Collection(Int32)">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tblBirthdayDetails" EntityType="EventReminderModel1.tblBirthdayDetail" />
+          <AssociationSet Name="FK_tblBirthdayDetails_tblUserAccountDetails" Association="EventReminderModel1.FK_tblBirthdayDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetail" EntitySet="tblUserAccountDetails" />
+            <End Role="tblBirthdayDetail" EntitySet="tblBirthdayDetails" />
+          </AssociationSet>
+          <FunctionImport Name="SP_BindRelationship" ReturnType="Collection(EventReminderModel1.SP_BindRelationship_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SP_GetHintQuestion_Result">
+          <Property Type="String" Name="HintQuestion" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="NewHintQuestion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="SP_CheckUserLogin_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="HintQuestionId" Nullable="true" />
+          <Property Type="String" Name="NewHintQuestion" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="HintQuestionAnswer" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="DateOfRegistration" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastAccessDateTime" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="true" />
+          <Property Type="Boolean" Name="IsCancelled" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tblBirthdayDetail">
+          <Key>
+            <PropertyRef Name="BirthdayDetailsId" />
+          </Key>
+          <Property Name="BirthdayDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateOfBirth" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="AnniversaryDate" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="PinCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RelationashilpId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblUserAccountDetail" Relationship="EventReminderModel1.FK_tblBirthdayDetails_tblUserAccountDetails" FromRole="tblBirthdayDetail" ToRole="tblUserAccountDetail" />
+        </EntityType>
+        <Association Name="FK_tblBirthdayDetails_tblUserAccountDetails">
+          <End Type="EventReminderModel1.tblUserAccountDetail" Role="tblUserAccountDetail" Multiplicity="1" />
+          <End Type="EventReminderModel1.tblBirthdayDetail" Role="tblBirthdayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblBirthdayDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_BindRelationship_Result">
+          <Property Type="Int32" Name="RelationshipId" Nullable="false" />
+          <Property Type="String" Name="RelationshipName" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventReminderModel1StoreContainer" CdmEntityContainer="EventReminderEntities2">
+          <EntitySetMapping Name="tblUserAccountDetails">
+            <EntityTypeMapping TypeName="EventReminderModel1.tblUserAccountDetail">
+              <MappingFragment StoreEntitySet="tblUserAccountDetails">
+                <ScalarProperty Name="IsCancelled" ColumnName="IsCancelled" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="LastAccessDateTime" ColumnName="LastAccessDateTime" />
+                <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HintQuestionId" ColumnName="HintQuestionId" />
+                <ScalarProperty Name="NewHintQuestion" ColumnName="NewHintQuestion" />
+                <ScalarProperty Name="HintQuestionAnswer" ColumnName="HintQuestionAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserAddressDetails">
+            <EntityTypeMapping TypeName="EventReminderModel1.tblUserAddressDetail">
+              <MappingFragment StoreEntitySet="tblUserAddressDetails">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserPersonalDetails">
+            <EntityTypeMapping TypeName="EventReminderModel1.tblUserPersonalDetail">
+              <MappingFragment StoreEntitySet="tblUserPersonalDetail">
+                <ScalarProperty Name="PersonallId" ColumnName="PersonallId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="AnniversaryDate" ColumnName="AnniversaryDate" />
+                <ScalarProperty Name="IsAgeSecert" ColumnName="IsAgeSecert" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_UpdateUserProfile" FunctionName="EventReminderModel1.Store.SP_UpdateUserProfile" />
+          <FunctionImportMapping FunctionImportName="SP_CheckEmailAvailibility" FunctionName="EventReminderModel1.Store.SP_CheckEmailAvailibility" />
+          <FunctionImportMapping FunctionImportName="SP_UserRegistration" FunctionName="EventReminderModel1.Store.SP_UserRegistration" />
+          <FunctionImportMapping FunctionImportName="SP_UserApproval" FunctionName="EventReminderModel1.Store.SP_UserApproval" />
+          <FunctionImportMapping FunctionImportName="SP_GetHintQuestion" FunctionName="EventReminderModel1.Store.SP_GetHintQuestion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventReminderModel1.SP_GetHintQuestion_Result">
+                <ScalarProperty Name="HintQuestion" ColumnName="HintQuestion" />
+                <ScalarProperty Name="NewHintQuestion" ColumnName="NewHintQuestion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CheckUserByEmailAnswer" FunctionName="EventReminderModel1.Store.SP_CheckUserByEmailAnswer" />
+          <FunctionImportMapping FunctionImportName="SP_UpdatPasswordByEmail" FunctionName="EventReminderModel1.Store.SP_UpdatPasswordByEmail" />
+          <FunctionImportMapping FunctionImportName="SP_CheckUserLogin" FunctionName="EventReminderModel1.Store.SP_CheckUserLogin">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CheckUserAccountStatus" FunctionName="EventReminderModel1.Store.SP_CheckUserAccountStatus" />
+          <EntitySetMapping Name="tblBirthdayDetails">
+            <EntityTypeMapping TypeName="EventReminderModel1.tblBirthdayDetail">
+              <MappingFragment StoreEntitySet="tblBirthdayDetails">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RelationashilpId" ColumnName="RelationashilpId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AnniversaryDate" ColumnName="AnniversaryDate" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BirthdayDetailsId" ColumnName="BirthdayDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_BindRelationship" FunctionName="EventReminderModel1.Store.SP_BindRelationship">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventReminderModel1.SP_BindRelationship_Result">
+                <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+                <ScalarProperty Name="RelationshipName" ColumnName="RelationshipName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

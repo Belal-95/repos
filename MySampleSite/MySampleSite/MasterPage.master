@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Students table</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:Image ID="image1" ImageUrl="~/Images/alfarooq.jpeg" runat="server" Height="300" Width="100%" />
+    </div>
+        <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        </div>
+        <div>
+            <hr />
+            <h4 align="center" >Copyrights &copy 2018-2019 Belal Khanjar. All rights reserved </h4>
+        </div>
+    
+    </form>
+</body>
+</html>

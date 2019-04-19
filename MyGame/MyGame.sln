@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame", "MyGame\MyGame.csproj", "{6E132375-7BF8-40C0-ABD0-415F4AEC1CEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{CA57B517-BA36-47AF-9100-3C55BBB21B25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E132375-7BF8-40C0-ABD0-415F4AEC1CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E132375-7BF8-40C0-ABD0-415F4AEC1CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E132375-7BF8-40C0-ABD0-415F4AEC1CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E132375-7BF8-40C0-ABD0-415F4AEC1CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA57B517-BA36-47AF-9100-3C55BBB21B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA57B517-BA36-47AF-9100-3C55BBB21B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA57B517-BA36-47AF-9100-3C55BBB21B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA57B517-BA36-47AF-9100-3C55BBB21B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A50A2315-182A-4BCE-83CA-5391FCF82D57}
+	EndGlobalSection
+EndGlobal

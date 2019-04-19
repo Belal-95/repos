@@ -1,0 +1,139 @@
+body {
+  margin: 0;
+  background-color: #f0f0f0; }
+
+.navCust .nav-item .nav-link {
+  color: #000; }
+.subBtn {
+    background: transparent;
+    border: none;
+    color: blue;
+    /* text-decoration: underline; */
+}
+
+.cont_head h2 {
+  color: #565656;
+  text-align: center; }
+
+.form-group {
+  margin-bottom: .25rem; }
+
+.form-control {
+  border-radius: 0; }
+
+.btn {
+  border-radius: 0; }
+
+.modelCust {
+  background-color: #fff; }
+
+.popup-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; }
+
+.btnCust {
+  border-radius: 0;
+  background-color: #00CED1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  transition-duration: 500ms; }
+  .btnCust:hover {
+    color: #fff; }
+  .btnCust i {
+    font-size: 5rem; }
+
+.create-cv-hover {
+  transition-duration: 500ms; }
+  .create-cv-hover:hover {
+    color: #fff;
+    transform: scale(1.1);
+    transition-duration: 500ms;
+    overflow: hidden; }
+
+.modal-content {
+  border-radius: 0; }
+
+.pop-img img {
+  width: 100%; }
+
+.oprBtn a {
+  padding: .5rem;
+  color: #fff;
+  background-color: #00ced1; }
+
+.table {
+  border: 2px solid #00ced1; }
+
+.premium-doc h3 i {
+  color: #00ced1; }
+
+.free-ul {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: .9rem; }
+  .free-ul li {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem 0; }
+    .free-ul li:before {
+      content: '\f00c';
+      font-family: 'FontAwesome';
+      color: #00ced1;
+      margin-right: .3rem; }
+
+.premium-ul {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: .9rem; }
+  .premium-ul li {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem 0; }
+    .premium-ul li:before {
+      content: '\f00c';
+      font-family: 'FontAwesome';
+      color: #00ced1;
+      margin-right: .3rem; }
+
+.upgrdbtn {
+  background-color: #00ced1;
+  padding: 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition-duration: 300ms; }
+  .upgrdbtn:after {
+    content: '\f004';
+    font-family: 'FontAwesome';
+    color: #fff;
+    margin-right: .3rem;
+    padding: .4rem; }
+  .upgrdbtn:hover {
+    color: #fff;
+    text-decoration: none;
+    transform: scale(1.05);
+    transition-duration: 300ms; }
+
+.foot-ul ul {
+  list-style-type: none;
+  padding-left: 0; }
+
+footer {
+  background-color: #fff; }
+  footer .social-links {
+    display: flex; }
+    footer .social-links li {
+      padding: .5rem; }
+      footer .social-links li a i {
+        padding: .5rem;
+        border: 2px solid #00ced1;
+        border-radius: 50%;
+        color: #00ced1; }
+
+/*# sourceMappingURL=cvhome.css.map */

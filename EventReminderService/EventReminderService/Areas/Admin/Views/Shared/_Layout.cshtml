@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome To Admin : @ViewBag.Title</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/themes/le-frog/jquery-ui.css" rel="stylesheet"/>
+    <link href="~/Content/themes/le-frog/theme.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td>
+                <!--Header Goes Here -->
+                @Html.Partial("_Header")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @RenderBody()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!--Footer Goes Here -->
+                @Html.Partial("_Footer")
+            </td>
+        </tr>
+        </table>
+</body>
+</html>

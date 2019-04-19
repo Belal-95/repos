@@ -311,11 +311,11 @@ iframe {
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 
-  background: #d5007d;
+  /*background: #d5007d;
   background: -webkit-linear-gradient(45deg, #d5007d, #e53935);
   background: -o-linear-gradient(45deg, #d5007d, #e53935);
   background: -moz-linear-gradient(45deg, #d5007d, #e53935);
-  background: linear-gradient(45deg, #d5007d, #e53935);
+  background: linear-gradient(45deg, #d5007d, #e53935);*/
 }
 
 
@@ -401,11 +401,11 @@ iframe {
     z-index: -1;
     width: 100%;
     height: 300%;
-    background: #d478e1;
-    background: -webkit-linear-gradient(top, #d478e1, #e1a1ea, #d478e1, #e1a1ea);
-    background: -o-linear-gradient(top, #d478e1, #e1a1ea, #d478e1, #e1a1ea);
-    background: -moz-linear-gradient(top, #d478e1, #e1a1ea, #d478e1, #e1a1ea);
-    background: linear-gradient(top, #d478e1, #e1a1ea, #d478e1, #e1a1ea);
+    /*background: #6195FF;*/
+    /*background: -webkit-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
+    background: -o-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
+    background: -moz-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
+    background: linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);*/
     bottom: -100%;
     left: 0;
     /*#e8519e*/

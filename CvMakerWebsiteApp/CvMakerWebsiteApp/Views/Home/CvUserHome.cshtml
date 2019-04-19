@@ -1,0 +1,608 @@
+﻿@using CvMakerWebsiteApp.Models;
+@{
+    Layout = null;
+}
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+      
+
+            //Adding a new Cv
+            $("#addNewCv").click(function () {
+                var cvIndustry = $("#cv-industry").val();
+                var cvName = $("#cvName").val();
+                var cvLang = $("#cv-lang").val();
+
+                if (cvIndustry == null)
+                    cvIndustry = "other";
+
+                if (cvLang == null)
+                    cvLang = "English";
+
+                if (cvName == "" || cvName == null)
+                    cvName = "My Cv";
+
+                
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    url: "@Url.Action("AddNewCv")",
+                    data: "{ cvName:'" + cvName + "', cvIndustry: '" + cvIndustry + "', cvLang: '" + cvLang + "'}",
+                    dataType: "json",
+                    success: function (response) {
+
+                        if (response > 0) {
+
+                        location.reload(true);
+                       
+
+                    }
+                    else
+                    {
+
+                    }
+                },
+                error: function (error)
+                {
+                    alert("Error Status: " + error.statusText);
+                }
+            });
+            });
+
+
+            //Editing the existing Cv
+            $("#EditCv").click(function () {
+                var cvIdEdit = $("#cvIdEdit").val();
+                var cvIndustryEdit = $("#cv-industryEdit").val();
+                var cvNameEdit = $("#cvNameEdit").val();
+                var cvLangEdit = $("#cv-langEdit").val();
+
+                if (cvIndustryEdit == null)
+                    cvIndustryEdit = "other";
+
+                if (cvLangEdit == null)
+                    cvLangEdit = "English";
+
+                if (cvNameEdit == "" || cvName == null)
+                    cvNameEdit = "My Cv";
+
+                ////var data = {};
+                ////data.cvName = cvName
+                ////data.cvIndustry = cvIndustry
+                ////data.cvLang = cvLang
+
+                ////alert(data);
+                //alert(cvIndustryEdit);
+                //alert(cvNameEdit);
+                //alert(cvLangEdit);
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    url: "@Url.Action("EditCv")",
+                //data: "{ cvName:'" + cvName + "', cvIndustry:'" + cvIndustry + "', cvLang:'" + cvLang +"'}",
+                    data: "{ cvIdEdit:'" + cvIdEdit + "', cvNameEdit: '" + cvNameEdit + "', cvIndustryEdit: '" + cvIndustryEdit + "', cvLangEdit: '" + cvLangEdit + "'}",
+                    //data: data,
+                    dataType: "json",
+                    success: function (response) {
+                    //alert(response);
+
+                    if (response > 0) {
+                        location.reload(true);
+
+                    }
+                    else
+                    {
+
+                    }
+                },
+                error: function (error)
+                {
+                    alert("Error Status: " + error.statusText);
+                }
+            });
+            });
+
+
+            $("a[name='EditCvLink']").click(function () {
+                cvId = $(this).attr("id");
+                //alert(cvId);
+                var tr = $(this).closest('tr');
+                var cvName = tr.children('td:eq(1)').children('input:eq(0)').attr("value");
+                var cvLang = tr.children('td:eq(2)').text().trim();
+                var cvIndust = tr.children('td:eq(3)').text().trim();
+                //alert(cvName);
+                //alert(cvLang);
+                //alert(cvIndust);
+
+                $("#cvIdEdit").val(cvId);
+                $("#cvNameEdit").val(cvName);
+                $("#cv-langEdit").val(cvLang).change();
+                $("#cv-industryEdit").val(cvIndust).change();
+                /////////////////
+
+            });
+
+            $("a[name='DeleteCvLink']").click(function () {
+                CvId = $(this).attr("id");
+                var tr = $(this).closest('tr');
+                CvName = tr.children('td:eq(1)').text().trim();
+
+
+                $("#cvIdDelete").val(CvId);
+                $("#cvNameToDelete").html(CvName);
+
+
+            });
+
+            $("#DeleteCvButton").click(function () {
+                var cvId = $("#cvIdDelete").val();
+                 $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset-utf-8",
+                        url: '@Url.Action("DeleteCv")',
+                        data: "{cvId:'" + cvId + "'}",
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+
+                            if (parseInt(value) > 0) {
+                                location.reload(true);
+                            }
+                            else {
+                            }
+                        },
+                        error: function (error) {
+                            altert("Error: " + error.status);
+                        }
+                    });
+            });
+
+            $("#CvNameToNavigate").click(function () {
+                var cvId = $(this).attr("id");
+                $("#getCvID").val(cvId);
+                alert($("#getCvID").val());
+            });
+
+            $("a[name='CvNameToNavigate']").click(function () {
+                var cvId = $(this).attr("id");
+                $("#getCvID").val(cvId);
+                alert($("#getCvID").val());
+
+            //    //var cvId = $(this).attr("id");
+            //    var tr = $(this).closest('tr');
+            //    var cvId = tr.children('td:eq(0)').text().trim();
+                @*@Session["CvId"] = cvId;*@
+                @*var cvName = tr.children('td:eq(1)').text().trim();
+                var cvLang = tr.children('td:eq(2)').text().trim();
+                var cvIndust = tr.children('td:eq(3)').text().trim();
+                alert(cvId);
+                alert(cvName);
+                alert(cvLang);
+                alert(cvIndust);
+                alert("@Session["UserId"]");*@
+                @*alert(@ViewBag.CvId);*@
+                @*@Session["CvId"]= cvId;*@
+               @*@ViewBag.CvId = cvId;*@
+                //window.location.href = "/Home/CvUserEditCv";
+
+
+                @*$.ajax({
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    url: "@Url.Action("SavingCvId")",
+                    data: "{ cvId:'" + $(this).attr("id") + "'}",
+                    dataType: "json",
+                    success: function (response) {
+
+                    if (response > 0) {
+                        alert("@Session["CvId"]");
+                    }
+                    else
+                    {
+
+                    }
+                },
+                error: function (error)
+                {
+                    alert("Error Status: " + error.statusText);
+                }
+            });
+
+
+                alert("done");
+                //window.location.href = "/Home/CvUserEditCv";
+                //$(this).closest('form').submit()*@
+            });
+        });
+    </script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- custome css -->
+    <link rel="stylesheet" href="../../js/css/cvhome.css">
+
+    <title>CV Home</title>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navCust shadow-sm bg-white">
+        <a class="navbar-brand" href="#">
+            <!-- <img src="" alt=""> -->
+            logo here
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/UpgradeToPremium">Upgrade to Premium <i class="fa fa-star-o" aria-hidden="true"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Edit account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+
+
+
+        <div class="cont_head my-4">
+            <h2>Create your Resume for free!!!</h2>
+        </div>
+
+        <!-- Button trigger modal -->
+        <div class="d-flex justify-content-center">
+            <div class=" create-cv-hover">
+                <button type="button" class="btn btnCust" data-toggle="modal" data-target="#createcv">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    Create a new Resume
+                </button>
+            </div>
+        </div>
+
+
+        <!--Adding New Cv Modal -->
+        <div class="modal fade" id="createcv" tabindex="-1" role="dialog" aria-labelledby="createcv" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body px-0 py-2 d-flex flex-column align-items-center">
+                        <div class="w-100 text-right px-3">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-md-10 p-0">
+                            <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cvname" placeholder="Enter a name for your cv" id="cvName">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="cv-lang" name="cvLanguage">
+                                        <option selected disabled>Select language</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                        <option>Germany</option>
+                                        <option>French</option>
+                                        <option>Hindi</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="cv-industry" name="cvIndustry">
+                                        <option selected disabled>Select industry</option>
+                                        <option value="other">Other</option>
+                                        <option value="academia">Academia and Research</option>
+                                        <option value="auto">Automobile</option>
+                                        <option value="education">Education, Teaching</option>
+                                        <option value="electric">Electricals, Electronics</option>
+                                        <option value="energy">Energy</option>
+                                        <option value="finance">Finance and Accounting</option>
+                                        <option value="government">Government</option>
+                                        <option value="hospitality">Hospitality, Tourism, Travel</option>
+                                        <option value="industrial">Industrial</option>
+                                        <option value="it">IT and Software</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="management">Management, Strategy</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="medical">Medical, Healthcare</option>
+                                        <option value="realestate">Property, Real Estate</option>
+                                        <option value="retail">Retail</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="telecom">Telecommunications</option>
+                                    </select>
+                                </div>
+                            </form>
+                            @using (Html.BeginForm())
+                            {
+                                <div class="text-right py-3">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="addNewCv"> Add </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Editing Cv Modal -->
+        <div class="modal fade" id="editcv" tabindex="-1" role="dialog" aria-labelledby="editcv" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body px-0 py-2 d-flex flex-column align-items-center">
+                        <div class="w-100 text-right px-3">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-md-10 p-0">
+                            <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cv-IdEdit" id="cvIdEdit" hidden="hidden">
+                                    <input type="text" class="form-control" name="cv-nameEdit" placeholder="Enter a name for your cv" id="cvNameEdit">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="cv-langEdit">
+                                        <option selected disabled>Select language</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                        <option>Germany</option>
+                                        <option>French</option>
+                                        <option>Hindi</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="cv-industryEdit">
+                                        <option selected disabled>Select industry</option>
+                                        <option value="other">Other</option>
+                                        <option value="academia">Academia and Research</option>
+                                        <option value="auto">Automobile</option>
+                                        <option value="education">Education, Teaching</option>
+                                        <option value="electric">Electricals, Electronics</option>
+                                        <option value="energy">Energy</option>
+                                        <option value="finance">Finance and Accounting</option>
+                                        <option value="government">Government</option>
+                                        <option value="hospitality">Hospitality, Tourism, Travel</option>
+                                        <option value="industrial">Industrial</option>
+                                        <option value="it">IT and Software</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="management">Management, Strategy</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="medical">Medical, Healthcare</option>
+                                        <option value="realestate">Property, Real Estate</option>
+                                        <option value="retail">Retail</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="telecom">Telecommunications</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <div class="text-right py-3">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="EditCv">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Deleting Cv Modal -->
+        <div class="modal fade" id="deletecv" tabindex="-1" role="dialog" aria-labelledby="deletecv" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body px-0 py-2 d-flex flex-column align-items-center">
+                        <div class="w-100 text-right px-3">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-md-10 p-0">
+                            <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cv-IdDelete" id="cvIdDelete" hidden="hidden">
+                                    Are you sure that you want to delete <span id="cvNameToDelete" style="font-weight:bold">aaaa</span>
+                                </div>
+                            </form>
+                            <div class="text-right py-3">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-primary" id="DeleteCvButton">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- list resumes -->
+        @{ List<SP_GetCvUserDetailsByUserId_Result1> objectCvDetails = (List<SP_GetCvUserDetailsByUserId_Result1>)ViewBag.CvDetails;}
+
+        <div class="my-5">
+            <div class="col-md-10 p-0 bg-white mx-auto">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Industry</th>
+                            <th scope="col">Last modified</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (SP_GetCvUserDetailsByUserId_Result1 objCvDetails in objectCvDetails)
+                        {
+                            <tr>
+                                <td hidden="hidden">
+                                    @objCvDetails.CvId
+                                </td>
+                                @*@using (Html.BeginForm())
+                                    {
+                                    <td>
+                                        <a href="" id="@objCvDetails.CvId" name="CvNameToNavigate" >@objCvDetails.CvName</a>
+                                    </td>
+                                    }*@
+                                @using (Html.BeginForm())
+                                {
+                                    <td>
+                                        <input class="subBtn" type="submit" value="@objCvDetails.CvName" id="@objCvDetails.CvId" name="CvNameToNavigate" />
+                                    </td>
+
+                                    <td>
+                                        @objCvDetails.Language
+                                    </td>
+                                    <td>
+                                        @objCvDetails.Industry
+                                    </td>
+                                    <td>
+                                        @objCvDetails.LastModificationDateTime
+                                    </td>
+                                    <td hidden="hidden">
+                                        <input type="text" id="getCvID" name="cvId123" value="@objCvDetails.CvId"/>
+                                    </td>
+                                }
+                                <td class="oprBtn">
+                                    <a href="#" id="@objCvDetails.CvId" name="EditCvLink" data-toggle="modal" data-target="#editcv">Edit</a>
+                                    <a href="#">Rename</a>
+                                    <a href="#" id="@objCvDetails.CvId" name="DeleteCvLink" data-toggle="modal" data-target="#deletecv">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                        @*<tr>
+                                <td>sample resume</td>
+                                <td>4 Mar, 2019</td>
+                                <td class="oprBtn">
+                                    <a href="#">Edit</a>
+                                    <a href="#">Rename</a>
+                                    <a href="#">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>latest resume</td>
+                                <td>2 Feb, 2019</td>
+                                <td class="oprBtn">
+                                    <a href="#">Edit</a>
+                                    <a href="#">Rename</a>
+                                    <a href="#">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Demo resume</td>
+                                <td>10 Mar, 2019</td>
+                                <td class="oprBtn">
+                                    <a href="#">Edit</a>
+                                    <a href="#">Rename</a>
+                                    <a href="#">Delete</a>
+                                </td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="col-md-10 premium-doc bg-white p-md-3 p-2 shadow-sm">
+                <h3>Upgrade to Premium <i class="fa fa-heart" aria-hidden="true"></i></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, voluptates. Et sed nobis veniam, mollitia harum, velit impedit, sint neque ut minima, dignissimos illo aperiam qui tempore repudiandae quo cum!</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="free-ul">
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, velit.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, consequuntur.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, iure.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, modi?</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, maiores!</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, quas!</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="premium-ul">
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis, numquam!</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, reiciendis.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, eveniet?</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, ea.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, repellendus.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, doloremque!</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, minus!</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, at.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, omnis.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="upgrdbtn" href="#">Upgrade to Premium</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="mt-md-5 mt-3 pt-md-3 pt-2 bg-white">
+            <div class="container">
+                <div class="row foot-ul mx-auto">
+                    <div class="col-md-4">
+                        <ul>
+                            <li>About us</li>
+                            <li>Contact us</li>
+                            <li>Privacy Policy</li>
+                            <li>Terms and services</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="social-links">
+                            <li>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Resume tips</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

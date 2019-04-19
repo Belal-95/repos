@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CvMakerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblCvBasicInformation">
+          <Key>
+            <PropertyRef Name="BasicInformationId" />
+          </Key>
+          <Property Name="BasicInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="150" />
+          <Property Name="EmailId" Type="varchar" MaxLength="150" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="WebSite" Type="varchar" MaxLength="50" />
+          <Property Name="AdressLine1" Type="varchar" MaxLength="50" />
+          <Property Name="AdressLine2" Type="varchar" MaxLength="50" />
+          <Property Name="AdressLine3" Type="varchar" MaxLength="50" />
+          <Property Name="UserPhoto" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tblEducationDetails">
+          <Key>
+            <PropertyRef Name="EducationId" />
+          </Key>
+          <Property Name="EducationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="50" />
+          <Property Name="InstitutionName" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="varchar" MaxLength="50" />
+          <Property Name="EndDate" Type="varchar" MaxLength="50" />
+          <Property Name="OtherInformaton" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CvMakerDB.dbo.tblInterestDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblInterestDetails">
+          <Key>
+            <PropertyRef Name="InterestsId" />
+            <PropertyRef Name="CvId" />
+          </Key>
+          <Property Name="InterestsId" Type="int" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="InterestsDetails" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblObjective">
+          <Key>
+            <PropertyRef Name="ObjectiveId" />
+          </Key>
+          <Property Name="ObjectiveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="Objective" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblQualifications">
+          <Key>
+            <PropertyRef Name="QualificationsId" />
+          </Key>
+          <Property Name="QualificationsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="Qualifications" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CvMakerDB.dbo.tblReferencesDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblReferencesDetails">
+          <Key>
+            <PropertyRef Name="ReferencesId" />
+            <PropertyRef Name="Cvid" />
+          </Key>
+          <Property Name="ReferencesId" Type="int" Nullable="false" />
+          <Property Name="Cvid" Type="int" Nullable="false" />
+          <Property Name="ReferencesDetails" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblUserAccountDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="150" />
+          <Property Name="DateOfRegistration" Type="datetime" />
+          <Property Name="LastAccessDateTime" Type="datetime" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUserCvDetails">
+          <Key>
+            <PropertyRef Name="CvId" />
+          </Key>
+          <Property Name="CvId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CvName" Type="varchar" MaxLength="150" />
+          <Property Name="Language" Type="varchar" MaxLength="50" />
+          <Property Name="LastModificationDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblUserPersonalDetails">
+          <Key>
+            <PropertyRef Name="PersonalId" />
+          </Key>
+          <Property Name="PersonalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="varchar" MaxLength="11" />
+          <Property Name="UserPhoto" Type="varchar" MaxLength="250" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tblWorkExperienceDetails">
+          <Key>
+            <PropertyRef Name="WorkExperienceId" />
+          </Key>
+          <Property Name="WorkExperienceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CvId" Type="int" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="varchar" MaxLength="50" />
+          <Property Name="EndDate" Type="varchar" MaxLength="50" />
+          <Property Name="OtherInformation" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_tblCvBasicInformation_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblCvBasicInformation" Type="Self.tblCvBasicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblCvBasicInformation">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducationDetails_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblEducationDetails" Type="Self.tblEducationDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblEducationDetails">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestDetails_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblInterestDetails" Type="Self.tblInterestDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblInterestDetails">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblObjective_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblObjective" Type="Self.tblObjective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblObjective">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQualifications_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblQualifications" Type="Self.tblQualifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblQualifications">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReferencesDetails_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblReferencesDetails" Type="Self.tblReferencesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblReferencesDetails">
+              <PropertyRef Name="Cvid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserCvDetails_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetails" Multiplicity="1" />
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserCvDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserPersonalDetails_tblUserAccountDetails">
+          <End Role="tblUserAccountDetails" Type="Self.tblUserAccountDetails" Multiplicity="1" />
+          <End Role="tblUserPersonalDetails" Type="Self.tblUserPersonalDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetails">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserPersonalDetails">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWorkExperienceDetails_tblUserCvDetails">
+          <End Role="tblUserCvDetails" Type="Self.tblUserCvDetails" Multiplicity="1" />
+          <End Role="tblWorkExperienceDetails" Type="Self.tblWorkExperienceDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetails">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblWorkExperienceDetails">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_CheckEmailAvailibility" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UserRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfRegistration" Type="datetime" Mode="In" />
+          <Parameter Name="IsApproved" Type="bit" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CvMakerDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCvBasicInformation" EntityType="Self.tblCvBasicInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEducationDetails" EntityType="Self.tblEducationDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblObjective" EntityType="Self.tblObjective" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblQualifications" EntityType="Self.tblQualifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserAccountDetails" EntityType="Self.tblUserAccountDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserCvDetails" EntityType="Self.tblUserCvDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserPersonalDetails" EntityType="Self.tblUserPersonalDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWorkExperienceDetails" EntityType="Self.tblWorkExperienceDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInterestDetails" EntityType="Self.tblInterestDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblInterestDetails].[InterestsId] AS [InterestsId], 
+    [tblInterestDetails].[CvId] AS [CvId], 
+    [tblInterestDetails].[InterestsDetails] AS [InterestsDetails]
+    FROM [dbo].[tblInterestDetails] AS [tblInterestDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblReferencesDetails" EntityType="Self.tblReferencesDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblReferencesDetails].[ReferencesId] AS [ReferencesId], 
+    [tblReferencesDetails].[Cvid] AS [Cvid], 
+    [tblReferencesDetails].[ReferencesDetails] AS [ReferencesDetails]
+    FROM [dbo].[tblReferencesDetails] AS [tblReferencesDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tblCvBasicInformation_tblUserCvDetails" Association="Self.FK_tblCvBasicInformation_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblCvBasicInformation" EntitySet="tblCvBasicInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducationDetails_tblUserCvDetails" Association="Self.FK_tblEducationDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblEducationDetails" EntitySet="tblEducationDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestDetails_tblUserCvDetails" Association="Self.FK_tblInterestDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblInterestDetails" EntitySet="tblInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblObjective_tblUserCvDetails" Association="Self.FK_tblObjective_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblObjective" EntitySet="tblObjective" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQualifications_tblUserCvDetails" Association="Self.FK_tblQualifications_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblQualifications" EntitySet="tblQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReferencesDetails_tblUserCvDetails" Association="Self.FK_tblReferencesDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblReferencesDetails" EntitySet="tblReferencesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserCvDetails_tblUserAccountDetails" Association="Self.FK_tblUserCvDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserPersonalDetails_tblUserAccountDetails" Association="Self.FK_tblUserPersonalDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetails" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserPersonalDetails" EntitySet="tblUserPersonalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWorkExperienceDetails_tblUserCvDetails" Association="Self.FK_tblWorkExperienceDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetails" EntitySet="tblUserCvDetails" />
+            <End Role="tblWorkExperienceDetails" EntitySet="tblWorkExperienceDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CvMakerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CvMakerDBEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SP_CheckEmailAvailibility" ReturnType="Collection(Int32)">
+          <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="sysdiagrams" EntityType="CvMakerDBModel.sysdiagram" />
+          <EntitySet Name="tblCvBasicInformations" EntityType="CvMakerDBModel.tblCvBasicInformation" />
+          <EntitySet Name="tblEducationDetails" EntityType="CvMakerDBModel.tblEducationDetail" />
+          <EntitySet Name="tblObjectives" EntityType="CvMakerDBModel.tblObjective" />
+          <EntitySet Name="tblQualifications" EntityType="CvMakerDBModel.tblQualification" />
+          <EntitySet Name="tblUserCvDetails" EntityType="CvMakerDBModel.tblUserCvDetail" />
+          <EntitySet Name="tblWorkExperienceDetails" EntityType="CvMakerDBModel.tblWorkExperienceDetail" />
+          <EntitySet Name="tblInterestDetails" EntityType="CvMakerDBModel.tblInterestDetail" />
+          <EntitySet Name="tblReferencesDetails" EntityType="CvMakerDBModel.tblReferencesDetail" />
+          <AssociationSet Name="FK_tblCvBasicInformation_tblUserCvDetails" Association="CvMakerDBModel.FK_tblCvBasicInformation_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblCvBasicInformation" EntitySet="tblCvBasicInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEducationDetails_tblUserCvDetails" Association="CvMakerDBModel.FK_tblEducationDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblEducationDetail" EntitySet="tblEducationDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblObjective_tblUserCvDetails" Association="CvMakerDBModel.FK_tblObjective_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblObjective" EntitySet="tblObjectives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblQualifications_tblUserCvDetails" Association="CvMakerDBModel.FK_tblQualifications_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblQualification" EntitySet="tblQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWorkExperienceDetails_tblUserCvDetails" Association="CvMakerDBModel.FK_tblWorkExperienceDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblWorkExperienceDetail" EntitySet="tblWorkExperienceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInterestDetails_tblUserCvDetails" Association="CvMakerDBModel.FK_tblInterestDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblInterestDetail" EntitySet="tblInterestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblReferencesDetails_tblUserCvDetails" Association="CvMakerDBModel.FK_tblReferencesDetails_tblUserCvDetails">
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+            <End Role="tblReferencesDetail" EntitySet="tblReferencesDetails" />
+          </AssociationSet>
+          <EntitySet Name="tblUserAccountDetails" EntityType="CvMakerDBModel.tblUserAccountDetail" />
+          <AssociationSet Name="FK_tblUserCvDetails_tblUserAccountDetails" Association="CvMakerDBModel.FK_tblUserCvDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetail" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserCvDetail" EntitySet="tblUserCvDetails" />
+          </AssociationSet>
+          <EntitySet Name="tblUserPersonalDetails" EntityType="CvMakerDBModel.tblUserPersonalDetail" />
+          <AssociationSet Name="FK_tblUserPersonalDetails_tblUserAccountDetails" Association="CvMakerDBModel.FK_tblUserPersonalDetails_tblUserAccountDetails">
+            <End Role="tblUserAccountDetail" EntitySet="tblUserAccountDetails" />
+            <End Role="tblUserPersonalDetail" EntitySet="tblUserPersonalDetails" />
+          </AssociationSet>
+          <FunctionImport Name="SP_UserRegistration">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="DateOfRegistration" Mode="In" Type="DateTime" />
+            <Parameter Name="IsApproved" Mode="In" Type="Boolean" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblCvBasicInformation">
+          <Key>
+            <PropertyRef Name="BasicInformationId" />
+          </Key>
+          <Property Name="BasicInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="EmailId" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdressLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdressLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdressLine3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblCvBasicInformation_tblUserCvDetails" FromRole="tblCvBasicInformation" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblEducationDetail">
+          <Key>
+            <PropertyRef Name="EducationId" />
+          </Key>
+          <Property Name="EducationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OtherInformaton" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblEducationDetails_tblUserCvDetails" FromRole="tblEducationDetail" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblObjective">
+          <Key>
+            <PropertyRef Name="ObjectiveId" />
+          </Key>
+          <Property Name="ObjectiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="Objective" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblObjective_tblUserCvDetails" FromRole="tblObjective" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblQualification">
+          <Key>
+            <PropertyRef Name="QualificationsId" />
+          </Key>
+          <Property Name="QualificationsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="Qualifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblQualifications_tblUserCvDetails" FromRole="tblQualification" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblUserCvDetail">
+          <Key>
+            <PropertyRef Name="CvId" />
+          </Key>
+          <Property Name="CvId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CvName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastModificationDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblCvBasicInformations" Relationship="CvMakerDBModel.FK_tblCvBasicInformation_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblCvBasicInformation" />
+          <NavigationProperty Name="tblEducationDetails" Relationship="CvMakerDBModel.FK_tblEducationDetails_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblEducationDetail" />
+          <NavigationProperty Name="tblObjectives" Relationship="CvMakerDBModel.FK_tblObjective_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblObjective" />
+          <NavigationProperty Name="tblQualifications" Relationship="CvMakerDBModel.FK_tblQualifications_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblQualification" />
+          <NavigationProperty Name="tblWorkExperienceDetails" Relationship="CvMakerDBModel.FK_tblWorkExperienceDetails_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblWorkExperienceDetail" />
+          <NavigationProperty Name="tblInterestDetails" Relationship="CvMakerDBModel.FK_tblInterestDetails_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblInterestDetail" />
+          <NavigationProperty Name="tblReferencesDetails" Relationship="CvMakerDBModel.FK_tblReferencesDetails_tblUserCvDetails" FromRole="tblUserCvDetail" ToRole="tblReferencesDetail" />
+          <NavigationProperty Name="tblUserAccountDetail" Relationship="CvMakerDBModel.FK_tblUserCvDetails_tblUserAccountDetails" FromRole="tblUserCvDetail" ToRole="tblUserAccountDetail" />
+        </EntityType>
+        <EntityType Name="tblWorkExperienceDetail">
+          <Key>
+            <PropertyRef Name="WorkExperienceId" />
+          </Key>
+          <Property Name="WorkExperienceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OtherInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblWorkExperienceDetails_tblUserCvDetails" FromRole="tblWorkExperienceDetail" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblInterestDetail">
+          <Key>
+            <PropertyRef Name="InterestsId" />
+            <PropertyRef Name="CvId" />
+          </Key>
+          <Property Name="InterestsId" Type="Int32" Nullable="false" />
+          <Property Name="CvId" Type="Int32" Nullable="false" />
+          <Property Name="InterestsDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblInterestDetails_tblUserCvDetails" FromRole="tblInterestDetail" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <EntityType Name="tblReferencesDetail">
+          <Key>
+            <PropertyRef Name="ReferencesId" />
+            <PropertyRef Name="Cvid" />
+          </Key>
+          <Property Name="ReferencesId" Type="Int32" Nullable="false" />
+          <Property Name="Cvid" Type="Int32" Nullable="false" />
+          <Property Name="ReferencesDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserCvDetail" Relationship="CvMakerDBModel.FK_tblReferencesDetails_tblUserCvDetails" FromRole="tblReferencesDetail" ToRole="tblUserCvDetail" />
+        </EntityType>
+        <Association Name="FK_tblCvBasicInformation_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblCvBasicInformation" Role="tblCvBasicInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblCvBasicInformation">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEducationDetails_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblEducationDetail" Role="tblEducationDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblEducationDetail">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblObjective_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblObjective" Role="tblObjective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblObjective">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblQualifications_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblQualification" Role="tblQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblQualification">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWorkExperienceDetails_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblWorkExperienceDetail" Role="tblWorkExperienceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblWorkExperienceDetail">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInterestDetails_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblInterestDetail" Role="tblInterestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblInterestDetail">
+              <PropertyRef Name="CvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblReferencesDetails_tblUserCvDetails">
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblReferencesDetail" Role="tblReferencesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserCvDetail">
+              <PropertyRef Name="CvId" />
+            </Principal>
+            <Dependent Role="tblReferencesDetail">
+              <PropertyRef Name="Cvid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblUserAccountDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfRegistration" Type="DateTime" Precision="3" />
+          <Property Name="LastAccessDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="tblUserCvDetails" Relationship="CvMakerDBModel.FK_tblUserCvDetails_tblUserAccountDetails" FromRole="tblUserAccountDetail" ToRole="tblUserCvDetail" />
+          <NavigationProperty Name="tblUserPersonalDetails" Relationship="CvMakerDBModel.FK_tblUserPersonalDetails_tblUserAccountDetails" FromRole="tblUserAccountDetail" ToRole="tblUserPersonalDetail" />
+        </EntityType>
+        <Association Name="FK_tblUserCvDetails_tblUserAccountDetails">
+          <End Type="CvMakerDBModel.tblUserAccountDetail" Role="tblUserAccountDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblUserCvDetail" Role="tblUserCvDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserCvDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblUserPersonalDetail">
+          <Key>
+            <PropertyRef Name="PersonalId" />
+          </Key>
+          <Property Name="PersonalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DateOfBirth" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblUserAccountDetail" Relationship="CvMakerDBModel.FK_tblUserPersonalDetails_tblUserAccountDetails" FromRole="tblUserPersonalDetail" ToRole="tblUserAccountDetail" />
+        </EntityType>
+        <Association Name="FK_tblUserPersonalDetails_tblUserAccountDetails">
+          <End Type="CvMakerDBModel.tblUserAccountDetail" Role="tblUserAccountDetail" Multiplicity="1" />
+          <End Type="CvMakerDBModel.tblUserPersonalDetail" Role="tblUserPersonalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUserAccountDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserPersonalDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CvMakerDBModelStoreContainer" CdmEntityContainer="CvMakerDBEntities">
+          <FunctionImportMapping FunctionImportName="SP_CheckEmailAvailibility" FunctionName="CvMakerDBModel.Store.SP_CheckEmailAvailibility" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CvMakerDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCvBasicInformations">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblCvBasicInformation">
+              <MappingFragment StoreEntitySet="tblCvBasicInformation">
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="AdressLine3" ColumnName="AdressLine3" />
+                <ScalarProperty Name="AdressLine2" ColumnName="AdressLine2" />
+                <ScalarProperty Name="AdressLine1" ColumnName="AdressLine1" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="BasicInformationId" ColumnName="BasicInformationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEducationDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblEducationDetail">
+              <MappingFragment StoreEntitySet="tblEducationDetails">
+                <ScalarProperty Name="OtherInformaton" ColumnName="OtherInformaton" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="InstitutionName" ColumnName="InstitutionName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="EducationId" ColumnName="EducationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblObjectives">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblObjective">
+              <MappingFragment StoreEntitySet="tblObjective">
+                <ScalarProperty Name="Objective" ColumnName="Objective" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblQualifications">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblQualification">
+              <MappingFragment StoreEntitySet="tblQualifications">
+                <ScalarProperty Name="Qualifications" ColumnName="Qualifications" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="QualificationsId" ColumnName="QualificationsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserCvDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblUserCvDetail">
+              <MappingFragment StoreEntitySet="tblUserCvDetails">
+                <ScalarProperty Name="LastModificationDateTime" ColumnName="LastModificationDateTime" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="CvName" ColumnName="CvName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWorkExperienceDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblWorkExperienceDetail">
+              <MappingFragment StoreEntitySet="tblWorkExperienceDetails">
+                <ScalarProperty Name="OtherInformation" ColumnName="OtherInformation" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="WorkExperienceId" ColumnName="WorkExperienceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInterestDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblInterestDetail">
+              <MappingFragment StoreEntitySet="tblInterestDetails">
+                <ScalarProperty Name="InterestsDetails" ColumnName="InterestsDetails" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
+                <ScalarProperty Name="InterestsId" ColumnName="InterestsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReferencesDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblReferencesDetail">
+              <MappingFragment StoreEntitySet="tblReferencesDetails">
+                <ScalarProperty Name="ReferencesDetails" ColumnName="ReferencesDetails" />
+                <ScalarProperty Name="Cvid" ColumnName="Cvid" />
+                <ScalarProperty Name="ReferencesId" ColumnName="ReferencesId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserAccountDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblUserAccountDetail">
+              <MappingFragment StoreEntitySet="tblUserAccountDetails">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="LastAccessDateTime" ColumnName="LastAccessDateTime" />
+                <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserPersonalDetails">
+            <EntityTypeMapping TypeName="CvMakerDBModel.tblUserPersonalDetail">
+              <MappingFragment StoreEntitySet="tblUserPersonalDetails">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PersonalId" ColumnName="PersonalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_UserRegistration" FunctionName="CvMakerDBModel.Store.SP_UserRegistration" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

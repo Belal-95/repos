@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Event Reminder Site</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/themes/le-frog/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/le-frog/theme.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family:Tahoma;
+            font-size:13px;
+        }
+    </style>
+</head>
+<body>
+    @Html.Partial("_Header")
+    <div style="border:2px solid gray">
+        @RenderBody()
+    </div>
+    @Html.Partial("_Footer")
+</body>
+</html>

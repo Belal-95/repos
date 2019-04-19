@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divDialog").dialog({
+            title: "Last Accessed Date Time",
+            width: 400,
+            modal: true,
+            draggable: true,
+            show: {
+                effect: "slide",
+                duration: 2000
+            },
+            hide: {
+                effect: "slide",
+                duration: 2000
+            }
+        });
+    });
+
+</script>
+
+<div id="divDialog" style="text-align:center">
+    <b style="font-size: 16px">
+        <br />
+        @Convert.ToDateTime(Session["LastAccessedDateTime"]).ToString("dddd, dd MMMM yyyy hh:mm:ss tt")
+    </b>
+</div>
+<table style="width: 100%; height: 400px" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td valign="top">
+            <table style="width: 100%">
+                <tr>
+                    <td width="50%" valign="top">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>Welcome Back</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="~/Images/event_elephant.gif" alt="Image" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%" valign="top">
+                        <table>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Session["FirstName"]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>You are successfully logged in. </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Click "Countinue" below to view your dashboard.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Never Forget Again,
+                                        <br />
+                                        Event Reminders
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="button" value="Continue" onclick="document.location.href='/User/Home/MembersCorner'" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,87 @@
+﻿@model EventReminderService.Areas.Admin.Models.tblAdminAccount
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#textUserName").focus();
+    });
+ 
+</script>
+@*create login User Interface*@
+@using (Html.BeginForm())
+{
+    @*@ViewData["Pwd"]*@
+    <div align="center" style="padding:0px;margin-top:5px">
+        <div style="width:60%;border:25px outset maroon;border-radius:30px;box-shadow:10px 10px grey;background-color:#FCFCFE">
+            <table style="width:100%;" cellspacing="15">
+                <tr>
+                    <td colspan="2" style="text-align:left;font-weight:bold;font-size:20px;background-color:green;color:white;border:5px outset black;border-radius:10px;text-align:center">
+                        Admin Login Form
+
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40%" valign="top">
+                        <img src="~/Images/Login.jpg" style="width:100%" />
+                    </td>
+                    <td width="60%" align="left" valign="top">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    @*Display Error if Login Failed*@
+                                    @if (ViewBag.Error != null)
+                                    {
+                                        <b style="color:red">@ViewBag.Error</b>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>
+                                        @Html.LabelFor(m => Model.UserName)
+                                    </b>
+                                    <br />
+                                    @Html.TextBoxFor(m => Model.UserName, new { id = "txtUserName" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.ValidationMessageFor(m => Model.UserName, "", new { style = "color:red" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>@Html.LabelFor(m => Model.Password)</b>
+                                    <br />
+                                    @Html.PasswordFor(m => Model.Password)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.ValidationMessageFor(m => Model.Password, "", new { style = "color:red" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Login" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br />
+}
+
+

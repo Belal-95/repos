@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "ControlPanel";
+    Layout = "~/Areas/Admin/Views/Shared/_ControlPanelLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divDialog").dialog({
+            title: "Last Accessed Date Time",
+            width: 400,
+            modal: true,
+            draggable: true,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "puff",
+                duration: 2000
+            }
+        });
+
+        $("#tableDashboard").find("td").addClass("tdStyle").find("a").addClass("linkStyle");
+
+        $("#tableDashboard").find("td").hover(function () {
+            $(this).css({ "background-color": "red", "border": "10px inset black" }).find("a").css("color", "white");
+        },
+            function () {
+                $(this).css({ "background-color": "aqua", "border": "10px outset green" }).find("a").css("color", "black");
+
+            });
+    });
+</script>
+
+<style type="text/css">
+    .tdStyle {
+        width: 25%;
+        height: 75px;
+        border:10px outset green;
+        border-radius: 10px;
+        margin: 5px;
+        padding: 5px;
+        background-color: turquoise;
+        color: white;
+        text-align:center;
+        cursor:pointer;
+    }
+    .linkStyle {
+        font-family: Tahoma;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        text-shadow: 5px 2px 5px green;
+        text-decoration: none;
+    }
+</style>
+
+<div id="divDialog" style="text-align: center">
+    <b style="font-size: 16px">
+        <br />
+        @Convert.ToDateTime(Session["LastAccessedDateTime"]).ToString("dddd, dd MMM yyyy hh:mm:ss tt")
+    </b>
+</div>
+
+<table style="width:100%" id="tableDashboard">
+    <tr>
+        <td>
+            @Html.ActionLink("Change Password", "ChangePassword", "Home")
+        </td>
+        <td>
+            @Html.ActionLink("Manage Country", "Index", "Country")
+        </td>
+        <td>
+            @Html.ActionLink("Manage State", "Index", "State")
+        </td>
+        <td>
+            @Html.ActionLink("Manage City", "Index", "City")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Manage Hint Question", "Index", "HintQuestion")
+        </td>
+        <td>
+            @Html.ActionLink("Manage Religion", "Index", "Religion")
+        </td>
+        <td>
+            @Html.ActionLink("Manage Relationship", "Index", "Relationship")
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+

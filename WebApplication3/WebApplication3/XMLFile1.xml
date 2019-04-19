@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+  <Ad>
+    <ImageUrl>~/images/belal.jpg</ImageUrl>
+    <NavigateUrl>http://facebook.com</NavigateUrl>
+    <AlternateText> hahahahaha </AlternateText>
+  <Impressions>4</Impressions>
+    <Keyword>SNS</Keyword>
+  </Ad>
+  <Ad>
+    <ImageUrl>~/images/redrose.jpg</ImageUrl>
+    <NavigateUrl>http://google.com</NavigateUrl>
+    <AlternateText> hahahahaha </AlternateText>
+  <Impressions>4</Impressions>
+    <Keyword>SNS</Keyword>
+  </Ad>
+  <Ad>
+    <ImageUrl>~/images/redrose1.jpg</ImageUrl>
+    <NavigateUrl>http://youtube.com</NavigateUrl>
+    <AlternateText> hahahahaha </AlternateText>
+  <Impressions>4</Impressions>
+    <Keyword>SNS</Keyword>
+  </Ad>
+</Advertisements>

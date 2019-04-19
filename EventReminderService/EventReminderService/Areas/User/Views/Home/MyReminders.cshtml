@@ -1,0 +1,603 @@
+﻿@using EventReminderService.Areas.User.Models;
+@{
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .buttonStyle1 {
+        font-family: Tahoma;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: #FCC513;
+        color: #003399;
+        border-radius: 10px;
+        border: 5px solid gray;
+        box-shadow: 10px 10px 10px gray;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .eventTitle {
+        font-family: Tahoma;
+        font-size: 15px;
+        font-weight: bold;
+        color: green;
+        border-radius: 15px;
+        border: 2px solid #1C5E55;
+        box-shadow: 10px 10px 10px gray;
+        padding: 5px;
+    }
+</style>
+
+<h2 style="margin:0px;padding:5px">My Reminders</h2>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#txtEditEventDate").datepicker({
+            showOn: "both",
+            buttonImage: "../../Images/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true,
+            maxDate: +0,
+            yearRange: "-100:+0",
+            dateFormat: "dd/M/yy"
+        });
+
+        $("#txtEditEventDate").change(function () {
+
+            var date = $(this).val();
+            var months = { "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12" };
+            var dateArray = date.split(/\//);
+            var day = dateArray[0];
+            var year = dateArray[2];
+            var month = months[dateArray[1]];
+            var newDate = [month, day, year].join("/");
+
+            var dateOfBirth = new Date(newDate);
+
+            var currentDate = new Date();
+            var age = currentDate.getFullYear() - dateOfBirth.getFullYear();
+
+            $("#txtEditEvent").val(age + " Birthday");
+
+
+
+            ////////////////////////////////////////
+          //  alert("Hey111111111");
+          //  var a = $("#txtEditEventDate").val();
+          //  alert(a);
+          ////  var dtBirthday = Convert.ToDateTime($("#txtEditEventDate").val());
+          //  alert("Hey222222222");
+          //  //DateTime b = Convert.toDateTime(a);
+          //  var year = DateTime.Now.Year - a.Year;
+          //  alert("Hey33333333");
+          //  //$("#txtEditEvent").html(year + "Birthday < img src= '~/Images/birthday.gif' />");
+          //  $("#txtEditEvent").val(123);
+          //  alert("Hey4444444");
+        });
+      
+        function bindRelationshipDDL(ddl) {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: '@Url.Action("GetRelationship", "Home")',
+                dataType: "json",
+                success: function (response) {
+                    var data = response;
+                    if (data.length > 0) {
+                        for (var c = 0; c < data.length; c++) {
+                            //alert(data[c].RelationshipId);
+                            //alert(data[c].RelationshipName);
+                            ddl.append("<option value='" + data[c].RelationshipId + "'> " + data[c].RelationshipName + "</option>");
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert("Error:" + error.status);
+                }
+            });
+        }
+
+         bindRelationshipDDL($("#ddlEditRelationship"));
+
+        $("#DivBirthdayDialog").dialog({
+            autoOpen: false,
+            width: 700,
+            resizable: false,
+            modal: true,
+            show: {
+                effect: "fadeIn",
+                duration: 500
+            },
+            hide: {
+                effect: "fadeOut",
+                duration: 500
+            }
+        });
+
+        $("a[name=EmailId]").click(function () {
+            var name = $(this).parent().parent().children("td").eq(2).text();
+            name = $.trim(name);
+            var userName = '@Session["FirstName"].ToString()';
+            var toEmailId = $(this).html();
+
+            $("#txtToMail").val(toEmailId);
+            $("#txtSubject").val("Event Reminder's Birthday Wishes!!!");
+            $("#txtMessage").text("Dear " + name + "\n\n" + "Wishing you a Many-Many Happy Birthday!!!\n\n" + "Thanks & Best Regards,\n" + userName);
+            $("#DivBirthdayDialog").dialog({
+                autoOpen: true
+            });
+        });
+
+
+        $("#DivBirthdayDialogSuccess").dialog({
+            width: 700,
+            resizable: false,
+            modal: true,
+            show: {
+                effect: "fadeIn",
+                duration: 500
+            },
+            hide: {
+                effect: "fadeOut",
+                duration: 500
+            }
+        });
+
+        @*$("a[name='Profile']").click(function () {
+            $("#divBirthdayProfile").dialog("open");
+
+            //birthdayId = $(this).attr("id");
+            var tr = $(this).closest('tr');
+            //var birthdayDetailsId = tr.children('td:eq(0)').text();
+            var dateOfBirth = tr.children('td:eq(0)').text();
+            var event = tr.children('td:eq(1)').text();
+            var firstName = tr.children('td:eq(2)').text();
+            var lastName = tr.children('td:eq(3)').text();
+            var nickName = tr.children('td:eq(4)').text();
+            var gender = tr.children('td:eq(5)').text();
+            var relationshipName = tr.children('td:eq(6)').text();
+            var emailId = tr.children('td:eq(7)').text();
+            var birthdayDetailsId = tr.children('td:eq(8)').text();
+
+            $("#txtEditFirstName").focus();
+
+            $("#txtEditEventDate").val(dateOfBirth.trim());
+            $("#txtEditEvent").val(event.trim());
+            $("#txtEditFirstName").val(firstName.trim());
+            $("#txtEditLastName").val(lastName.trim());
+            $("#txtEditNickName").val(nickName.trim());
+
+            relationshipName = relationshipName.trim();
+            alert(relationshipName);
+
+           // $("#ddlEditRelationship").val(1);
+
+            //$("#ddlEditRelationship option").each(function () {
+            //    if ($(this).text() == relationshipName) {
+            //        $(this).prop('selected', 'selected');
+            //    }
+            //});
+
+           // var theText = "GOOGLE";
+         //   $("#ddlEditRelationship option:contains(" + relationshipName + ")").attr('selected', 'selected');
+
+
+            $("#ddlEditRelationship option").filter(function (index) { return $(this).text() === relationshipName; }).attr('selected', 'selected');
+
+
+            $("#ddlEditRelationship option:contains('Brother')").each(function () {
+
+                if ($(this).html() == 'Brother') {
+                    $(this).attr('selected', 'selected');
+                }
+            });
+            //alert(relationshipName);
+            //alert(gender);
+            gender = gender.trim();
+            //alert(gender);
+            //alert(birthdayDetailsId);
+            birthdayDetailsId = birthdayDetailsId.trim();
+            //alert(birthdayDetailsId);
+
+            if (gender == "Male")
+                $("#rdMale").attr('checked', 'checked');
+            else
+                $("#rdFemale").attr('checked', 'checked');
+
+            $("#txtEditEmail").val(emailId.trim());
+            $("#ddlEditRelationship").val(relationshipName.trim());
+
+
+            //var isActive = tr.children('td:eq(2)').find(":checkbox").is(":checked");
+            //$("#txtEditCountryName").val(cName);
+            //$("#chkEditIsActive").prop("checked", isActive);
+            //$("#divEdit").dialog("open");
+            ///////////////////
+            //$("#pUStatus").text("");
+            ///////////////////
+            ///////////////////
+            //$("#lblUError").text("");
+            ///////////////////
+        });
+
+        $("#divBirthdayProfile").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 350,
+            show: {
+                effect: "slide",
+                duration: 500
+            },
+            hide: {
+                effect: "slide",
+                durarion: 500
+            },
+            buttons: {
+                "Update": function () {
+                    $("#spanEEventDate, #spanEEvent, #spanEFirstName, #spanELastName").html("");
+
+                    var dateOfBirth = $("#txtEditEventDate").val().trim();
+                    //  var event = tr.children('td:eq(1)').text();
+                    var firstName = $("#txtEditFirstName").val().trim();
+                    var lastName = $("#txtEditLastName").val().trim();
+                    var nickName = $("#txtEditNickName").val().trim();
+
+                    var gender = "";
+                    if ($("#rdMale").attr('checked') == 'checked')
+                        gender = "Male";
+                    else
+                        gender = "Female";
+                    
+                    var relationshipName = $("#ddlEditRelationship option:selected").val();
+                    var emailId = $("#txtEditEmail").val().trim();
+                    var birthdayDetailsId = tr.children('td:eq(8)').text();
+
+
+                    var EventDate = $("#txtEditEventDate").val().trim();
+
+                    var Relationship = $("#ddlEditRelationship option:selected").val();
+
+                    var firstName = $("#txtEditFirstName").val().trim();
+
+                    var lastName = $("#txtEditLastName").val().trim();
+
+                    //var Gender = $("#rdMale").is(":checked");
+
+                    if (EventDate == "")
+                        $("#txtEditEventDate").html("<br/> <b style='color:red'>Please enter city Name</b>");
+
+                    if (Relationship == "0")
+                        $("#ddlEditRelationship").html("<br/><b style='color:red'> Please enter select country name</b>");
+
+
+                    if (EventDate == "" || Relationship == "0" || firstName == "" || lastName == "")
+                        return false;
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: '@Url.Action("UpdateRelationshipDetails")',
+                        data: "{ cityId:" + dateOfBirth + ", cityName:'" + firstName + "', countryId:" + lastName + ", stateId:" + nickName + ", isActive:'" + gender + "'}", relationshipName + emailId +birthdayDetailsId
+                        dataType: "json",
+                        success: function (response) {
+                            var value = response;
+                            if (parseInt(value) > 0) {
+                                $("#divEdit").dialog("close");
+                                loadCityListData();
+                            }
+                            else {
+                                $("#pEStatus").html("<b style='color:red'> City Updation Failed</b>");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error:" + error.status);
+                        }
+                    });
+                },
+                "Close": function () {
+                    $("#divBirthdayProfile").dialog("close");
+                }
+            }
+        });*@
+
+    });
+</script>
+
+
+<table width="100%" cellpadding="5">
+    <tr>
+        <td colspan="4">
+            Please enter the reminders in your life like birthdays, anniversaries, and holidays using one of the buttons below.
+        </td>
+    </tr>
+    <tr>
+        <td width="25%" align="center">
+            <input type="button" id="btnAddBirthdays" value="Add Birthdays" class="buttonStyle1" onclick="document.location.href = '/User/Home/AddBirthdays'" />
+
+            <br />
+            <b style="color:green;font-size: 10px">Enter multiple Birthdays</b>
+        </td>
+        <td width="25%" align="center">
+            <input type="button" id="btnBirthdayRequester" value="Birthday Requester" class="buttonStyle1" onclick="document.location.href = '/User/Home/BirthdayRequester'" />
+
+            <br />
+            <b style="color:green;font-size: 10px">Ask others to provide their Birthday</b>
+        </td>
+        <td width="25%" align="center">
+            <input type="button" id="btnAddOtherEvents" value="Add Other Events" class="buttonStyle1" />
+
+            <br />
+            <b style="color:green;font-size: 10px">Anniversary, Graduation, ect</b>
+        </td>
+        <td width="25%" align="center">
+            <input type="button" id="btnHolidays" value="Holidays" class="buttonStyle1" />
+
+            <br />
+            <b style="color:green;font-size: 10px">Manage Holidays</b>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+            <span class="eventTitle">Birthday Events</span>
+        </td>
+        <td align="right"></td>
+    </tr>
+
+    <tr>
+        <td colspan="4">
+            @{ List<GetBirthdayDetailsByUserId> objBirthdayDetails = (List<GetBirthdayDetailsByUserId>)ViewBag.BirthdayEvents;}
+
+            <table id="tblBirthday" width="100%" border="1">
+                <tr>
+                    <th width="10%">
+                        Event Date
+                    </th>
+                    <th width="10%">
+                        Event
+                    </th>
+                    <th width="10%">
+                        First Name
+                    </th>
+                    <th width="10%">
+                        Last Name
+                    </th>
+                    <th width="10%">
+                        Nick Name
+                    </th>
+                    <th width="7%">
+                        Gender
+                    </th>
+                    <th width="12%">
+                        Relationship
+                    </th>
+                    <th width="15%">
+                        Email
+                    </th>
+                    <th width="0%"></th>
+                    <th width="16%">
+                        Action
+                    </th>
+                </tr>
+                @foreach (GetBirthdayDetailsByUserId objBirthday in objBirthdayDetails)
+                {
+                    <tr>
+                        <td>
+                            @objBirthday.DateOfBirth
+                        </td>
+                        <td>
+                            @{ DateTime dtBirthday = Convert.ToDateTime(objBirthday.DateOfBirth);
+                                int year = DateTime.Now.Year - dtBirthday.Year;}
+                            @year Birthday <img src="~/Images/birthday.gif" />
+                        </td>
+                        <td>
+                            @objBirthday.FirstName
+                        </td>
+                        <td>
+                            @objBirthday.LastName
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(objBirthday.NickName))
+                            {
+                                @objBirthday.NickName;
+                            }
+                            else
+                            {
+                                <span style="text-align:center">N/A</span>
+                            }
+                        </td>
+                        <td>
+                            @if (objBirthday.Gender == "M")
+                            {
+                                <span>Male</span>
+                            }
+                            else
+                            {
+                                <span>Female</span>
+                            }
+                        </td>
+                        <td>
+
+                            @objBirthday.RelationshipName
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(objBirthday.EmailId))
+                            {
+                                <a name="EmailId" href="#">@objBirthday.EmailId</a>
+                            }
+                            else
+                            {
+                                <span>N/A</span>
+                            }
+                        </td>
+                        <td width="0">
+                            <span id="spanBirthdayDetailsId" style="display:none">@objBirthday.BirthdayDetailsId</span>
+                        </td>
+                        <td align="center">
+                            @*int c = objBirthday.BirthdayDetailsId
+                                @Html.ActionLink("Profile", "BirthdayProfile", new { id = objBirthday.BirthdayDetailsId })*@
+                            <a href="#" name="Profile" id=objBirthday.BirthdayDetailsId>Profile</a>
+                            &nbsp;
+                            @Html.ActionLink("Delete", "DeleteBirthdayProfile", new { id = objBirthday.BirthdayDetailsId })
+                            &nbsp;
+                            @Html.ActionLink("Reminder", "BirthdayReminderSetup", new { id = objBirthday.BirthdayDetailsId })
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span class="eventTitle">Holiday Events</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span class="eventTitle">Other Events</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+</table>
+
+<div id="DivBirthdayDialog" style="border-radius:10px;border:10px solid Yellow;background-color:#EDFFA9;color:green" title="Send Birthday Wishes">
+    @using (Html.BeginForm("SendBirthdayMail", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table width="100%">
+            <tr>
+                <td width="25%">
+                    <b>To</b>
+                </td>
+                <td width="2%">:</td>
+                <td>
+                    <input type="text" name="toMail" id="txtToMail" readonly="readonly" style="width:250px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>From</b>
+                </td>
+                <td>:</td>
+                <td>
+                    <input type="text" name="fromMail" id="txtFromMail" readonly="readonly" style="width:250%" value="@Session["EmailId"].ToString()" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Subject</b>
+                </td>
+                <td>:</td>
+                <td>
+                    <input type="text" name="subject" id="txtSubject" readonly="readonly" style="width:300%" />
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <b>Message</b>
+                </td>
+                <td valign="top">:</td>
+                <td>
+                    <textarea name="message" id="txtMessage" rows="7" cols="75"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Attachment1</b>
+                </td>
+                <td>:</td>
+                <td>
+                    <input type="file" name="fileAttach" id="fileAttach1" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Attachment2</b>
+                </td>
+                <td>:</td>
+                <td>
+                    <input type="file" name="fileAttach" id="fileAttach2" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Attachment3</b>
+                </td>
+                <td>:</td>
+                <td>
+                    <input type="file" name="fileAttach" id="fileAttach3" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <img id="imgBtnSendMail" src="~/Images/SendEmail.jpg" width="150" height="30" style="cursor:pointer" onclick="javascript: document.forms[0].submit();" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div id="divBirthdayProfile">
+    <p id="pStatus" style='color:red'></p>
+    <b>Event Date	:</b>
+    @*<b>@Html.LabelFor(model => Model.DateOfBirth)</b>*@
+    <br />
+    <input type="text" id="txtEditEventDate" />
+    <span id="spanEEventDate"></span>
+    <br /><br />
+    <b>Event	:</b>
+    <br />
+    <input type="text" id="txtEditEvent" disabled="disabled" />
+    <span id="spanEEvent"></span>
+    <br /><br />
+    <b>First Name	:</b>
+    <br />
+    <input type="text" id="txtEditFirstName" />
+    <span id="spanEFirstName"></span>
+    <br /><br />
+    <b>Last Name	:</b>
+    <br />
+    <input type="text" id="txtEditLastName" />
+    <span id="spanELastName"></span>
+    <br /><br />
+    <b>Nick Name	:</b>
+    <br />
+    <input type="text" id="txtEditNickName" />
+    @*<span id="spanENickName"></span>*@
+    <br /><br />
+    <b>Gender	:</b>
+    <br />
+    <input type="radio" id="rdMale" name="Gender" />
+    Male
+    <input type="radio" id="rdFemale" name="Gender" />
+    Female
+    <br /><br />
+    <b>Relationship	:</b>
+    <br />
+    <select id="ddlEditRelationship" ></select>
+    <br /><br />
+    <b>Email	:</b>
+    <br />
+    <input type="text" id="txtEditEmail" />
+    @*<span id="spanEEditEmail"></span>*@
+    @*<input type="button" id="btnClose" name="Close" value="Close" />*@
+    <br /><br />
+
+</div>
+
+
+@if (TempData["MailSuccess"] != null)
+{
+    <div id="DivBirthdayDialogSuccess" style="border-radius:10px;border:10px solid Yellow;background-color:#EDFFA9;color:green" title="Send Birthday Wishes">
+        <p style="text-align:center">@TempData["MailSuccess"]</p>
+    </div>
+}

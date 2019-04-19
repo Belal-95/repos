@@ -1,0 +1,530 @@
+﻿
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Sample CV - CV Maker</title>
+
+    <meta name="description" content="أنشيء, راجع , انشر, و شارك سيرتك الذاتية مجاناً" />
+    <meta name="keywords" content="create English resume, create العربية resume, create Български resume, create Čeština resume, create Dansk resume, create Deutsch resume, create Eesti keel resume, create ქართული resume, create Dutch resume, create Español resume, create فارسی resume, create Français resume, create Galician resume, create Έλληνικά resume, create Hrvatski resume, create Hungarian resume, create Italiano resume, create עברית resume, create 한국어 resume, create Norsk resume, create Polski resume, create Português (br) resume, create Português (pt) resume, create Român resume, create Pусский resume, create Slovenščina resume, create Slovenský resume, create Shqip resume, create Suomi resume, create Svenska resume, create Türkçe resume, create Українська resume, create Tiếng Việt resume, create മലയാളം resume, create 中文 resume, create 繁體中文 resume" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+    <link href="https://cvmkr.com/public/?v=1.1&css=Member,ui,cleditor" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="https://cvmkr.com/public/lang/ar.js"></script>
+
+    <script type="text/javascript" src="https://cvmkr.com/public/?v=1.1&js=cleditor,global"></script>
+
+
+
+    <link rel="shortcut icon" href="https://cvmkr.com/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <meta name="robots" content="index,follow" />
+
+    <link rel="image_src" href="http://cvmkr.com/images/thumbnail.jpg" />
+</head>
+<body class="CV">
+    <div id="wrap">
+        <div id="header">
+            <div id="bar">
+                <div class="content">
+                    <p class="tag">
+                        أنشيء, راجع , انشر, و شارك سيرتك الذاتية مجاناً<!-- <a href="https://cvmkr.com/ar/Pages/about" class="more">معرفة المزيد</a> //-->
+                    </p>
+
+                    <ul class="nav noul">
+
+                        <li class="oauth oauth_none">
+                            <a href="https://cvmkr.com/">
+                                <strong>مرحبا Belal-Khanger</strong>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://cvmkr.com/ar/Member/upgrade">Upgrade to Premium ❤</a>
+                        </li>
+                        <li><a href="https://cvmkr.com/ar/Member/account">تعديل حساب</a></li>
+                        <li><a href="https://cvmkr.com/ar/Member/?action=logout">تسجيل الخروج</a></li>
+                    </ul>
+
+                    <div class="language">
+                        <select id="language">
+                            <option value="en" class="en">English</option>
+                            <option value="ar" class="ar">العربية</option>
+                            <option value="bg" class="bg">Български</option>
+                            <option value="cz" class="cz">Čeština</option>
+                            <option value="da" class="da">Dansk</option>
+                            <option value="de" class="de">Deutsch</option>
+                            <option value="ee" class="ee">Eesti keel</option>
+                            <option value="ge" class="ge">ქართული</option>
+                            <option value="nl" class="nl">Dutch</option>
+                            <option value="es" class="es">Español</option>
+                            <option value="fa" class="fa">فارسی</option>
+                            <option value="fr" class="fr">Français</option>
+                            <option value="gl" class="gl">Galician</option>
+                            <option value="gr" class="gr">Έλληνικά</option>
+                            <option value="hr" class="hr">Hrvatski</option>
+                            <option value="hu" class="hu">Hungarian</option>
+                            <option value="it" class="it">Italiano</option>
+                            <option value="iw" class="iw">עברית</option>
+                            <option value="ko" class="ko">한국어</option>
+                            <option value="nn" class="nn">Norsk</option>
+                            <option value="pl" class="pl">Polski</option>
+                            <option value="br" class="br">Português (br)</option>
+                            <option value="pt" class="pt">Português (pt)</option>
+                            <option value="ro" class="ro">Român</option>
+                            <option value="ru" class="ru">Pусский</option>
+                            <option value="sl" class="sl">Slovenščina</option>
+                            <option value="sk" class="sk">Slovenský</option>
+                            <option value="sq" class="sq">Shqip</option>
+                            <option value="fi" class="fi">Suomi</option>
+                            <option value="sv" class="sv">Svenska</option>
+                            <option value="tr" class="tr">Türkçe</option>
+                            <option value="uk" class="uk">Українська</option>
+                            <option value="vn" class="vn">Tiếng Việt</option>
+                            <option value="ml" class="ml">മലയാളം</option>
+                            <option value="zh" class="zh">中文</option>
+                            <option value="zht" class="zht">繁體中文</option>
+                        </select>
+                    </div>
+                    <div class="clear"> </div>
+                </div><!-- content //-->
+            </div><!-- #bar //-->
+
+            <div id="head">
+                <div class="content">
+                    <a class="logo" href="https://cvmkr.com/"><img src="https://cvmkr.com/images/logo.png" alt="مُنشئ السيرة الذاتية" /></a>
+
+
+                    <ul class="stats noul">
+                        <li>
+                            <span class="number">16,310,726</span>
+                            التحميلات
+                        </li>
+                        <li class="r">
+                            <span class="number">6,247,762</span>
+                            السير الذاتية المحفوظة
+                        </li>
+                    </ul>
+                    <div class="clear"> </div>
+                </div>
+            </div><!-- #head // -->
+            <div class="clear"> </div>
+        </div><!-- #header //-->
+
+        <div id="main">
+            <div id="jobs-toast">
+                &nbsp;
+            </div>
+            <div id="cv">
+                <h1>
+                    <a href="https://cvmkr.com/ar/CV/edit?id=6965196">Sample CV</a>
+                    <sup class="lang">English</sup>
+                </h1>
+
+
+                <div class="controls">
+                    <span id="notice" class="notice"> </span>
+                    <a href="https://cvmkr.com/ar/Member/upgrade" target="_blank" class="button premium" id="bt-help"> Upgrade to Premium ❤</a>
+
+                    <a href="https://cvmkr.com/ar/Pages/help" target="_blank" class="button" id="bt-help"><span class="ui-icon ui-icon-info"></span> مساعدة</a>
+                    <a href="#" class="button" id="bt-preview"><span class="ui-icon ui-icon-search"></span> إستعراض سريع</a>
+                    <a href="#" class="button" id="bt-save"><span class="ui-icon ui-icon-disk"></span> حفظ</a>
+
+                    <a href="#" class="button" id="bt-download"><span class="ui-icon ui-icon-check"></span> حفظ وتحميل</a>
+                </div>
+                <div class="clear"> </div>
+
+
+                <div class="options">
+                    <ul id="cvsections" class="noul"></ul>
+                    <p>
+                        <a href="#" class="button" id="bt-add-section"><span class="ui-icon ui-icon-plusthick"></span> إضافة قسم جديد</a>
+                    </p>
+                    <p class="msg">* لإعادة ترتيب الأقسام في سيرتك الذاتية إضغط واسحب اسم القسم في القائمة أعلاه.</p>
+                    <p class="msg">* في حال ترك الحقول في القسم فارغة فإن القسم لن يظهر في سيرتك الذاتية.</p>
+                </div>
+
+                <form name="cv" method="post" action="" id="cvform" class="edit" enctype="multipart/form-data" target="postframe">
+                    <div id="section-basic" class="section ">
+                        <h2 class="title"><span class="name">Basic information</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="action" name="action" value="cv" />
+                                <input type="hidden" class="email_copy" name="email_copy" value="" />
+                                <input type="hidden" class="style" name="style" value="executive" />
+                                <input type="hidden" class="type" name="type" value="pdf" />
+                                <input type="hidden" class="page_size" name="page_size" value="pdf" />
+                                <input type="hidden" class="section_name" name="sections[basic][section_name]" value="Basic information" />
+                                <p class="field field_">
+                                    <label>Full name</label><input maxlength="100" type="text" name="sections[basic][data][fullname]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>E-mail address</label><input maxlength="100" type="text" name="sections[basic][data][email]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Phone numbers</label><input maxlength="100" type="text" name="sections[basic][data][phone]" class="text" value="" />
+                                    <span class="info">If you have more than one number, separate with commas</span>
+                                </p><p class="field field_">
+                                    <label>Websites</label><input maxlength="100" type="text" name="sections[basic][data][website]" class="text" value="" />
+                                    <span class="info">If you have more than one URL, separate with commas</span>
+                                </p><hr />
+                                <p class="field field_">
+                                    <label>Address line 1</label><input maxlength="100" type="text" name="sections[basic][data][address1]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Address line 2</label><input maxlength="100" type="text" name="sections[basic][data][address2]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Address line 3</label><input maxlength="100" type="text" name="sections[basic][data][address3]" class="text" value="" />
+                                </p><hr />
+                                <p class="field field_photo">
+                                    <label for="photo">Photo</label><input type="file" id="photo" name="photo" class="text" value="" />
+                                    <span class="info">gif, jpg, png, jpeg<br />320 x 400 px</span>
+                                </p><p class="field field_bt-photo">
+                                    <input type="button" id="bt-photo" name="bt-photo" class="button" value="Upload" />
+                                </p><p class="field field_bt-photo-remove">
+                                    <input type="button" id="bt-photo-remove" name="bt-photo-remove" class="button" value="Remove" />
+                                </p>
+                            </div>
+                        </div>
+                    </div><div id="section-work" class="section addable renamable">
+                        <h2 class="title"><span class="name">Work experience</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[work][section_name]" value="Work experience" />
+                                <p class="field field_">
+                                    <label>Job title</label><input maxlength="100" type="text" name="sections[work][data][job_title][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Company name</label><input maxlength="100" type="text" name="sections[work][data][company][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Start date</label><input maxlength="100" type="text" name="sections[work][data][start][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2005</span>
+                                </p><p class="field field_">
+                                    <label>End date</label><input maxlength="100" type="text" name="sections[work][data][end][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2009, or Present</span>
+                                </p><p class="field field_">
+                                    <label>Other information</label><textarea name="sections[work][data][info][]" class="textarea"></textarea>
+                                    <span class="info">Optional details such as job responsibilities, achievements etc.</span>
+                                </p><hr />
+                            </div>
+                        </div>
+                    </div><div id="section-qualifications" class="section renamable">
+                        <h2 class="title"><span class="name">Qualifications</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[qualifications][section_name]" value="Qualifications" />
+                                <p class="field field_">
+                                    <label>Qualifications</label><textarea name="sections[qualifications][data][info][]" class="textarea"></textarea>
+                                    <span class="info">Certifications, accreditions etc. that you have received</span>
+                                </p><hr />
+                            </div>
+                        </div>
+                    </div><div id="section-education" class="section addable renamable">
+                        <h2 class="title"><span class="name">Education</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[education][section_name]" value="Education" />
+                                <p class="field field_">
+                                    <label>Course name</label><input maxlength="100" type="text" name="sections[education][data][course][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Institution name</label><input maxlength="100" type="text" name="sections[education][data][school][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Start date</label><input maxlength="100" type="text" name="sections[education][data][start][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2005</span>
+                                </p><p class="field field_">
+                                    <label>End date</label><input maxlength="100" type="text" name="sections[education][data][end][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2009, or Present</span>
+                                </p><p class="field field_">
+                                    <label>Other information</label><textarea name="sections[education][data][info][]" class="textarea"></textarea>
+                                    <span class="info">Optional details such as course description, marks etc.</span>
+                                </p><hr />
+                            </div>
+                        </div>
+                    </div><div id="section-interests" class="section renamable">
+                        <h2 class="title"><span class="name">Interests</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[interests][section_name]" value="Interests" />
+                                <p class="field field_">
+                                    <label>Interests</label><textarea name="sections[interests][data][info][]" class="textarea"></textarea>
+                                </p>
+                            </div>
+                        </div>
+                    </div><div id="section-references" class="section renamable">
+                        <h2 class="title"><span class="name">References</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[references][section_name]" value="References" />
+                                <p class="field field_">
+                                    <label>References</label><textarea name="sections[references][data][info][]" class="textarea">References available upon request.</textarea>
+                                </p>
+                            </div>
+                        </div>
+                    </div><div id="section-new" class="section renamable invisible newsection">
+                        <h2 class="title"><span class="name">New section</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[new][section_name]" value="New section" />
+                                <p class="field field_">
+                                    <label>New section</label><textarea name="sections[new][data][info][]" class="textarea"></textarea>
+                                </p>
+                            </div>
+                        </div>
+                    </div><div id="section-special" class="section addable renamable invisible special">
+                        <h2 class="title"><span class="name">New section</span></h2><div class="sets">
+                            <div class="set">
+                                <input type="hidden" class="section_name" name="sections[new][section_name]" value="Title" />
+                                <p class="field field_">
+                                    <label>Title</label><input maxlength="100" type="text" name="sections[new][data][title][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Subtitle</label><input maxlength="100" type="text" name="sections[new][data][subtitle][]" class="text" value="" />
+                                </p><p class="field field_">
+                                    <label>Start date</label><input maxlength="100" type="text" name="sections[new][data][start][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2005</span>
+                                </p><p class="field field_">
+                                    <label>End date</label><input maxlength="100" type="text" name="sections[new][data][end][]" class="text" value="" />
+                                    <span class="info">Eg: Jan 2009, or Present</span>
+                                </p><p class="field field_">
+                                    <label>Other information</label><textarea name="sections[new][data][info][]" class="textarea"></textarea>
+                                    <span class="info">Optional details such as course description, marks etc.</span>
+                                </p><hr />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clear"> </div>
+            </div>
+
+            <iframe id="postframe" name="postframe" src=""></iframe>
+
+            <div id="photo-preview">
+            </div>
+
+            @*<script type="text/javascript">
+                    var CV_INIT = true, CV_ID = "6965196", CV_DATA = { "basic": { "section_name": "Basic information", "data": { "fullname": "Belal-Khanger", "email": "belal-khanger@hotmail.com", "phone": "(123) 456 789, (456) 789 123", "website": "http:\/\/cvmkr.com", "address1": "956, 31st Street", "address2": "NYC - 10001", "address3": "United States" } }, "1287593158087": { "section_name": "Objective", "data": { "info": ["Seeking a position as an accountant where extensive experience will be further developed and utilised. Extensive experience to the credit."] } }, "work": { "section_name": "Work experience", "data": { "job_title": ["Administrator", "Accounting Assistant"], "company": ["MyOffice Inc, Boston", "DC Systems, DC"], "start": ["October 2005", "March 2003"], "end": ["Present", "June 2005"], "info": ["<ul><li>Performed general office duties and administrative tasks.<\/li><li>Prepared weekly confidential sales reports for presentation to management.<\/li><li>Managed the internal and external mail functions.<\/li><\/ul>", "<ul><li>Administered online banking functions. <\/li><li>Reduced credit period from 90 days to 60 days. <\/li><li>Managed payroll function for 140 employees.<\/li><\/ul>"] } }, "qualifications": { "section_name": "Qualifications", "data": { "info": ["<ul><li>Certified Public Accountant (CPA)<\/li><li>Certified Management Accountant (CMA)<\/li><li>Certified Financial Manager (CFM)<br>bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb<\/li><\/ul>"] } }, "education": { "section_name": "Education", "data": { "course": ["MS in Accounting", "BS in Accounting"], "school": ["University of Washington", "Columbia University"], "start": ["September 1997", "September 1993"], "end": ["September 2001", "September 1996"], "info": ["Obtained the MS degree with GPA  4.0", "<br>"] } }, "interests": { "section_name": "Interests", "data": { "info": ["Music, Reading, Painting"] } }, "references": { "section_name": "References", "data": { "info": ["Mr. Neo, President of Matrix corp.<br>Email: neo@neo-matrix.com<br>Phone: +1-234-5678<br>"] } } }, CV_USER = '2881277', CV_SECTIONS = { "basic": { "name": "Basic information", "addable": false, "renamable": false }, "1287593158087": { "name": "Objective", "addable": false, "renamable": true }, "work": { "name": "Work experience", "addable": true, "renamable": true }, "qualifications": { "name": "Qualifications", "addable": false, "renamable": true }, "education": { "name": "Education", "addable": true, "renamable": true }, "interests": { "name": "Interests", "addable": false, "renamable": true }, "references": { "name": "References", "addable": false, "renamable": true } },
+                        CV_ORDER = ["basic", "1287593158087", "work", "qualifications", "education", "interests", "references"], CV_MAX_ADDABLES = 30,
+                        CV_MAX_SECTIONS = 20, CV_PHOTO_FILES = ["gif", "jpg", "png", "jpeg"], CV_PHOTO_SIZE = 900;
+                </script>*@
+
+            <noscript><h2>يجب عليك ان تفعل الجافا سكربت لاستخدام هذه الخاصية.</h2>لمعرفة المزيد, <a href="https://www.google.com/adsense/support/bin/answer.py?hl=en&answer=12654">إضغط هنا</a>.</noscript>
+
+
+            <div style="text-align: center; margin: 30px;">
+                <a href="https://cvmkr.com/ar/Member/upgrade"><img src="https://cvmkr.com/images/upgrade.png" alt="" /></a>
+            </div>
+
+            <div class="clear"> </div><div id="download-prompt" class="invisible">
+                <div id="preview-thumb">
+
+                </div>
+                <div class="prompt-optionset">
+                    <div id="choose-style" class="optionset">
+                        يرجى اختيار المظهر<div class="clear"> </div>
+                        <p class="headline premium">
+                            <label for="style-headline">
+                                Headline															<span class="tag premium">(Premium &#9733;)</span>
+                            </label>
+                            <input data-premium="1" checked id="style-headline" type="radio" name="style" class="style" value="headline" />
+                        </p>
+                        <p class="mocca premium">
+                            <label for="style-mocca">
+                                Mocca															<span class="tag premium">(Premium &#9733;)</span>
+                            </label>
+                            <input data-premium="1" id="style-mocca" type="radio" name="style" class="style" value="mocca" />
+                        </p>
+                        <p class="typewriter premium">
+                            <label for="style-typewriter">
+                                Typewriter															<span class="tag premium">(Premium &#9733;)</span>
+                            </label>
+                            <input data-premium="1" id="style-typewriter" type="radio" name="style" class="style" value="typewriter" />
+                        </p>
+                        <p class="ink premium">
+                            <label for="style-ink">
+                                Ink															<span class="tag premium">(Premium &#9733;)</span>
+                            </label>
+                            <input data-premium="1" id="style-ink" type="radio" name="style" class="style" value="ink" />
+                        </p>
+                        <p class="executive free">
+                            <label for="style-executive">
+                                Executive
+                            </label>
+                            <input data-premium="" id="style-executive" type="radio" name="style" class="style" value="executive" />
+                        </p>
+                        <p class="elegant free">
+                            <label for="style-elegant">
+                                Elegant
+                            </label>
+                            <input data-premium="" id="style-elegant" type="radio" name="style" class="style" value="elegant" />
+                        </p>
+                        <p class="bold free">
+                            <label for="style-bold">
+                                Bold
+                            </label>
+                            <input data-premium="" id="style-bold" type="radio" name="style" class="style" value="bold" />
+                        </p>
+                        <p class="literateur free">
+                            <label for="style-literateur">
+                                Literateur
+                            </label>
+                            <input data-premium="" id="style-literateur" type="radio" name="style" class="style" value="literateur" />
+                        </p>
+                        <p class="finesse free">
+                            <label for="style-finesse">
+                                Finesse
+                            </label>
+                            <input data-premium="" id="style-finesse" type="radio" name="style" class="style" value="finesse" />
+                        </p>
+                        <p class="metro free">
+                            <label for="style-metro">
+                                Metro
+                            </label>
+                            <input data-premium="" id="style-metro" type="radio" name="style" class="style" value="metro" />
+                        </p>
+                        <div class="clear"> </div>
+                    </div>
+
+                    <div class="clear"> </div>
+                    <div>
+                        <div id="choose-type" class="optionset">
+                            يرجى إختيار النوع<br />
+                            <select name="type" class="type">
+                                <option value="pdf">PDF</option>
+                                <option value="html">HTML</option>
+                                <option value="txt">TXT</option>
+                            </select>
+                        </div>
+
+                        <div id="choose-size" class="optionset">
+                            حجم الصفحة<br />
+                            <select name="page_size" class="page_size">
+                                <option value="A4">A4</option>
+                                <option value="letter">US Letter</option>
+                            </select>
+                        </div>
+
+                        <div class="clear"> </div>
+                    </div>
+
+                    <div id="email-copy" class=" optionset">
+                        ()
+                        <br />
+                        <input id="copy-email" type="text" name="email" value="belal-khanger@hotmail.com" disabled>
+                    </div>
+
+                    <div id="share-options" class="invisible optionset">
+                        رابط المشاركة (<a href="" class="url" target="_blank">عرض</a>)<br />
+                        <input type="text" id="share-link" value="" />
+
+                        <div class="publish">
+                            <label>إلغاء النشر<input type="radio" class="visibility" name="publish" value="unpublish" checked /></label>
+                            <label>نشر<input type="radio" class="visibility" name="publish" value="publish" /></label>
+                        </div>
+
+                        <!-- 			<div class="addthis_toolbox addthis_default_style">
+                                    </div> -->
+                    </div>
+                </div>
+            </div>
+        </div><!-- main //-->
+        <div class="push"> </div>
+    </div><!-- wrap //-->
+
+    <div id="footer-container">
+        <div id="footer">
+            <div class="content friendly">
+                <ul class="extlinks noul">
+                    <li class="ssl">256 بت SSL تشفير امن</li>
+                    <li class="chrome"><a href="https://chrome.google.com/webstore/detail/gpbnepipgmcpkdglgbcfmcecaoflaemc">متاح على "Chrome webstore"</a></li>
+                    <li class="twitter"><a href="http://twitter.com/cvmkr">تابع التحديثات على @*@cvmkr*@</a></li>
+                </ul>
+                <ul class="lang noul">
+                    <li><a href="https://cvmkr.com/?lang=en">English</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ar">العربية</a></li>
+                    <li><a href="https://cvmkr.com/?lang=bg">Български</a></li>
+                    <li><a href="https://cvmkr.com/?lang=cz">Čeština</a></li>
+                    <li><a href="https://cvmkr.com/?lang=da">Dansk</a></li>
+                    <li><a href="https://cvmkr.com/?lang=de">Deutsch</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ee">Eesti keel</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ge">ქართული</a></li>
+                    <li><a href="https://cvmkr.com/?lang=nl">Dutch</a></li>
+                    <li><a href="https://cvmkr.com/?lang=es">Español</a></li>
+                    <li><a href="https://cvmkr.com/?lang=fa">فارسی</a></li>
+                    <li><a href="https://cvmkr.com/?lang=fr">Français</a></li>
+                    <li><a href="https://cvmkr.com/?lang=gl">Galician</a></li>
+                    <li><a href="https://cvmkr.com/?lang=gr">Έλληνικά</a></li>
+                    <li><a href="https://cvmkr.com/?lang=hr">Hrvatski</a></li>
+                    <li><a href="https://cvmkr.com/?lang=hu">Hungarian</a></li>
+                    <li><a href="https://cvmkr.com/?lang=it">Italiano</a></li>
+                    <li><a href="https://cvmkr.com/?lang=iw">עברית</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ko">한국어</a></li>
+                    <li><a href="https://cvmkr.com/?lang=nn">Norsk</a></li>
+                    <li><a href="https://cvmkr.com/?lang=pl">Polski</a></li>
+                    <li><a href="https://cvmkr.com/?lang=br">Português (br)</a></li>
+                    <li><a href="https://cvmkr.com/?lang=pt">Português (pt)</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ro">Român</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ru">Pусский</a></li>
+                    <li><a href="https://cvmkr.com/?lang=sl">Slovenščina</a></li>
+                    <li><a href="https://cvmkr.com/?lang=sk">Slovenský</a></li>
+                    <li><a href="https://cvmkr.com/?lang=sq">Shqip</a></li>
+                    <li><a href="https://cvmkr.com/?lang=fi">Suomi</a></li>
+                    <li><a href="https://cvmkr.com/?lang=sv">Svenska</a></li>
+                    <li><a href="https://cvmkr.com/?lang=tr">Türkçe</a></li>
+                    <li><a href="https://cvmkr.com/?lang=uk">Українська</a></li>
+                    <li><a href="https://cvmkr.com/?lang=vn">Tiếng Việt</a></li>
+                    <li><a href="https://cvmkr.com/?lang=ml">മലയാളം</a></li>
+                    <li><a href="https://cvmkr.com/?lang=zh">中文</a></li>
+                    <li><a href="https://cvmkr.com/?lang=zht">繁體中文</a></li>
+                </ul>
+
+                <ul class="links noul">
+                    <li class="title">روابط</li>
+                    <li><a href="https://cvmkr.com/ar/Pages/help">مساعدة</a></li>
+                    <li><a href="https://cvmkr.com/ar/Pages/tips">نصائح سيرة ذاتية</a></li>
+                    <li><a href="https://cvmkr.com/ar/Pages/languages">شكر وتقدير للمترجمين</a></li>
+                    <li><a href="https://uk.rulla.com/london/jobs/">Jobs by Rulla</a></li>
+                </ul>
+
+                <div class="share">
+
+                </div>
+            </div>
+
+            <div class="clear"> </div>
+
+            <div class="bar">
+                <div class="content">
+                    <p class="copyright">
+                        مُنشئ السيرة الذاتية © 2010 - 2013. جميع الحقوق محفوظة					<span class="ssl"></span>
+                    </p>
+                    <ul class="nav noul">
+                        <li><a href="https://cvmkr.com/ar/Pages/privacy">الشروط وسياسة الخصوصية</a></li>
+                        <li><a href="https://cvmkr.com/ar/Contact/">اتصل</a></li>
+                    </ul>
+                    <div class="">
+
+                    </div>
+                    <div class="clear"> </div>
+                </div>
+            </div>
+
+        </div><!-- footer //-->
+
+        <script>
+            var CV_ROOT = "https://cvmkr.com/";
+
+            var SUBSCRIBED = false;
+        </script>
+
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-5537752-3']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+    </div>
+
+</body>
+</html>

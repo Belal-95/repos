@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome To User : @ViewBag.Title</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/themes/le-frog/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/le-frog/theme.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            padding:0px;
+            margin: 0px;
+            font-family: Tahoma;
+            font-size: 13px;
+        }
+    </style>
+
+
+</head>
+<body>
+    <table style="width:100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <!--Header Goes Here -->
+                @Html.Partial("_Header")
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Last Accessed Date & Time:&nbsp;</b>@Convert.ToDateTime(Session["LastAccessedDateTime"]).ToString("dddd, dd MMM yyyy hh:mm:ss tt")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @RenderBody()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!--Footer Goes Here -->
+                @Html.Partial("_Footer")
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E63D45C-5FDF-44BA-9188-EC968036CAF9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MemoriesWithBelal</RootNamespace>
+    <AssemblyName>MemoriesWithBelal</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="allvideos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="allvideos.Designer.cs">
+      <DependentUpon>allvideos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="closer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="closer.Designer.cs">
+      <DependentUpon>closer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="finall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="finall.Designer.cs">
+      <DependentUpon>finall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fingerPrints.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fingerPrints.Designer.cs">
+      <DependentUpon>fingerPrints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LASTQUEST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LASTQUEST.Designer.cs">
+      <DependentUpon>LASTQUEST.cs</DependentUpon>
+    </Compile>
+    <Compile Include="lockedaway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="lockedaway.Designer.cs">
+      <DependentUpon>lockedaway.cs</DependentUpon>
+    </Compile>
+    <Compile Include="photos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="photos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>photos.resx</DependentUpon>
+    </Compile>
+    <Compile Include="prefinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prefinal.Designer.cs">
+      <DependentUpon>prefinal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="vidGoogleDrive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vidGoogleDrive.Designer.cs">
+      <DependentUpon>vidGoogleDrive.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="allvideos.resx">
+      <DependentUpon>allvideos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="closer.resx">
+      <DependentUpon>closer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="finall.resx">
+      <DependentUpon>finall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fingerPrints.resx">
+      <DependentUpon>fingerPrints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LASTQUEST.ak.resx">
+      <DependentUpon>LASTQUEST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LASTQUEST.resx">
+      <DependentUpon>LASTQUEST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lockedaway.resx">
+      <DependentUpon>lockedaway.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="photos.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>photos.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prefinal.resx">
+      <DependentUpon>prefinal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vidGoogleDrive.resx">
+      <DependentUpon>vidGoogleDrive.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red-rose.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Image 2017-08-12 at 5.20.47 PM.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0012.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160526-WA0013.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7a74446f7bfd39cd642e9892b8d575e2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2016-07-19 18.26.16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0518460dd0d80f1212318ebb9983c6966506f7-wm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12142208_841010632663775_278235566_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12592370_5_12592370_562688617227765_1190212509431860882_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\425630351_18759.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CYMERA_20160815_122307.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1466601699400.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1467688275354.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992525023.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992543040.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992877030.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992891809.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\funny-baby-crying-2016-best-baby-480x293.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Good morni_3eaabc88d42fc9440ac16a28587d3216.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_images.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_Z-1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\happy-birthday-fireworks-espanol-2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\happy-birthday-to-my-beautiful-best-friend-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %283%29 %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %283%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %285%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %288%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160514-WA0002.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160526-WA0001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160530-WA0012.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160530-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160607-WA0024.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160608-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160614-WA0009.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160614-WA0018.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160617-WA0014.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160620-WA0026.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160627-WA0007.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160705-WA0038.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160707-WA0001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160707-WA0012.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160713-WA0003.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160723-WA0001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160731-WA0011.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160801-WA0008.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img-thing.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _2Q.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _images-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _images-2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\received_708825409190015.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2016-07-03-20-23-08.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0d5e55973413880e66861f3b2f1b1229.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5b57d7aa13b7e005cb1ccffe20d1f082.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\031.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\050e9bf6dc8bd2921874a88b7e7b84f472739b-wm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\304131.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12417882_2_12417882_224453544583283_1746322687751765298_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\13108779_1721722438040722_1012410614_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\802232556_111504.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\803711011_57589.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bag15-38-2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CYMERA_20160815_122727.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1465930557608.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469072314272.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992523866.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992537776.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FB_IMG_1469992881304.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Good morni_1dcb4bbc63b96a9996cc5ab015a7ced5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_2Q.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_Beautiful-Good-Morning-Have-a-Nice-Day-Wallpapers-HD-Images-61.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_images-1.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_images-2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Good morni_Wakeup-Wink-Those-Teeny-Weeny-Eyes.-Stretch-Those-Inzy-Winzy-Bones-Wear-That-Jolly-Winning-Smile-Tell-Yourself-Today-Is-A-Beautiful-Day...Good-Morning.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\good morni_Z.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %284%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %286%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images %287%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG_20160712_050612.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160520-WA0000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0010.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0011.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0020.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0023.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0025.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160522-WA0028.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160525-WA0004.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160528-WA0011.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160528-WA0012.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160528-WA0015.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160530-WA0013.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160530-WA0015.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160530-WA0018.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160601-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0000.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0001.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0002.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0005.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0035.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160605-WA0037.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160607-WA0021.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160607-WA0023.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160609-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160612-WA0004.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160614-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160617-WA0017.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160620-WA0025.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160625-WA0002.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160626-WA0005.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160627-WA0008.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160703-WA0026.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160710-WA0009.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160712-WA0015.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160713-WA0004.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160713-WA0005.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160720-WA0005.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IMG-20160725-WA0005.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _C7+B+iYi3OUYj3yAAAAAElFTkSuQmCC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _images.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\n4hr_13950972971.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picture qu_images.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Please.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pYYBAFV5gEuARM3fAAAh5ujkfYk747.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UgNlORf.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Madeleine _images-1.jpeg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

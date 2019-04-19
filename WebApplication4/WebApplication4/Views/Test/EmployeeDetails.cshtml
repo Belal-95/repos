@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication4.Models.Employee>
+
+@{
+    ViewBag.Title = "EmployeeDetails";
+}
+
+<h2>EmployeeDetails</h2>
+
+<table style="width:100%" border="1">
+    <tr>
+        <th style="width:10%">
+            @Html.DisplayNameFor(model => model.EmpId)
+        </th>
+        <th style="width:20%">
+            @Html.DisplayNameFor(modal => modal.EmpName)
+        </th>
+        <th style="width:20%">
+            @Html.DisplayNameFor(model => model.EmpJob)
+        </th>
+        <th style="width:20%">
+            @Html.DisplayNameFor(modal => modal.EmpSalary)
+        </th>
+        <th style="width:20%">
+            @Html.DisplayNameFor(model => model.DeptName)
+        </th>
+        <th style="width:30%">
+            @Html.DisplayNameFor(model=>model.Address)
+        </th>
+    </tr>
+
+    @foreach(var emp in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => emp.EmpId)
+        </td>
+        <td>
+            @Html.DisplayFor(model => emp.EmpName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => emp.EmpJob)
+        </td>
+        <td>
+            @Html.DisplayFor(model => emp.EmpSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(model => emp.DeptName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => emp.Address.AddressLine1)
+            <br />
+            @Html.DisplayFor(model => emp.Address.City)
+            <br />
+            @Html.DisplayFor(model => emp.Address.State)
+            <br />
+            @Html.DisplayFor(Model => emp.Address.PinCode)
+        </td>
+    </tr>
+    }
+</table>
