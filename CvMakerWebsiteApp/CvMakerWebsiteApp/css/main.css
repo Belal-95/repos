@@ -401,11 +401,11 @@ iframe {
     z-index: -1;
     width: 100%;
     height: 300%;
-    /*background: #6195FF;*/
-    /*background: -webkit-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
+    background: #6195FF;
+    background: -webkit-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
     background: -o-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
     background: -moz-linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
-    background: linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);*/
+    background: linear-gradient(top, #6195FF, #6195FF, #6195FF, #6195FF);
     bottom: -100%;
     left: 0;
     /*#e8519e*/

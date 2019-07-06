@@ -290,5 +290,379 @@ namespace CvMakerWebsiteApp.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteCvWorkExperienceDetailsByCvId", cvIdParameter);
         }
+    
+        public virtual int SP_UpdateCvInformation(Nullable<int> cvId, string fullName, string profilePhoto, string emailId, string phoneNo, string website, string addline1, string addline2, string jobTitle, string companyName, string dateStartWork, string dateEndWork, string otherWorkInformation, string qualificationText, string objectivesText, string courseName, string institutionName, string dateStartEdu, string dateEndEdu, string otherEduInfo, string interestsText, string referenceText)
+        {
+            var cvIdParameter = cvId.HasValue ?
+                new ObjectParameter("CvId", cvId) :
+                new ObjectParameter("CvId", typeof(int));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("fullName", fullName) :
+                new ObjectParameter("fullName", typeof(string));
+    
+            var profilePhotoParameter = profilePhoto != null ?
+                new ObjectParameter("profilePhoto", profilePhoto) :
+                new ObjectParameter("profilePhoto", typeof(string));
+    
+            var emailIdParameter = emailId != null ?
+                new ObjectParameter("emailId", emailId) :
+                new ObjectParameter("emailId", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("phoneNo", phoneNo) :
+                new ObjectParameter("phoneNo", typeof(string));
+    
+            var websiteParameter = website != null ?
+                new ObjectParameter("website", website) :
+                new ObjectParameter("website", typeof(string));
+    
+            var addline1Parameter = addline1 != null ?
+                new ObjectParameter("addline1", addline1) :
+                new ObjectParameter("addline1", typeof(string));
+    
+            var addline2Parameter = addline2 != null ?
+                new ObjectParameter("addline2", addline2) :
+                new ObjectParameter("addline2", typeof(string));
+    
+            var jobTitleParameter = jobTitle != null ?
+                new ObjectParameter("jobTitle", jobTitle) :
+                new ObjectParameter("jobTitle", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("companyName", companyName) :
+                new ObjectParameter("companyName", typeof(string));
+    
+            var dateStartWorkParameter = dateStartWork != null ?
+                new ObjectParameter("dateStartWork", dateStartWork) :
+                new ObjectParameter("dateStartWork", typeof(string));
+    
+            var dateEndWorkParameter = dateEndWork != null ?
+                new ObjectParameter("dateEndWork", dateEndWork) :
+                new ObjectParameter("dateEndWork", typeof(string));
+    
+            var otherWorkInformationParameter = otherWorkInformation != null ?
+                new ObjectParameter("otherWorkInformation", otherWorkInformation) :
+                new ObjectParameter("otherWorkInformation", typeof(string));
+    
+            var qualificationTextParameter = qualificationText != null ?
+                new ObjectParameter("qualificationText", qualificationText) :
+                new ObjectParameter("qualificationText", typeof(string));
+    
+            var objectivesTextParameter = objectivesText != null ?
+                new ObjectParameter("objectivesText", objectivesText) :
+                new ObjectParameter("objectivesText", typeof(string));
+    
+            var courseNameParameter = courseName != null ?
+                new ObjectParameter("CourseName", courseName) :
+                new ObjectParameter("CourseName", typeof(string));
+    
+            var institutionNameParameter = institutionName != null ?
+                new ObjectParameter("institutionName", institutionName) :
+                new ObjectParameter("institutionName", typeof(string));
+    
+            var dateStartEduParameter = dateStartEdu != null ?
+                new ObjectParameter("dateStartEdu", dateStartEdu) :
+                new ObjectParameter("dateStartEdu", typeof(string));
+    
+            var dateEndEduParameter = dateEndEdu != null ?
+                new ObjectParameter("dateEndEdu", dateEndEdu) :
+                new ObjectParameter("dateEndEdu", typeof(string));
+    
+            var otherEduInfoParameter = otherEduInfo != null ?
+                new ObjectParameter("otherEduInfo", otherEduInfo) :
+                new ObjectParameter("otherEduInfo", typeof(string));
+    
+            var interestsTextParameter = interestsText != null ?
+                new ObjectParameter("interestsText", interestsText) :
+                new ObjectParameter("interestsText", typeof(string));
+    
+            var referenceTextParameter = referenceText != null ?
+                new ObjectParameter("referenceText", referenceText) :
+                new ObjectParameter("referenceText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateCvInformation", cvIdParameter, fullNameParameter, profilePhotoParameter, emailIdParameter, phoneNoParameter, websiteParameter, addline1Parameter, addline2Parameter, jobTitleParameter, companyNameParameter, dateStartWorkParameter, dateEndWorkParameter, otherWorkInformationParameter, qualificationTextParameter, objectivesTextParameter, courseNameParameter, institutionNameParameter, dateStartEduParameter, dateEndEduParameter, otherEduInfoParameter, interestsTextParameter, referenceTextParameter);
+        }
+    
+        public virtual int SP_UpdateCvInformationWithoutPhoto(Nullable<int> cvId, string fullName, string emailId, string phoneNo, string website, string addline1, string addline2, string jobTitle, string companyName, string dateStartWork, string dateEndWork, string otherWorkInformation, string qualificationText, string objectivesText, string courseName, string institutionName, string dateStartEdu, string dateEndEdu, string otherEduInfo, string interestsText, string referenceText)
+        {
+            var cvIdParameter = cvId.HasValue ?
+                new ObjectParameter("CvId", cvId) :
+                new ObjectParameter("CvId", typeof(int));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("fullName", fullName) :
+                new ObjectParameter("fullName", typeof(string));
+    
+            var emailIdParameter = emailId != null ?
+                new ObjectParameter("emailId", emailId) :
+                new ObjectParameter("emailId", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("phoneNo", phoneNo) :
+                new ObjectParameter("phoneNo", typeof(string));
+    
+            var websiteParameter = website != null ?
+                new ObjectParameter("website", website) :
+                new ObjectParameter("website", typeof(string));
+    
+            var addline1Parameter = addline1 != null ?
+                new ObjectParameter("addline1", addline1) :
+                new ObjectParameter("addline1", typeof(string));
+    
+            var addline2Parameter = addline2 != null ?
+                new ObjectParameter("addline2", addline2) :
+                new ObjectParameter("addline2", typeof(string));
+    
+            var jobTitleParameter = jobTitle != null ?
+                new ObjectParameter("jobTitle", jobTitle) :
+                new ObjectParameter("jobTitle", typeof(string));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("companyName", companyName) :
+                new ObjectParameter("companyName", typeof(string));
+    
+            var dateStartWorkParameter = dateStartWork != null ?
+                new ObjectParameter("dateStartWork", dateStartWork) :
+                new ObjectParameter("dateStartWork", typeof(string));
+    
+            var dateEndWorkParameter = dateEndWork != null ?
+                new ObjectParameter("dateEndWork", dateEndWork) :
+                new ObjectParameter("dateEndWork", typeof(string));
+    
+            var otherWorkInformationParameter = otherWorkInformation != null ?
+                new ObjectParameter("otherWorkInformation", otherWorkInformation) :
+                new ObjectParameter("otherWorkInformation", typeof(string));
+    
+            var qualificationTextParameter = qualificationText != null ?
+                new ObjectParameter("qualificationText", qualificationText) :
+                new ObjectParameter("qualificationText", typeof(string));
+    
+            var objectivesTextParameter = objectivesText != null ?
+                new ObjectParameter("objectivesText", objectivesText) :
+                new ObjectParameter("objectivesText", typeof(string));
+    
+            var courseNameParameter = courseName != null ?
+                new ObjectParameter("CourseName", courseName) :
+                new ObjectParameter("CourseName", typeof(string));
+    
+            var institutionNameParameter = institutionName != null ?
+                new ObjectParameter("institutionName", institutionName) :
+                new ObjectParameter("institutionName", typeof(string));
+    
+            var dateStartEduParameter = dateStartEdu != null ?
+                new ObjectParameter("dateStartEdu", dateStartEdu) :
+                new ObjectParameter("dateStartEdu", typeof(string));
+    
+            var dateEndEduParameter = dateEndEdu != null ?
+                new ObjectParameter("dateEndEdu", dateEndEdu) :
+                new ObjectParameter("dateEndEdu", typeof(string));
+    
+            var otherEduInfoParameter = otherEduInfo != null ?
+                new ObjectParameter("otherEduInfo", otherEduInfo) :
+                new ObjectParameter("otherEduInfo", typeof(string));
+    
+            var interestsTextParameter = interestsText != null ?
+                new ObjectParameter("interestsText", interestsText) :
+                new ObjectParameter("interestsText", typeof(string));
+    
+            var referenceTextParameter = referenceText != null ?
+                new ObjectParameter("referenceText", referenceText) :
+                new ObjectParameter("referenceText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateCvInformationWithoutPhoto", cvIdParameter, fullNameParameter, emailIdParameter, phoneNoParameter, websiteParameter, addline1Parameter, addline2Parameter, jobTitleParameter, companyNameParameter, dateStartWorkParameter, dateEndWorkParameter, otherWorkInformationParameter, qualificationTextParameter, objectivesTextParameter, courseNameParameter, institutionNameParameter, dateStartEduParameter, dateEndEduParameter, otherEduInfoParameter, interestsTextParameter, referenceTextParameter);
+        }
+    
+        public virtual int SP_UpdateCvPhoto(Nullable<int> cvId, string profilePhoto)
+        {
+            var cvIdParameter = cvId.HasValue ?
+                new ObjectParameter("CvId", cvId) :
+                new ObjectParameter("CvId", typeof(int));
+    
+            var profilePhotoParameter = profilePhoto != null ?
+                new ObjectParameter("profilePhoto", profilePhoto) :
+                new ObjectParameter("profilePhoto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateCvPhoto", cvIdParameter, profilePhotoParameter);
+        }
+    
+        public virtual int SP_UpdateWorkExperienceJobTitle(Nullable<int> workExperienceId, string jobTitle)
+        {
+            var workExperienceIdParameter = workExperienceId.HasValue ?
+                new ObjectParameter("workExperienceId", workExperienceId) :
+                new ObjectParameter("workExperienceId", typeof(int));
+    
+            var jobTitleParameter = jobTitle != null ?
+                new ObjectParameter("jobTitle", jobTitle) :
+                new ObjectParameter("jobTitle", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateWorkExperienceJobTitle", workExperienceIdParameter, jobTitleParameter);
+        }
+    
+        public virtual int SP_UpdateWorkExperienceCompanyName(Nullable<int> workExperienceId, string companyName)
+        {
+            var workExperienceIdParameter = workExperienceId.HasValue ?
+                new ObjectParameter("workExperienceId", workExperienceId) :
+                new ObjectParameter("workExperienceId", typeof(int));
+    
+            var companyNameParameter = companyName != null ?
+                new ObjectParameter("companyName", companyName) :
+                new ObjectParameter("companyName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateWorkExperienceCompanyName", workExperienceIdParameter, companyNameParameter);
+        }
+    
+        public virtual int SP_UpdateWorkExperienceEndDate(Nullable<int> workExperienceId, string workenddate)
+        {
+            var workExperienceIdParameter = workExperienceId.HasValue ?
+                new ObjectParameter("workExperienceId", workExperienceId) :
+                new ObjectParameter("workExperienceId", typeof(int));
+    
+            var workenddateParameter = workenddate != null ?
+                new ObjectParameter("workenddate", workenddate) :
+                new ObjectParameter("workenddate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateWorkExperienceEndDate", workExperienceIdParameter, workenddateParameter);
+        }
+    
+        public virtual int SP_UpdateWorkExperienceOtherInformation(Nullable<int> workExperienceId, string otherWorkInformation)
+        {
+            var workExperienceIdParameter = workExperienceId.HasValue ?
+                new ObjectParameter("workExperienceId", workExperienceId) :
+                new ObjectParameter("workExperienceId", typeof(int));
+    
+            var otherWorkInformationParameter = otherWorkInformation != null ?
+                new ObjectParameter("otherWorkInformation", otherWorkInformation) :
+                new ObjectParameter("otherWorkInformation", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateWorkExperienceOtherInformation", workExperienceIdParameter, otherWorkInformationParameter);
+        }
+    
+        public virtual int SP_UpdateWorkExperienceStartDate(Nullable<int> workExperienceId, string workstartdate)
+        {
+            var workExperienceIdParameter = workExperienceId.HasValue ?
+                new ObjectParameter("workExperienceId", workExperienceId) :
+                new ObjectParameter("workExperienceId", typeof(int));
+    
+            var workstartdateParameter = workstartdate != null ?
+                new ObjectParameter("workstartdate", workstartdate) :
+                new ObjectParameter("workstartdate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateWorkExperienceStartDate", workExperienceIdParameter, workstartdateParameter);
+        }
+    
+        public virtual int SP_UpdateEducatinEndDate(Nullable<int> educationId, string eduenddate)
+        {
+            var educationIdParameter = educationId.HasValue ?
+                new ObjectParameter("EducationId", educationId) :
+                new ObjectParameter("EducationId", typeof(int));
+    
+            var eduenddateParameter = eduenddate != null ?
+                new ObjectParameter("eduenddate", eduenddate) :
+                new ObjectParameter("eduenddate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEducatinEndDate", educationIdParameter, eduenddateParameter);
+        }
+    
+        public virtual int SP_UpdateEducationCourseName(Nullable<int> educationId, string courseName)
+        {
+            var educationIdParameter = educationId.HasValue ?
+                new ObjectParameter("EducationId", educationId) :
+                new ObjectParameter("EducationId", typeof(int));
+    
+            var courseNameParameter = courseName != null ?
+                new ObjectParameter("courseName", courseName) :
+                new ObjectParameter("courseName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEducationCourseName", educationIdParameter, courseNameParameter);
+        }
+    
+        public virtual int SP_UpdateEducationInstitutionName(Nullable<int> educationId, string institutionName)
+        {
+            var educationIdParameter = educationId.HasValue ?
+                new ObjectParameter("EducationId", educationId) :
+                new ObjectParameter("EducationId", typeof(int));
+    
+            var institutionNameParameter = institutionName != null ?
+                new ObjectParameter("institutionName", institutionName) :
+                new ObjectParameter("institutionName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEducationInstitutionName", educationIdParameter, institutionNameParameter);
+        }
+    
+        public virtual int SP_UpdateEducationOtherInformation(Nullable<int> educationId, string otherEduInfo)
+        {
+            var educationIdParameter = educationId.HasValue ?
+                new ObjectParameter("EducationId", educationId) :
+                new ObjectParameter("EducationId", typeof(int));
+    
+            var otherEduInfoParameter = otherEduInfo != null ?
+                new ObjectParameter("otherEduInfo", otherEduInfo) :
+                new ObjectParameter("otherEduInfo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEducationOtherInformation", educationIdParameter, otherEduInfoParameter);
+        }
+    
+        public virtual int SP_UpdateEducationStartDate(Nullable<int> educationId, string edustartdate)
+        {
+            var educationIdParameter = educationId.HasValue ?
+                new ObjectParameter("EducationId", educationId) :
+                new ObjectParameter("EducationId", typeof(int));
+    
+            var edustartdateParameter = edustartdate != null ?
+                new ObjectParameter("edustartdate", edustartdate) :
+                new ObjectParameter("edustartdate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEducationStartDate", educationIdParameter, edustartdateParameter);
+        }
+    
+        public virtual int SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo(Nullable<int> cvId, string fullName, string emailId, string phoneNo, string website, string addline1, string addline2, string qualificationText, string objectivesText, string interestsText, string referenceText)
+        {
+            var cvIdParameter = cvId.HasValue ?
+                new ObjectParameter("CvId", cvId) :
+                new ObjectParameter("CvId", typeof(int));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("fullName", fullName) :
+                new ObjectParameter("fullName", typeof(string));
+    
+            var emailIdParameter = emailId != null ?
+                new ObjectParameter("emailId", emailId) :
+                new ObjectParameter("emailId", typeof(string));
+    
+            var phoneNoParameter = phoneNo != null ?
+                new ObjectParameter("phoneNo", phoneNo) :
+                new ObjectParameter("phoneNo", typeof(string));
+    
+            var websiteParameter = website != null ?
+                new ObjectParameter("website", website) :
+                new ObjectParameter("website", typeof(string));
+    
+            var addline1Parameter = addline1 != null ?
+                new ObjectParameter("addline1", addline1) :
+                new ObjectParameter("addline1", typeof(string));
+    
+            var addline2Parameter = addline2 != null ?
+                new ObjectParameter("addline2", addline2) :
+                new ObjectParameter("addline2", typeof(string));
+    
+            var qualificationTextParameter = qualificationText != null ?
+                new ObjectParameter("qualificationText", qualificationText) :
+                new ObjectParameter("qualificationText", typeof(string));
+    
+            var objectivesTextParameter = objectivesText != null ?
+                new ObjectParameter("objectivesText", objectivesText) :
+                new ObjectParameter("objectivesText", typeof(string));
+    
+            var interestsTextParameter = interestsText != null ?
+                new ObjectParameter("interestsText", interestsText) :
+                new ObjectParameter("interestsText", typeof(string));
+    
+            var referenceTextParameter = referenceText != null ?
+                new ObjectParameter("referenceText", referenceText) :
+                new ObjectParameter("referenceText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo", cvIdParameter, fullNameParameter, emailIdParameter, phoneNoParameter, websiteParameter, addline1Parameter, addline2Parameter, qualificationTextParameter, objectivesTextParameter, interestsTextParameter, referenceTextParameter);
+        }
     }
 }

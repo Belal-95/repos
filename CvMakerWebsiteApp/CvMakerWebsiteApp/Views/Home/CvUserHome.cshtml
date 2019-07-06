@@ -262,10 +262,14 @@
                     <a class="nav-link" href="/Home/UpgradeToPremium">Upgrade to Premium <i class="fa fa-star-o" aria-hidden="true"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Edit account</a>
+                    @*<a class="nav-link" href="#">Edit account</a>*@
+                    @Html.ActionLink("Edit Account", "EditAccount", null, new { @class = "nav-link" })
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                    @Html.ActionLink("Logout", "Logout", null, new { @class = "nav-link" })
+
+                    @*<a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>*@
                 </li>
             </ul>
         </div>
@@ -302,7 +306,7 @@
                         <div class="col-md-10 p-0">
                             <form action="">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="cvname" placeholder="Enter a name for your cv" id="cvName">
+                                    <input type="text" class="form-control" name="cvname" placeholder="Enter a name for your cv" id="cvName" maxlength="50">
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control" id="cv-lang" name="cvLanguage">
@@ -461,6 +465,10 @@
                     <tbody>
                         @foreach (SP_GetCvUserDetailsByUserId_Result1 objCvDetails in objectCvDetails)
                         {
+                            if (objCvDetails.CvName == null)
+                            {
+                                continue;
+                            }
                             <tr>
                                 <td hidden="hidden">
                                     @objCvDetails.CvId
@@ -487,16 +495,17 @@
                                         @objCvDetails.LastModificationDateTime
                                     </td>
                                     <td hidden="hidden">
-                                        <input type="text" id="getCvID" name="cvId123" value="@objCvDetails.CvId"/>
+                                        <input type="text" id="getCvID" name="cvId123" value="@objCvDetails.CvId" />
                                     </td>
                                 }
                                 <td class="oprBtn">
                                     <a href="#" id="@objCvDetails.CvId" name="EditCvLink" data-toggle="modal" data-target="#editcv">Edit</a>
-                                    <a href="#">Rename</a>
+                                    @*<a href="#">Rename</a>*@
                                     <a href="#" id="@objCvDetails.CvId" name="DeleteCvLink" data-toggle="modal" data-target="#deletecv">Delete</a>
                                 </td>
                             </tr>
                         }
+
                         @*<tr>
                                 <td>sample resume</td>
                                 <td>4 Mar, 2019</td>
@@ -559,7 +568,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <a class="upgrdbtn" href="#">Upgrade to Premium</a>
+                    <a class="upgrdbtn" href="#" onclick="myFunction()">Upgrade to Premium</a>
                 </div>
             </div>
         </div>
@@ -604,5 +613,10 @@
     @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        function myFunction() {
+            alert(" this function is still under development thanks for understanding :)");
+        }
+    </script>
 </body>
 </html>

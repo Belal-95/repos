@@ -38,8 +38,8 @@
           <Property Name="CvId" Type="int" Nullable="false" />
           <Property Name="CourseName" Type="varchar" MaxLength="50" />
           <Property Name="InstitutionName" Type="varchar" MaxLength="50" />
-          <Property Name="StartDate" Type="varchar" MaxLength="11" />
-          <Property Name="EndDate" Type="varchar" MaxLength="11" />
+          <Property Name="StartDate" Type="varchar" MaxLength="50" />
+          <Property Name="EndDate" Type="varchar" MaxLength="50" />
           <Property Name="OtherInformaton" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tblInterestDetails">
@@ -295,6 +295,110 @@
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="CvId" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateCvInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CvId" Type="int" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="profilePhoto" Type="varchar" Mode="In" />
+          <Parameter Name="emailId" Type="varchar" Mode="In" />
+          <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+          <Parameter Name="website" Type="varchar" Mode="In" />
+          <Parameter Name="addline1" Type="varchar" Mode="In" />
+          <Parameter Name="addline2" Type="varchar" Mode="In" />
+          <Parameter Name="jobTitle" Type="varchar" Mode="In" />
+          <Parameter Name="companyName" Type="varchar" Mode="In" />
+          <Parameter Name="dateStartWork" Type="varchar" Mode="In" />
+          <Parameter Name="dateEndWork" Type="varchar" Mode="In" />
+          <Parameter Name="otherWorkInformation" Type="varchar(max)" Mode="In" />
+          <Parameter Name="qualificationText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="objectivesText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="CourseName" Type="varchar" Mode="In" />
+          <Parameter Name="institutionName" Type="varchar" Mode="In" />
+          <Parameter Name="dateStartEdu" Type="varchar" Mode="In" />
+          <Parameter Name="dateEndEdu" Type="varchar" Mode="In" />
+          <Parameter Name="otherEduInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="interestsText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="referenceText" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateCvInformationWithoutPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CvId" Type="int" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="emailId" Type="varchar" Mode="In" />
+          <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+          <Parameter Name="website" Type="varchar" Mode="In" />
+          <Parameter Name="addline1" Type="varchar" Mode="In" />
+          <Parameter Name="addline2" Type="varchar" Mode="In" />
+          <Parameter Name="jobTitle" Type="varchar" Mode="In" />
+          <Parameter Name="companyName" Type="varchar" Mode="In" />
+          <Parameter Name="dateStartWork" Type="varchar" Mode="In" />
+          <Parameter Name="dateEndWork" Type="varchar" Mode="In" />
+          <Parameter Name="otherWorkInformation" Type="varchar(max)" Mode="In" />
+          <Parameter Name="qualificationText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="objectivesText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="CourseName" Type="varchar" Mode="In" />
+          <Parameter Name="institutionName" Type="varchar" Mode="In" />
+          <Parameter Name="dateStartEdu" Type="varchar" Mode="In" />
+          <Parameter Name="dateEndEdu" Type="varchar" Mode="In" />
+          <Parameter Name="otherEduInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="interestsText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="referenceText" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CvId" Type="int" Mode="In" />
+          <Parameter Name="fullName" Type="varchar" Mode="In" />
+          <Parameter Name="emailId" Type="varchar" Mode="In" />
+          <Parameter Name="phoneNo" Type="varchar" Mode="In" />
+          <Parameter Name="website" Type="varchar" Mode="In" />
+          <Parameter Name="addline1" Type="varchar" Mode="In" />
+          <Parameter Name="addline2" Type="varchar" Mode="In" />
+          <Parameter Name="qualificationText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="objectivesText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="interestsText" Type="varchar(max)" Mode="In" />
+          <Parameter Name="referenceText" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateCvPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CvId" Type="int" Mode="In" />
+          <Parameter Name="profilePhoto" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateEducatinEndDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EducationId" Type="int" Mode="In" />
+          <Parameter Name="eduenddate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateEducationCourseName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EducationId" Type="int" Mode="In" />
+          <Parameter Name="courseName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateEducationInstitutionName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EducationId" Type="int" Mode="In" />
+          <Parameter Name="institutionName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateEducationOtherInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EducationId" Type="int" Mode="In" />
+          <Parameter Name="otherEduInfo" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateEducationStartDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EducationId" Type="int" Mode="In" />
+          <Parameter Name="edustartdate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateWorkExperienceCompanyName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="workExperienceId" Type="int" Mode="In" />
+          <Parameter Name="companyName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateWorkExperienceEndDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="workExperienceId" Type="int" Mode="In" />
+          <Parameter Name="workenddate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateWorkExperienceJobTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="workExperienceId" Type="int" Mode="In" />
+          <Parameter Name="jobTitle" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateWorkExperienceOtherInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="workExperienceId" Type="int" Mode="In" />
+          <Parameter Name="otherWorkInformation" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateWorkExperienceStartDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="workExperienceId" Type="int" Mode="In" />
+          <Parameter Name="workstartdate" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_UpdatPasswordByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmailId" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -396,8 +500,8 @@
           <Property Name="CvId" Type="Int32" Nullable="false" />
           <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InstitutionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="EndDate" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OtherInformaton" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblUserCvDetail" Relationship="Self.FK_tblEducationDetails_tblUserCvDetails" FromRole="tblEducationDetails" ToRole="tblUserCvDetails" />
         </EntityType>
@@ -689,6 +793,110 @@
           </FunctionImport>
           <FunctionImport Name="SP_DeleteCvWorkExperienceDetailsByCvId">
           <Parameter Name="CvId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateCvInformation">
+            <Parameter Name="CvId" Mode="In" Type="Int32" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="profilePhoto" Mode="In" Type="String" />
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="phoneNo" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+            <Parameter Name="addline1" Mode="In" Type="String" />
+            <Parameter Name="addline2" Mode="In" Type="String" />
+            <Parameter Name="jobTitle" Mode="In" Type="String" />
+            <Parameter Name="companyName" Mode="In" Type="String" />
+            <Parameter Name="dateStartWork" Mode="In" Type="String" />
+            <Parameter Name="dateEndWork" Mode="In" Type="String" />
+            <Parameter Name="otherWorkInformation" Mode="In" Type="String" />
+            <Parameter Name="qualificationText" Mode="In" Type="String" />
+            <Parameter Name="objectivesText" Mode="In" Type="String" />
+            <Parameter Name="CourseName" Mode="In" Type="String" />
+            <Parameter Name="institutionName" Mode="In" Type="String" />
+            <Parameter Name="dateStartEdu" Mode="In" Type="String" />
+            <Parameter Name="dateEndEdu" Mode="In" Type="String" />
+            <Parameter Name="otherEduInfo" Mode="In" Type="String" />
+            <Parameter Name="interestsText" Mode="In" Type="String" />
+            <Parameter Name="referenceText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateCvInformationWithoutPhoto">
+            <Parameter Name="CvId" Mode="In" Type="Int32" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="phoneNo" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+            <Parameter Name="addline1" Mode="In" Type="String" />
+            <Parameter Name="addline2" Mode="In" Type="String" />
+            <Parameter Name="jobTitle" Mode="In" Type="String" />
+            <Parameter Name="companyName" Mode="In" Type="String" />
+            <Parameter Name="dateStartWork" Mode="In" Type="String" />
+            <Parameter Name="dateEndWork" Mode="In" Type="String" />
+            <Parameter Name="otherWorkInformation" Mode="In" Type="String" />
+            <Parameter Name="qualificationText" Mode="In" Type="String" />
+            <Parameter Name="objectivesText" Mode="In" Type="String" />
+            <Parameter Name="CourseName" Mode="In" Type="String" />
+            <Parameter Name="institutionName" Mode="In" Type="String" />
+            <Parameter Name="dateStartEdu" Mode="In" Type="String" />
+            <Parameter Name="dateEndEdu" Mode="In" Type="String" />
+            <Parameter Name="otherEduInfo" Mode="In" Type="String" />
+            <Parameter Name="interestsText" Mode="In" Type="String" />
+            <Parameter Name="referenceText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateCvPhoto">
+            <Parameter Name="CvId" Mode="In" Type="Int32" />
+            <Parameter Name="profilePhoto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateWorkExperienceJobTitle">
+            <Parameter Name="workExperienceId" Mode="In" Type="Int32" />
+            <Parameter Name="jobTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateWorkExperienceCompanyName">
+            <Parameter Name="workExperienceId" Mode="In" Type="Int32" />
+            <Parameter Name="companyName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateWorkExperienceEndDate">
+            <Parameter Name="workExperienceId" Mode="In" Type="Int32" />
+            <Parameter Name="workenddate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateWorkExperienceOtherInformation">
+            <Parameter Name="workExperienceId" Mode="In" Type="Int32" />
+            <Parameter Name="otherWorkInformation" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateWorkExperienceStartDate">
+            <Parameter Name="workExperienceId" Mode="In" Type="Int32" />
+            <Parameter Name="workstartdate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEducatinEndDate">
+            <Parameter Name="EducationId" Mode="In" Type="Int32" />
+            <Parameter Name="eduenddate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEducationCourseName">
+            <Parameter Name="EducationId" Mode="In" Type="Int32" />
+            <Parameter Name="courseName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEducationInstitutionName">
+            <Parameter Name="EducationId" Mode="In" Type="Int32" />
+            <Parameter Name="institutionName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEducationOtherInformation">
+            <Parameter Name="EducationId" Mode="In" Type="Int32" />
+            <Parameter Name="otherEduInfo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEducationStartDate">
+            <Parameter Name="EducationId" Mode="In" Type="Int32" />
+            <Parameter Name="edustartdate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo">
+            <Parameter Name="CvId" Mode="In" Type="Int32" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="phoneNo" Mode="In" Type="String" />
+            <Parameter Name="website" Mode="In" Type="String" />
+            <Parameter Name="addline1" Mode="In" Type="String" />
+            <Parameter Name="addline2" Mode="In" Type="String" />
+            <Parameter Name="qualificationText" Mode="In" Type="String" />
+            <Parameter Name="objectivesText" Mode="In" Type="String" />
+            <Parameter Name="interestsText" Mode="In" Type="String" />
+            <Parameter Name="referenceText" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_CheckUserLogin_Result">
@@ -1070,6 +1278,20 @@
           <FunctionImportMapping FunctionImportName="SP_DeleteCvQualificationsDetailsByCvId" FunctionName="CvMakerDBModel1.Store.SP_DeleteCvQualificationsDetailsByCvId" />
           <FunctionImportMapping FunctionImportName="SP_DeleteCvReferencesDetailsByCvId" FunctionName="CvMakerDBModel1.Store.SP_DeleteCvReferencesDetailsByCvId" />
           <FunctionImportMapping FunctionImportName="SP_DeleteCvWorkExperienceDetailsByCvId" FunctionName="CvMakerDBModel1.Store.SP_DeleteCvWorkExperienceDetailsByCvId" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateCvInformation" FunctionName="CvMakerDBModel1.Store.SP_UpdateCvInformation" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateCvInformationWithoutPhoto" FunctionName="CvMakerDBModel1.Store.SP_UpdateCvInformationWithoutPhoto" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateCvPhoto" FunctionName="CvMakerDBModel1.Store.SP_UpdateCvPhoto" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateWorkExperienceJobTitle" FunctionName="CvMakerDBModel1.Store.SP_UpdateWorkExperienceJobTitle" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateWorkExperienceCompanyName" FunctionName="CvMakerDBModel1.Store.SP_UpdateWorkExperienceCompanyName" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateWorkExperienceEndDate" FunctionName="CvMakerDBModel1.Store.SP_UpdateWorkExperienceEndDate" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateWorkExperienceOtherInformation" FunctionName="CvMakerDBModel1.Store.SP_UpdateWorkExperienceOtherInformation" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateWorkExperienceStartDate" FunctionName="CvMakerDBModel1.Store.SP_UpdateWorkExperienceStartDate" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateEducatinEndDate" FunctionName="CvMakerDBModel1.Store.SP_UpdateEducatinEndDate" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateEducationCourseName" FunctionName="CvMakerDBModel1.Store.SP_UpdateEducationCourseName" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateEducationInstitutionName" FunctionName="CvMakerDBModel1.Store.SP_UpdateEducationInstitutionName" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateEducationOtherInformation" FunctionName="CvMakerDBModel1.Store.SP_UpdateEducationOtherInformation" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateEducationStartDate" FunctionName="CvMakerDBModel1.Store.SP_UpdateEducationStartDate" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo" FunctionName="CvMakerDBModel1.Store.SP_UpdateCvInformationWithoutPhotoAndWithoutEduAndWorkInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

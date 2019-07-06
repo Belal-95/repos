@@ -1,0 +1,126 @@
+﻿@using CvMakerWebsiteApp.Models;
+
+@{
+    Layout = null;
+}
+
+<html>
+
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- custome css -->
+    <link rel="stylesheet" href="../../js/css/cvhome.css">
+    <title>EditAccount</title>
+
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+
+        
+        $("#myAccountForm").validate({
+            rules: {
+                name: {
+                    minlength: 4,
+                    required: true
+                },
+                password: {
+                    required: true,
+                    digits: true,
+                    minlength: 6,
+                    maxlenght: 20,
+                },
+
+            }
+        });
+        });
+    </script>*@
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navCust shadow-sm bg-white">
+        <a class="navbar-brand" href="#">
+            <!-- <img src="" alt=""> -->
+            logo here
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/UpgradeToPremium">Upgrade to Premium <i class="fa fa-star-o" aria-hidden="true"></i></a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Back To List", "CvUserHome", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Logout", "Logout", null, new { @class = "nav-link" })
+
+                    @*<a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>*@
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br /><br /><br />
+
+    @*@{tblUserAccountDetail objUserAccountDetail = tblUserAccountDetail v}*@
+
+    
+    @using (Html.BeginForm())
+    {
+                <div class="col-md-8">
+                    <div>
+                        @if (TempData["SaveChanges"] != null)
+                        {
+                            <b style="color:green">Changes was saved successfully!!!</b>
+                        }
+
+                    </div>
+                    <div class="modal-body px-0 py-2 d-flex flex-column align-items-center">
+                        <div class="col-md-10 p-0">
+
+                            <form>
+                                @if(@ViewBag.accountDetails != null)
+                                { 
+                                <div class="form-group">
+                                    <b>Name : </b>
+                                    <input type="text" class="form-control" name="name" placeholder="Enter a new name for your cv" id="cvNameEdit" maxlength="50" value="@ViewBag.accountDetails.FullName">
+                                    
+                                </div>
+                                }
+                                <div class="form-group">
+                                    <b>Password : </b>
+                                    <input type="password" class="form-control" name="password" placeholder="Enter your new password" id="cvpasswordEdit" required="required">
+                                    @if (ViewBag.notValidated == 1)
+                                    {
+                                        <span style="color:red">Password should be at least 6 digits</span>
+                                    }
+                                   
+                                </div>
+
+                                <div class="text-left py-3">
+                                    <button type="submit" class="btn btn-primary" id="EditAccount">Save changes</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+    }
+</body>
+
+</html>
+

@@ -1,9 +1,17 @@
-﻿<!doctype html>
-<html lang="en">
+﻿@using CvMakerWebsiteApp.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CV - Edit</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Testview</title>
+
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Bootstrap CSS -->
@@ -12,365 +20,790 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- custome css -->
     <link rel="stylesheet" href="../../js/css/cv-edit.css">
+
+    <meta charset="utf-8">
+    <meta name="description" content="Jeremy Kun's Curriculum Vitae.">
+    <title>Jeremy Kun &#8212; Curriculum Vitae</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,700' rel='stylesheet' type='text/css'>
+    <style>
+        body, h1, h2, h3, h4, h5, h6, p, div, table, tr, th, td {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            font-family: 'Lato', Arial, sans-serif;
+            font-weight: 300;
+        }
+
+        #main {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 3%;
+            font-size: 1.3em;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #CCC;
+        }
+
+            .header h1 {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .header h2 {
+                text-align: center;
+                font-size: 1.2em;
+            }
+
+        .cv-section-body {
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+        .cv-section-title {
+            width: 100%;
+        }
+
+        .cv-section-title {
+            font-weight: bold;
+        }
+
+        .cv-section-body td {
+            vertical-align: top;
+            padding-bottom: 10px;
+            padding-top: 4px;
+        }
+
+        td:first-child {
+            width: 150px;
+        }
+
+        td:nth-child(2) {
+            padding-left: 35px;
+        }
+
+        .small-details {
+            margin-top: 3px;
+            font-size: 0.8em;
+        }
+
+        .bibtex {
+            font-family: monospace;
+            font-size: 0.6em;
+            font-color: #CCC;
+            margin-top: 10px;
+        }
+
+        .abstract {
+            margin-top: 10px;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-md navCust shadow-sm bg-white">
-        <a class="navbar-brand" href="#">
-            <!-- <img src="" alt=""> -->
-            logo here
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    @{SP_GetSingleCvDetailsByUserIdAndCvId_Result objectCvDetails = (SP_GetSingleCvDetailsByUserIdAndCvId_Result)ViewBag.CvDetails;
+    }
+    @{SP_GetCvBasicInformationByCvId_Result objectBasicInfoDetails = (SP_GetCvBasicInformationByCvId_Result)ViewBag.CvbasicInfoDetails;
+    }
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Upgrade to Premium <i class="fa fa-star-o" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Edit account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="cv_name py-md-5 py-2">
-            <h1>CV name here</h1>
-        </div>
+    <!-- Cv Tamplet Preview-->
+    @*Cv Tamplet preview End*@
 
-        <div class="row">
-            <div class="col-3 p-md-1 p-2">
-                <ul class="nav nav-pills mb-3 bg-white p-3" id="sortable" role="tablist">
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link active" id="pills-basic-tab" data-toggle="pill" href="#pills-basic" role="tab" aria-controls="pills-basic" aria-selected="true">Basic information</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-work-tab" data-toggle="pill" href="#pills-work" role="tab" aria-controls="pills-work" aria-selected="false">Work experience</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-qualification-tab" data-toggle="pill" href="#pills-qualification" role="tab" aria-controls="pills-qualification" aria-selected="false">Qualification</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-education-tab" data-toggle="pill" href="#pills-education" role="tab" aria-controls="pills-education" aria-selected="false">Education</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-interest-tab" data-toggle="pill" href="#pills-interest" role="tab" aria-controls="pills-interest" aria-selected="false">Interests</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-objectives-tab" data-toggle="pill" href="#pills-objectives" role="tab" aria-controls="pills-objectives" aria-selected="false">Objectives</a>
-                    </li>
-                    <li class="nav-item ui-icon ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a class="nav-link" id="pills-references-tab" data-toggle="pill" href="#pills-references" role="tab" aria-controls="pills-references" aria-selected="false">References</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-9 p-md-1 p-2">
-                <form action="">
-                    <div class="tab-content bg-white p-3" id="pills-tabContent">
-                        <!-- Basic information -->
-                        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
-                            <h4>Basic Information</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="full-name">Full Name</label>
-                                        <input type="text" class="form-control" name="full-name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailAdd">Email Address</label>
-                                        <input type="email" class="form-control" name="emailAdd">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailAdd">Phone number</label>
-                                        <input type="email" class="form-control" name="phone">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailAdd">Website</label>
-                                        <input type="text" class="form-control" name="website">
-                                    </div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailAdd">Address Line 1</label>
-                                        <input type="text" class="form-control" name="addline1">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="emailAdd">Address Line 2</label>
-                                        <input type="text" class="form-control" name="addline2">
-                                    </div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="col-md-10">
-                                    <div class="d-flex justify-content-center p-2">
-                                        <img class="upload-img" src="" alt="uploaded-image-here">
-                                        <input type="file">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <button class="btn btn-sm btn-success mx-1">Upload</button>
-                                            <button class="btn btn-sm btn-secondary mx-1">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    
+            <div id="PreviewTamp1">
+                <div id="body">
+                    <div id="main">
+                        <div class="header">
+                               <h1>@objectBasicInfoDetails.FullName</h1>
                         </div>
-                        <!-- Work Experience -->
-                        <div class="tab-pane fade" id="pills-work" role="tabpanel" aria-labelledby="pills-work-tab">
-                            <h4>Work Experience</h4>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="job-title">Job Title</label>
-                                        <input type="text" class="form-control" name="job-title">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cmp-name">Company Name</label>
-                                        <input type="text" class="form-control" name="cmp-name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="start-date">Start Date</label>
-                                        <input type="Date" class="form-control" name="start-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="end-date">End Date</label>
-                                        <input type="Date" class="form-control" name="end-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
+                        <div class="cv-sections">
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Personal Details</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>Name</td>
+                                        <td>@objectBasicInfoDetails.FullName</td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Phone No</td>
+                                        <td><span class="small-details">@objectBasicInfoDetails.phoneNumber</span></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Email</td>
+                                        <td>@objectBasicInfoDetails.EmailId</td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Webpage</td>
+                                        <td>@objectBasicInfoDetails.WebSite</td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <a href="#" class="btn btn-secondary my-3">Delete</a>
-                            <div class="divide"></div>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="job-title">Job Title</label>
-                                        <input type="text" class="form-control" name="job-title">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cmp-name">Company Name</label>
-                                        <input type="text" class="form-control" name="cmp-name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="start-date">Start Date</label>
-                                        <input type="Date" class="form-control" name="start-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="end-date">End Date</label>
-                                        <input type="Date" class="form-control" name="end-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Education</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2011 - 2016</td>
+                                        <td><div>Ph.D in Mathematics</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2007 - 2011</td>
+                                        <td>
+                                            <div>B.S. in Mathematics, Minor in Computer Science</div>
+                                            <div><span class="small-details">California Polytechnic State University. Magna Cum Laude.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2010</td>
+                                        <td><div>Budapest Semesters in Mathematics. Graduated with honors.</div></td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <a href="#" class="btn btn-secondary my-3">Delete</a>
-                            <div class="divide"></div>
-                            <a href="#" class="btn btn-success mb-2">Add</a>
-                        </div>
-                        <!-- Qualification -->
-                        <div class="tab-pane fade" id="pills-qualification" role="tabpanel" aria-labelledby="pills-qualification-tab">
-                            <h4>Qualification</h4>
-                            <div>
-                                <textarea name="" id="" cols="50" rows="20" placeholder="Example: Certified Public Accountant"></textarea>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Publications</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2016</td>
+                                        <td><div><a href="http://www.levreyzin.com/papers/Kun16_phd.pdf">Graphs, New Models, and Complexity</a>. Jeremy Kun. The University of Illinois at Chicago.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2016</td>
+                                        <td><div><a href="">A Confidence-Based Approach for Balancing Fairness and Accuracy</a>. Benjamin Fish, Jeremy Kun, Adam Lelkes. SIAM International Symposium on Data Mining.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2016</td>
+                                        <td><div><a href="http://arxiv.org/abs/1507.05206">Interception in Distance-Vector Routing Networks</a>. David Burstein, Franklin Kenter, Jeremy Kun, Feng Shi. Journal of Complex Networks.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td><div><a href="http://arxiv.org/abs/1410.0245">On the Computational Complexity of MapReduce</a>. Benjamin Fish, Jeremy Kun, Adam Lelkes, Lev Reyzin, Gyorgy Turan. International Symposium on Distributed Computing.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td><div><a href="http://comnet.oxfordjournals.org/cgi/content/abstract/cnv020?ijkey=ZiDO26VV0vKrRIO&keytype=ref">Network Installation Under Convex Costs</a>. Alexander Gutfraind, Jeremy Kun, Adam Lelkes, Lev Reyzin. Journal of Complex Networks.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td><div><a href="http://www.fatml.org/papers/Fish_Kun_Lelkes.pdf">Fair Boosting: a Case Study</a>. Benjamin Fish, Jeremy Kun, Adam Lelkes. International Conference on Machine Learning Workshop on Fairness, Accountability, and Transparency in Machine Learning.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td><div><a href="http://jmlr.org/proceedings/papers/v40/Kun15.html">Open Problem: Learning Quantum Circuits with Queries</a>. Jeremy Kun, Lev Reyzin. Conference on Learning Theory.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td><div><a href="http://arxiv.org/abs/1401.3258">A Boosting Approach to Learning Graph Representations</a>. Rajmonda Caceres, Kevin Carter, Jeremy Kun. SIAM International Conference on Data Mining Workshop on Mining Networks and Graphs.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td><div><a href="http://arxiv.org/abs/1402.4376">On Coloring Resilient Graphs</a>. Jeremy Kun, Lev Reyzin. Mathematical Foundations of Computer Science.</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td><div><a href="http://arxiv.org/abs/1308.3258">Anti-Coordination Games and Stable Graph Colorings</a>. Jeremy Kun, Brian Powers, Lev Reyzin. Syposium on Algorithmic Game Theory.</div></td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <p class="hints">Certifications, Accreditation etc, that you have received</p>
-                        </div>
-                        <!-- Education -->
-                        <div class="tab-pane fade" id="pills-education" role="tabpanel" aria-labelledby="pills-education-tab">
-                            <h4>Education</h4>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="job-title">Course name</label>
-                                        <input type="text" class="form-control" name="job-title">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cmp-name">Institution Name</label>
-                                        <input type="text" class="form-control" name="cmp-name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="start-date">Start Date</label>
-                                        <input type="Date" class="form-control" name="start-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="end-date">End Date</label>
-                                        <input type="Date" class="form-control" name="end-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Preprints</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td></td>
+                                        <td><div><a href="http://arxiv.org/abs/1405.3210">Locally Boosted Graph Aggregation for Community Detection</a>. Rajmonda Caceres, Kevin Carter, Jeremy Kun.</div></td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <a href="#" class="btn btn-secondary my-3">Delete</a>
-                            <div class="divide"></div>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="job-title">Course name</label>
-                                        <input type="text" class="form-control" name="job-title">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cmp-name">Institution Name</label>
-                                        <input type="text" class="form-control" name="cmp-name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="start-date">Start Date</label>
-                                        <input type="Date" class="form-control" name="start-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="end-date">End Date</label>
-                                        <input type="Date" class="form-control" name="end-date">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                                </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Awards</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>Dean's Scholar Award.</div>
+                                            <div><span class="small-details">To provide the most distinguished, advanced-level graduate students with a period of time dedicated solely to the completion of their programs. Granted by University of Illinois at Chicago.</span></div>
+                                            <div><span class="small-details">Monetary value of $25,000.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Best Student Poster Award.</div>
+                                            <div><span class="small-details">For the poster 'Information Monitoring in Routing Networks'. Granted by SIAM Network Science 15.</span></div>
+                                            <div><span class="small-details">Monetary value of $100.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2011</td>
+                                        <td>
+                                            <div>Charles J. Hanks Excellence in Mathematics Award.</div>
+                                            <div><span class="small-details">Demonstrated excellence and outstanding ability. Granted by California Polytechnic State University.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2010</td>
+                                        <td>
+                                            <div>Robert P. Balles Mathematics Award.</div>
+                                            <div><span class="small-details">Highest GPA in mathematics coursework after three years. Granted by California Polytechnic State University.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2007</td>
+                                        <td>
+                                            <div>Eagle Scout Award.</div>
+                                            <div><span class="small-details">Troop 234 of Moraga, CA. Granted by Boy Scouts of America.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <a href="#" class="btn btn-secondary my-3">Delete</a>
-                            <div class="divide"></div>
-                            <a href="#" class="btn btn-success mb-2">Add</a>
-                        </div>
-                        <!-- Interest -->
-                        <div class="tab-pane fade" id="pills-interest" role="tabpanel" aria-labelledby="pills-interest-tab">
-                            <h4>Interest</h4>
-                            <div class="my-3">
-                                <textarea name="" id="" cols="50" rows="20" placeholder="Music, Reading, Gardening"></textarea>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Work Experience</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2016 - present</td>
+                                        <td>
+                                            <div>Backend Engineer. 21 Inc.</div>
+                                            <div><span class="small-details">Built the Django backend for a task marketplace, including surveys, branching task pipelines, and automated reviews. Additional roles building an elasticsearch integration, doing ad hoc data science, maintaining an open-source bitcoin wallet (two1-python), and a mobile developer.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013 - 2014</td>
+                                        <td>
+                                            <div>Graduate Research Assistant. MIT Lincoln Laboratory.</div>
+                                            <div><span class="small-details">Research on graph representation learning, data mining on large networks. Proved theorems, designed algorithms, ran experiments, and wrote technical research papers.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2011 - 2013</td>
+                                        <td>
+                                            <div>Graduate Teaching Assistant. University of Illinois at Chicago.</div>
+                                            <div><span class="small-details">Taught calculus and introductory computer science.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2008 - 2009</td>
+                                        <td>
+                                            <div>Junior Developer. CreateSpace On-Demand Publishing.</div>
+                                            <div><span class="small-details">Designed and developed a new accounting gateway infrastructure for a growing tech start-up, including writing thousands of lines of Java and SQL. Completed a technical writing training program.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <div class="divide"></div>
-                            <a href="#" class="btn btn-secondary my-2">Delete</a>
-                        </div>
-                        <!-- Objectives -->
-                        <div class="tab-pane fade" id="pills-objectives" role="tabpanel" aria-labelledby="pills-objectives-tab">
-                            <h4>Objectives</h4>
-                            <div class="my-3">
-                                <textarea name="" id="" cols="50" rows="20" placeholder="Example: Certified Public Accountant"></textarea>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Contract Work</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2014 - 2015</td>
+                                        <td>
+                                            <div>Technical Reviewer, Doing Math with Python. No Starch Press.</div>
+                                            <div><span class="small-details">Publication date: 2015-05-25</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2012 - Present</td>
+                                        <td><div>Webmaster, <a href="http://qed.wpcp.org/">QED Math Symposium</a>. Chicago Public Schools.</div></td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <div class="divide"></div>
-                            <a href="#" class="btn btn-secondary my-2">Delete</a>
-                        </div>
-                        <!-- References -->
-                        <div class="tab-pane fade" id="pills-references" role="tabpanel" aria-labelledby="pills-references-tab">
-                            <h4>References</h4>
-                            <div class="my-3">
-                                <textarea name="" id="" cols="50" rows="20" placeholder="Mr. Neo, President of Matrix corp.
-Email: neo@neo-matrix.com
-Phone: +1-234-5678"></textarea>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Professional Programs</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>June 2014</td>
+                                        <td>
+                                            <div>Network Science Week. American Mathematical Society Mathematics Research Community.</div>
+                                            <div><span class="small-details">Received mentoring, engaged in research to attack open problems, and developed new collaborations.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Summer 2013</td>
+                                        <td>
+                                            <div>Ph.D Student Intern. MIT Lincoln Labs.</div>
+                                            <div><span class="small-details">Research on machine learning in large graphs.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Summer 2012</td>
+                                        <td>
+                                            <div>Ph.D Student Intern. Lawrence Livermore National Laboratory.</div>
+                                            <div><span class="small-details">Data mining research in wind energy and plasma physics.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Summer 2009</td>
+                                        <td>
+                                            <div>Software Developer Intern. Amazon.com.</div>
+                                            <div><span class="small-details">Worked on the message-passing framework in a million-line service-oriented C++ architecture which regulated inventory in all of Amazon's warehouses.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
                             </div>
-                            <div class="divide"></div>
-                            <a href="#" class="btn btn-secondary my-2">Delete</a>
-                        </div>
-                    </div>
-                    <div class="my-3 text-right">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <footer>
-            <div class="mt-md-5 mt-3 pt-md-3 pt-2 bg-white">
-                <div class="container">
-                    <div class="row foot-ul mx-auto">
-                        <div class="col-md-4">
-                            <ul>
-                                <li>About us</li>
-                                <li>Contact us</li>
-                                <li>Privacy Policy</li>
-                                <li>Terms and services</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul class="social-links">
-                                <li>
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li><a href="#">Help</a></li>
-                                <li><a href="#">Resume tips</a></li>
-                            </ul>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Programming</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>Portfolio</td>
+                                        <td><div><a href="https://github.com/j2kun/">Github Repository</a></div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Top Language</td>
+                                        <td><div>Python</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Competent Languages</td>
+                                        <td><div>Python, Java, C, C++, Haskell, Racket, HTML/CSS, Mathematica, Javascript/Node/ES6</div></td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Familiar Languages</td>
+                                        <td><div>R, Perl, Bash, PHP, SQL</div></td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Service</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Reviewer, ALT 2015.</div>
+                                            <div><span class="small-details">Algorithmic Learning Theory.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>Publicity Co-Chair, ISAIM 2014.</div>
+                                            <div><span class="small-details">International Symposium on Artificial Intelligence and Mathematics.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Organizer, Graduate Student Colloquium.</div>
+                                            <div><span class="small-details">University of Illinois at Chicago.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013 - Present</td>
+                                        <td>
+                                            <div>Organizer, Graduate Student Theoretical Computer Science Seminar.</div>
+                                            <div><span class="small-details">University of Illinois at Chicago.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td>
+                                            <div>Instructor, Website Workshop.</div>
+                                            <div><span class="small-details">Association for Women in Mathematics, University of Illinois at Chicago.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Talks</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Resilience and new approaches to approximate graph coloring</div>
+                                            <div><span class="small-details">Theory Seminar, North Carolina State University. Research talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div><a href="https://www.youtube.com/watch?v=JH4DOjYX59Y">What Can Algorithms Tell Us About Life, Love, and Happiness?</a></div>
+                                            <div><span class="small-details">Moraine Valley Community College STEM Talks. General audience talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>On Resiliently Colorable Graphs</div>
+                                            <div><span class="small-details">Computer Science Seminar, University of Illinois at Chicago. Research talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>Resilient Coloring and Other Combinatorial Problems</div>
+                                            <div><span class="small-details">Midwest Theory Day. Purdue University. Research talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td>
+                                            <div>Anti-Coordination Games and Stable Graph Colorings</div>
+                                            <div><span class="small-details">Computer Science Seminar, University of Illinois at Chicago. Research talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>A Gentle Introduction to Learning Theory</div>
+                                            <div><span class="small-details">Graduate Student Colloquium, University of Illinois at Chicago. Graduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Information Monitoring in Routing Networks</div>
+                                            <div><span class="small-details">Chicago Area SIAM Student Conference, Illinois Institute of Technology. Graduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>How to Combine Graphs</div>
+                                            <div><span class="small-details">Chicago Area SIAM Student Conference, Northwestern University. Graduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td>
+                                            <div>Stable Graph Colorings, and Why You Should Care about NP</div>
+                                            <div><span class="small-details">Graduate Student Colloquium, University of Illinois at Chicago. Graduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td>
+                                            <div>A Brief Overview of Persistent Homology and its Applications</div>
+                                            <div><span class="small-details">Chicago Area SIAM Student Conference, University of Illinois at Chicago. Graduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Eigenfaces: using linear algebra to recognize faces</div>
+                                            <div><span class="small-details">Undergraduate Math Club, Wheaton College. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>How to Send Secret Messages (RSA)</div>
+                                            <div><span class="small-details">'Math and Snacks,' University of Illinois at Chicago. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>Hybrid Images and Fourier Analysis</div>
+                                            <div><span class="small-details">Undergraduate Math Club, University of Illinois at Chicago. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2014</td>
+                                        <td>
+                                            <div>Elliptic Curves, Projective Geometry, and Python</div>
+                                            <div><span class="small-details">Stanford Pre-Collegiate Studies. High school talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2013</td>
+                                        <td>
+                                            <div>Classic Nintendo Games are NP-Hard</div>
+                                            <div><span class="small-details">Undergraduate Math Club, University of Illinois at Chicago. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2012</td>
+                                        <td>
+                                            <div>PageRank and the Billion-Dollar Eigenvector</div>
+                                            <div><span class="small-details">Undergraduate Math Club, University of Illinois at Chicago. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2011</td>
+                                        <td>
+                                            <div>Eigenfaces: Linear Algebra for Facial Recognition</div>
+                                            <div><span class="small-details">Undergraduate Math Club, University of Illinois at Chicago. Undergraduate student talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>2011 - Present</td>
+                                        <td>
+                                            <div>Guest lectures to high school students</div>
+                                            <div><span class="small-details">Various locations. High school talk.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Posters</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>2015</td>
+                                        <td>
+                                            <div>Information Monitoring in Routing Networks</div>
+                                            <div><span class="small-details">SIAM Workshop on Network Science</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Teaching</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>Calculus 1</td>
+                                        <td>
+                                            <div>TA, University of Illinois at Chicago, Fall 2011, Fall 2013, Fall 2015.</div>
+                                            <div><span class="small-details">Led a discussion session twice weekly.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Differential Equations</td>
+                                        <td>
+                                            <div>TA, University of Illinois at Chicago, Spring 2016.</div>
+                                            <div><span class="small-details">Led a discussion session once weekly.</span></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="cv-item">
+                                        <td>Introduction to Mathematical Computer Science</td>
+                                        <td>
+                                            <div>TA, University of Illinois at Chicago, Spring 2012, Fall 2012, Spring 2013.</div>
+                                            <div><span class="small-details">Wrote a grading robot for all labs and projects.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div class="cv-section">
+                                <h3 class="cv-section-title">Other</h3>
+                                <table class="cv-section-body">
+                                    <tr class="cv-item">
+                                        <td>Blog</td>
+                                        <td>
+                                            <div><a href="http://jeremykun.com">Math Intersect Programming</a></div>
+                                            <div><span class="small-details">In-depth presentation of technical topics with full implementations in code. As of February 2017: 236 published posts, 2000 word average post length, over 3.5 million page views since June 2011.</span></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
+
+            </div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" id="btnClosePreview1">Close</button></div></div>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button type="button" id="btnPrinPreview1" onclick="ExportPdf()">Print</button>
+                    @*<a href="#" onclick="HTMLtoPDF()">Download PDF</a>*@
+                </div>
             </div>
-            </div>
-        </footer>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="../../js/js/plugin.js"></script>
-        <script>
-  $( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-  } );
-        </script>
-        <script src="../../tinymce/tinymce.min.js"></script>
-        <script>
-    tinymce.init(
-                  {
-                    selector:'textarea',
-                    menubar:'false',
-                    plugins:'lists placeholder',
-                    toolbar: ' bullist numlist | bold underline'
-                    }
-                );
-        </script>
+        
+
+
 </body>
-</html>
+@*<script>
+        //Global Variable Declaration
+        var base64Img = null;
+        margins = {
+            top: 70,
+            bottom: 40,
+            left: 30,
+            width: 550
+        };
+
+        /* append other function below: */
+
+        //Generate PDF Function
+
+        function generate() {
+            var pdf = new jsPDF('p', 'pt', 'a4');
+            pdf.setFontSize(18);
+            pdf.fromHTML(document.getElementById('PreviewTamp1'),
+                margins.left, // x coord
+                margins.top,
+                {
+                    // y coord
+                    width: margins.width// max width of content on PDF
+                }, function (dispose) {
+                    headerFooterFormatting(pdf)
+                },
+                margins);
+
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('style', 'position:absolute;right:0; top:0; bottom:0; height:100%; width:650px; padding:20px;');
+            document.body.appendChild(iframe);
+
+            iframe.src = pdf.output('datauristring');
+        };
+
+
+        //Page and Footer Formatting Function
+
+        function headerFooterFormatting(doc) {
+            var totalPages = doc.internal.getNumberOfPages();
+
+            for (var i = totalPages; i >= 1; i--) { //make this page, the current page we are currently working on.
+                doc.setPage(i);
+
+                header(doc);
+
+                //footer(doc, i, totalPages);
+
+            }
+        };
+
+
+        //Header Function
+
+        function header(doc) {
+            doc.setFontSize(30);
+            doc.setTextColor(40);
+            doc.setFontStyle('normal');
+
+            if (base64Img) {
+                doc.addImage(base64Img, 'JPEG', margins.left, 10, 40, 40);
+            }
+
+            doc.text("Report Header Template", margins.left + 50, 40);
+
+            doc.line(3, 70, margins.width + 43, 70); // horizontal line
+        };
+
+
+        //Load the header image and convert to base64
+        imgToBase64('octocat.jpg', function (base64) {
+            base64Img = base64;
+        });
+
+
+        //Image Converter Function
+
+        // You could either use a function similar to this or preconvert an image with, for example, http://dopiaza.org/tools/datauri
+        // http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+        function imgToBase64(url, callback, imgVariable) {
+
+            if (!window.FileReade) {
+                callback(null);
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = function () {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    imgVariable = reader.result.replace('text/xml', 'image/jpeg');
+                    callback(imgVariable);
+                };
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', url);
+            xhr.send();
+        };
+
+
+
+    </script>
+    <script src="~/js/jspdf.js"></script>*@
+
+<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script> 
+<script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+
+<script>
+    function ExportPdf() {
+        kendo.drawing
+            .drawDOM("#PreviewTamp1",
+                {
+                    paperSize: "A4",
+                    margin: { top: "1cm", bottom: "1cm" },
+                    scale: 0.8,
+                    height: 500
+                })
+            .then(function (group) {
+                kendo.drawing.pdf.saveAs(group, "Exported.pdf")
+            });
+    }
+</script>
+
+
+

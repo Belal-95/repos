@@ -1,0 +1,303 @@
+﻿@using CvMakerWebsiteApp.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        body {
+            background-color: #565656;
+            color: #fff;
+        }
+
+        .mainheaderink {
+            border-bottom: 5px solid #fff;
+            margin-bottom: 1.5rem;
+        }
+
+            .mainheaderink h1 {
+                margin-bottom: 0;
+            }
+
+            .mainheaderink p {
+                margin-bottom: 0;
+            }
+
+        .info p {
+            margin-bottom: 0;
+        }
+
+        ul {
+            padding-left: 0;
+        }
+
+        .rowstyle {
+            margin: 1rem 0;
+            border-bottom: 1px solid #fff;
+        }
+
+        .jobtitle {
+            font-size: 1rem;
+        }
+
+        /*# sourceMappingURL=ink.css.map */
+    </style>
+
+    @{SP_GetSingleCvDetailsByUserIdAndCvId_Result objectCvDetails = (SP_GetSingleCvDetailsByUserIdAndCvId_Result)ViewBag.CvDetails;
+    }
+    @{SP_GetCvBasicInformationByCvId_Result objectBasicInfoDetails = (SP_GetCvBasicInformationByCvId_Result)ViewBag.CvbasicInfoDetails;
+    }
+
+    @*To alter if needed List*@
+    @{ List<SP_GetCvEducationDetailsByCvId_Result> objectEducationDetails = (List<SP_GetCvEducationDetailsByCvId_Result>)ViewBag.CvEducationInfoDetails;
+    }
+    @{SP_GetCvInterestDetailsByCvId_Result objectInterestDetails = (SP_GetCvInterestDetailsByCvId_Result)ViewBag.CvInterestInfoDetails;
+    }
+    @{SP_GetCvObjectiveDetailsByCvId_Result objectObjectiveDetails = (SP_GetCvObjectiveDetailsByCvId_Result)ViewBag.CvObjectiveInfoDetails;
+    }
+    @{SP_GetCvQualificationDetailsByCvId_Result objectQualificationDetails = (SP_GetCvQualificationDetailsByCvId_Result)ViewBag.CvQualificationInfoDetails;
+    }
+    @{SP_GetCvReferencesDetailsByCvId_Result objectReferencesDetails = (SP_GetCvReferencesDetailsByCvId_Result)ViewBag.CvReferencesInfoDetails;
+    }
+
+    @*To aler if needed List*@
+    @{List<SP_GetCvWorkExperienceDetailsByCvId_Result> objectWorkExperienceDetails = (List<SP_GetCvWorkExperienceDetailsByCvId_Result>)ViewBag.CvWorkExperienceInfoDetails;
+    }
+
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Ink</title>
+</head>
+<body>
+    <div class="container py-5" id="PreviewTamp1" style="background-color: #565656;">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-4 d-flex justify-content-center">
+                <img src="@objectBasicInfoDetails.UserPhoto" alt="" class="img-fluid" style="width:225px;height:225px">
+            </div>
+            <div class="col-md-8 d-flex flex-column justify-content-center">
+                <div class="mainheaderink py-4 w-100">
+                    <h1>@objectBasicInfoDetails.FullName</h1>
+                    <p>@objectBasicInfoDetails.EmailId </p>
+                </div>
+                <div>
+                    <div class="row justify-content-between">
+                        <div class="col-md-4">
+                            <div class="address">
+                                <p>@objectBasicInfoDetails.AdressLine1</p>
+                                <p>@objectBasicInfoDetails.AdressLine2</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="info">
+                                @if (@objectBasicInfoDetails.WebSite != null)
+                                {
+                                    <p><b>Website:</b> @objectBasicInfoDetails.WebSite</p>
+                                }
+                                <p><b>Phone:</b> @objectBasicInfoDetails.phoneNumber</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (@objectWorkExperienceDetails != null)
+        {
+            <!-- Work experience -->
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>Work experience</h4>
+                </div>
+                <div class="col-md-8">
+                    @foreach (SP_GetCvWorkExperienceDetailsByCvId_Result objCvWorkExperienceDetails in objectWorkExperienceDetails)
+                    {
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="mb-0 d-flex flex-column">
+                                <p class="mb-2">@objCvWorkExperienceDetails.CompanyName</p>
+                                <span class="jobtitle">@objCvWorkExperienceDetails.JobTitle</span>
+                            </h4>
+                            <h4>
+                                <span>@objCvWorkExperienceDetails.StartDate</span> - <span>@objCvWorkExperienceDetails.EndDate</span>
+                            </h4>
+                        </div>
+                        <div class="my-2">
+                            <p>@Html.Raw(@objCvWorkExperienceDetails.OtherInformation)</p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        }
+        @if (@objectQualificationDetails.Qualifications != null)
+        {
+            <!-- Qualifications -->
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>Qualification</h4>
+                </div>
+                <div class="col-md-8">
+                    <div>
+
+                        @Html.Raw(@objectQualificationDetails.Qualifications)
+                        @*<ul>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, repellat.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, optio?</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, rerum.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, quas.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, dolorem!</li>
+                        </ul>*@
+                    </div>
+
+                </div>
+
+            </div>
+        }
+        @if (@objectObjectiveDetails.Objective != null)
+        {
+            @*Objectives*@
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>Objective</h4>
+                </div>
+                <div class="col-md-8">
+                    <div>
+                        <p>
+                            @Html.Raw(@objectObjectiveDetails.Objective)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (@objectInterestDetails.InterestsDetails != null)
+        {
+            <!-- Interests -->
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>Interests</h4>
+                </div>
+                <div class="col-md-8">
+                    <div>
+                        <p>
+                            @Html.Raw(@objectInterestDetails.InterestsDetails)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (@objectEducationDetails != null)
+        {
+            <!-- Education -->
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>Education</h4>
+                </div>
+                <div class="col-md-8">
+                    @foreach (SP_GetCvEducationDetailsByCvId_Result objCvEducationDetails in objectEducationDetails)
+                    {
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="mb-0 d-flex flex-column">
+                                    <p class="mb-2">@objCvEducationDetails.CourseName</p>
+                                    <span class="jobtitle">@objCvEducationDetails.InstitutionName</span>
+                                </h4>
+                                <h4>
+                                    <span>@objCvEducationDetails.StartDate</span> - <span>@objCvEducationDetails.EndDate</span>
+                                </h4>
+                            </div>
+                            <div class="my-2">
+                                <p>
+                                    @Html.Raw(@objCvEducationDetails.OtherInformaton)
+                                </p>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        @if (@objectReferencesDetails.ReferencesDetails != null)
+        {
+            <!-- References -->
+            <div class="row rowstyle">
+                <div class="col-md-4">
+                    <h4>References</h4>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <p>
+                            @Html.Raw(@objectReferencesDetails.ReferencesDetails)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="margin-left:50px;">
+            <div class="ui-dialog-buttonset">
+                <a type="button" id="btnClosePreview1" href="/Home/CvUserEditCv">Back</a>
+            </div>
+        </div>
+
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" style="margin-left:50px; margin-bottom:20px">
+            <div class="ui-dialog-buttonset">
+                <button type="button" id="btnPrinPreview1" onclick="ExportPdf()">Donload pdf</button>
+                @*<a href="#" onclick="HTMLtoPDF()">Download PDF</a>*@
+            </div>
+        </div>
+
+    </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js">
+    </script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js">
+    </script>
+
+    @*<script>
+            function ExportPdf() {
+                kendo.drawing
+                    .drawDOM("#PreviewTamp1",
+                    {
+                            paperSize: "A4",
+                            //margin: { top: "1cm", bottom: "1cm" },
+                            scale: 0.8,
+                            height: 500
+                        })
+                    .then(function (group) {
+                        kendo.drawing.pdf.saveAs(group, @objectBasicInfoDetails.FullName +".pdf")
+                    });
+            }
+        </script>*@
+    <script>
+    function ExportPdf() {
+        //var k = ;
+        kendo.drawing
+            .drawDOM("#PreviewTamp1",
+                {
+                    paperSize: "A4",
+                    //margin: { top: "1cm", bottom: "1cm",left: "0.5cm", right: "0.5cm" },
+                    scale: 0.8,
+                    height: 500
+                })
+            .then(function (group) {
+                kendo.drawing.pdf.saveAs(group, "@objectBasicInfoDetails.FullName" + "Cv.pdf")
+            });
+    }
+    </script>
