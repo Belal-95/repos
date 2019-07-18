@@ -1126,5 +1126,25 @@ namespace CvMakerWebsiteApp.Controllers
             return View();
         }
 
+        public ActionResult Default()
+        {
+            return View();
+        }
+
+        public ActionResult Task1()
+        {
+            return View();
+        }
+
+        public ActionResult Task2()
+        {
+            return View();
+        }
+
+        public ActionResult Task3()
+        {
+            return View();
+        }
+
     }
 }

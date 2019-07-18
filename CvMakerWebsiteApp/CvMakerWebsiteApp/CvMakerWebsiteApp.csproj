@@ -564,6 +564,10 @@
     <Content Include="Views\Home\Testview3.cshtml" />
     <Content Include="Views\Home\Testview4.cshtml" />
     <Content Include="Views\Home\EditAccount.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\Task1.cshtml" />
+    <Content Include="Views\Home\Task2.cshtml" />
+    <Content Include="Views\Home\Task3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
